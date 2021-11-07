@@ -40,15 +40,30 @@
 }
 .publishOptions {
 	display: flex;
-	margin-left: 20px;
 }
 .publishOption {
 	display: flex;
 	align-items: center;
-	margin-right: 15px;
+	margin: 0 25px;
 	cursor: pointer;
 }
 
 .publishIcon {
+	font-size: 22px !important;
 	margin-right: 5px;
+}
+.publishOptionText {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.publishButton {
+	border: none;
+	padding: 7px;
+	border-radius: 5px;
+	background-color: #9000ff;
+	font-weight: 500;
+	margin-right: 15px;
+	cursor: pointer;
+	color: white;
 }

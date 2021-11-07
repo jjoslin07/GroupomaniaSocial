@@ -38,6 +38,7 @@ export default function Publish() {
 							<span className="publishOptionText">Mood</span>
 						</div>
 					</div>
+					<button className="publishButton"> Publish</button>
 				</div>
 			</div>
 		</div>
