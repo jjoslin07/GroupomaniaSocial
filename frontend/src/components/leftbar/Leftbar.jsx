@@ -12,7 +12,7 @@ import {
 } from "@mui/icons-material";
 export default function Leftbar() {
 	return (
-		<div className="leftbar">
+		<div className="leftbarContainer">
 			<div className="leftbarWrapper">
 				<ul className="leftbarList">
 					<li className="leftbarListItem">
@@ -29,7 +29,7 @@ export default function Leftbar() {
 					</li>
 					<li className="leftbarListItem">
 						<Groups className="leftbarIcon" />
-						<span className="leftbarListItemText">Groups</span>
+						<span className="leftbarListItemText">Friends</span>
 					</li>
 					<li className="leftbarListItem">
 						<Bookmarks className="leftbarIcon" />
@@ -61,7 +61,7 @@ export default function Leftbar() {
 							src="/assets/Profile/2.jpg"
 							alt=""
 						/>
-						<span className="leftbarFriendName">Jill Smith</span>
+						<span className="leftbarFriendName">Vicki Smith</span>
 					</li>
 					<li className="leftbarFriend">
 						<img
@@ -109,7 +109,7 @@ export default function Leftbar() {
 							src="/assets/Profile/male.png"
 							alt=""
 						/>
-						<span className="leftbarFriendName"> John Doe</span>
+						<span className="leftbarFriendName"> James Doe</span>
 					</li>
 				</ul>
 			</div>

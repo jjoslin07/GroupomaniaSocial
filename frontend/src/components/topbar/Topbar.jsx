@@ -7,13 +7,13 @@ export default function Topbar() {
 	return (
 		<div className="topbarContainer">
 			<div className="topbarLeft">
-				<span className="logo">
+				<div className="logo">
 					<img
 						src="/assets/Groupomania_Logos/icon-left-font-monochrome-white.png"
 						alt="Groupomania logo monocrhome white"
 						className="companyLogo"
 					/>
-				</span>
+				</div>
 			</div>
 			<div className="topbarCenter">
 				<div className="searchbar">
@@ -24,20 +24,19 @@ export default function Topbar() {
 			<div className="topbarRight">
 				<div className="topbarLinks">
 					<span className="topbarLink">Home</span>
-					<span className="topbarLink">Timeline</span>
 				</div>
 				<div className="topbarIcons">
 					<div className="topbarIconItem">
 						<Person />
-						<span className="topbarIconBadge">1</span>
+						<span className="topbarIconBadge">12</span>
 					</div>
 					<div className="topbarIconItem">
 						<Chat />
-						<span className="topbarIconBadge">2</span>
+						<span className="topbarIconBadge">5</span>
 					</div>
 					<div className="topbarIconItem">
 						<Notifications />
-						<span className="topbarIconBadge">1</span>
+						<span className="topbarIconBadge">20</span>
 					</div>
 				</div>
 				<img
