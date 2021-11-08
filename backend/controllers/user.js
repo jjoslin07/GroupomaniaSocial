@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const User = require('../models/User');
 
 // Sign the user up with a unique id using a unique email and hash's the password to store in database.
 exports.register = (req, res) => {
