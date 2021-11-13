@@ -11,12 +11,12 @@ class User extends Model {}
 
 User.init({
   // Model attributes are defined here
-  username: {
+username: {
     type: DataTypes.STRING(20),
     allowNull: false,
     unique: true
 },
-    email: {
+email: {
     type: DataTypes.STRING(50),
     allowNull: false,
     lowercase: true,
@@ -67,5 +67,6 @@ timestamps: true
   sequelize,
   modelName: 'User' 
 });
+console.log(User === sequelize.models.User); 
 return User
 }

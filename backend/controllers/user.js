@@ -1,15 +1,22 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const { User } = require('../models/User');
+const database = require('../config/database');
+const { request } = require('../app');
 
 // Sign the user up with a unique id using a unique email and hash's the password to store in database.
 exports.register = (req, res) => {
     bcrypt.hash(req.body.password, 10).then(
         (hash) => {
-            const user = new User({
-                email: req.body.email,
-                password: hash
-            });
+                let email = req.body.email;
+                let password = hash;
+				if(email && password) {
+					database.query('INSERT INTO user WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
+						if(results.length > 0){
+							request.session
+						}
+					})
+				}
             // Save user to database.
             user.save().then(
                 () => {

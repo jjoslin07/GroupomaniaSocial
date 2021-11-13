@@ -2,6 +2,7 @@ const router = require('express').Router();
 const userCtrl = require('../controllers/user');
 const  auth  = require('../middleware/auth');
 const  multer  = require('../middleware/multer-config');
+const db = require('../config/database');
 
 // Register User
 router.post("/register", userCtrl.register); 
