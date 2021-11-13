@@ -1,87 +1,88 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { User } = require('../models/User');
-const database = require('../config/database');
-const { request } = require('../app');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { User } = require("../models/User");
+const database = require("../config/database");
+const { request } = require("../app");
 
 // Sign the user up with a unique id using a unique email and hash's the password to store in database.
 exports.register = (req, res) => {
-    bcrypt.hash(req.body.password, 10).then(
-        (hash) => {
-                let email = req.body.email;
-                let password = hash;
-				if(email && password) {
-					database.query('INSERT INTO user WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
-						if(results.length > 0){
-							request.session
-						}
-					})
+	bcrypt.hash(req.body.password, 10).then((hash) => {
+		let email = req.body.email;
+		let password = hash;
+		if (email && password) {
+			database.query(
+				"INSERT INTO user WHERE email = ? AND password = ?",
+				[email, password],
+				function (error, results, fields) {
+					if (results.length > 0) {
+						request.session;
+					}
 				}
-            // Save user to database.
-            user.save().then(
-                () => {
-                    res.status(201).json({
-                        message: 'User added successfully!'
-                    });
-                }
-            ).catch(
-                (error) => {
-                    return res.status(401).json({
-                        error: error,
-                        message: 'Email not valid or is already in use, please try again!'
-                    });
-                }
-            );
-        }
-    );
+			);
+		}
+		// Save user to database.
+		user
+			.save()
+			.then(() => {
+				res.status(201).json({
+					message: "User added successfully!",
+				});
+			})
+			.catch((error) => {
+				return res.status(401).json({
+					error: error,
+					message: "Email not valid or is already in use, please try again!",
+				});
+			});
+	});
 };
 
 // Searches for user in the database and if found compares password with bcrypt hash and logs user in.
 exports.login = (req, res) => {
-    User.findOne({
-        email: req.body.email
-    }).then(
-        (user) => {
-            if (!user) {
-                return res.status(401).json({
-                    error: new Error('User not found!')
-                });
-            }
-            // Compare password hash's to login user in.
-            bcrypt.compare(req.body.password, user.password).then(
-                (valid) => {
-                    if (!valid) {
-                        return res.status(401).json({
-                            error: new Error('Incorrect password!')
-                        });
-                    }
-                    // Use Json Web Token to keep the user signed in (Gives unique token that expires in 24 hours.)
-                    const token = jwt.sign({
-                        userId: user._id
-                    },
-                        process.env.SECRET_TOKEN, {
-                        expiresIn: '24h'
-                    });
-                    res.status(200).json({
-                        userId: user._id,
-                        token: token
-                    });
-                }
-            ).catch(
-                (error) => {
-                    res.status(500).json({
-                        error: error
-                    });
-                }
-            );
-        }
-    ).catch(
-        (error) => {
-            res.status(500).json({
-                error: error
-            });
-        }
-    );
+	User.findOne({
+		email: req.body.email,
+	})
+		.then((user) => {
+			if (!user) {
+				return res.status(401).json({
+					error: new Error("User not found!"),
+				});
+			}
+			// Compare password hash's to login user in.
+			bcrypt
+				.compare(req.body.password, user.password)
+				.then((valid) => {
+					if (!valid) {
+						return res.status(401).json({
+							error: new Error("Incorrect password!"),
+						});
+					}
+					// Use Json Web Token to keep the user signed in (Gives unique token that expires in 24 hours.)
+					const token = jwt.sign(
+						{
+							userId: user._id,
+						},
+						process.env.SECRET_TOKEN,
+						{
+							expiresIn: "24h",
+						}
+					);
+					res.status(200).json({
+						userId: user._id,
+						token: token,
+					});
+				})
+				.catch((error) => {
+					res.status(500).json({
+						error: error,
+					});
+				});
+		})
+		.catch((error) => {
+			res.status(500).json({
+				error: error,
+			});
+		});
 };
 // Update user
 exports.updateUser = async (req, res) => {
