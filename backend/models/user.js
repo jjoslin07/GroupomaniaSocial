@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
 				createdAt: undefined,
 				updatedAt: undefined,
 				isAdmin: undefined,
+				id: undefined,
 			};
 		}
 	}
