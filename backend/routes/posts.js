@@ -15,5 +15,7 @@ router.patch("/:id", auth.checkAuth, postsCtrl.update);
 router.delete("/:id", auth.checkAuth, postsCtrl.destroy);
 // Like a Post
 router.put("/:id/like", auth.checkAuth, postsCtrl.like);
+// Love a post
+router.put("/:id", auth.checkAuth, postsCtrl.love);
 
 module.exports = router;

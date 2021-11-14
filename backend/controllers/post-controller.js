@@ -180,16 +180,34 @@ function destroy(req, res) {
 // Function to Like and unlike a Post
 
 function like(req, res) {
-	const like = { likes: req.userData.userid };
-	console.log(req.userData); //DEBUG
+	console.log(req.userData); //REMOVE
+	console.log(req.params); //REMOVE
 	const post = models.Post.findByPk(req.params.id)
 		.then(() => {
 			if (!post.likes.includes(req.userData.userId)) {
-				models.Post.updateOne(push(like));
+				models.Post.updateOne({ $push: { likes: req.userData.userId } });
 				res.status(200).json("The post has been liked");
 			} else {
-				models.Post.updateOne(pull(like));
+				models.Post.updateOne({ $pull: { likes: req.userData.userId } });
 				res.status(200).json("The post has been unliked");
+			}
+		})
+		.catch((error) => {
+			res.status(500).json(error);
+		});
+}
+
+// Function to Love and Unlove a Post
+
+function love(req, res) {
+	const post = models.Post.findByPk(req.params.id)
+		.then(() => {
+			if (!post.loves.includes(req.userData.userId)) {
+				models.Post.updateOne({ $push: { loves: req.userData.userId } });
+				res.status(200).json("The post has been loved");
+			} else {
+				models.Post.updateOne({ $pull: { loves: req.userData.userId } });
+				res.status(200).json("The post has been unloved");
 			}
 		})
 		.catch((error) => {
@@ -204,4 +222,5 @@ module.exports = {
 	update: update,
 	destroy: destroy,
 	like: like,
+	love: love,
 };

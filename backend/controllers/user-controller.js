@@ -190,18 +190,7 @@ function show(req, res) {
 			.then((result) => {
 				if (result) {
 					console.log(result);
-					res.status(200).json({
-						attributes: {
-							name: result.name,
-							profilePicture: result.profilePicture,
-							coverPicture: result.coverPicture,
-							followers: result.followers,
-							following: result.following,
-							desc: result.desc,
-							city: result.city,
-							hometown: result.from,
-						},
-					});
+					res.status(200).json(result);
 				} else {
 					res.status(404).json({
 						message: "User not found!",
