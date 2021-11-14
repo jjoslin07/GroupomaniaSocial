@@ -99,8 +99,65 @@ function login(req, res) {
 			});
 		});
 }
+// Update a User
+
+function update(req, res) {
+	const id = req.params.id;
+	bcrypt.genSalt(10, function (err, salt) {
+		bcrypt.hash(req.body.password, salt, function (err, hash) {
+			const updatedUser = {
+				name: req.body.name,
+				email: req.body.email,
+				password: hash,
+				profilePicture: req.body.profilePicture,
+				coverPicture: req.body.coverPicture,
+				desc: req.body.desc,
+				city: req.body.city,
+				from: req.body.from,
+			};
+			const userId = req.userData.userId;
+
+			models.User.findByPk(req.userData.userId)
+				.then((result) => {
+					if (result !== null && userId === req.userData.userId) {
+						models.User.update(updatedUser, { where: { id: userId } })
+							.then((result) => {
+								if (result) {
+									res.status(200).json({
+										message: "Profile updated successfully",
+										user: updatedUser,
+									});
+								} else {
+									res.status(403).json({
+										message: "You can only update your account!",
+										error: error,
+									});
+								}
+							})
+							.catch((error) => {
+								res.status(500).json({
+									message: "Something went wrong!",
+									error: error,
+								});
+							});
+					} else {
+						res.status(400).json({
+							message: "Invalid request",
+						});
+					}
+				})
+				.catch((error) => {
+					res.status(500).json({
+						message: "Something went wrong",
+						erorr: error,
+					});
+				});
+		});
+	});
+}
 
 module.exports = {
 	signUp: signUp,
 	login: login,
+	update: update,
 };

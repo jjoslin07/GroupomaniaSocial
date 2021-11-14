@@ -177,10 +177,31 @@ function destroy(req, res) {
 		});
 }
 
+// Function to Like and unlike a Post
+
+function like(req, res) {
+	const like = { likes: req.userData.userid };
+	console.log(req.userData);
+	const post = models.Post.findByPk(req.params.id)
+		.then(() => {
+			if (!post.likes.includes(req.userData.userId)) {
+				models.Post.updateOne(push(like));
+				res.status(200).json("The post has been liked");
+			} else {
+				models.Post.updateOne(pull(like));
+				res.status(200).json("The post has been unliked");
+			}
+		})
+		.catch((error) => {
+			res.status(500).json(error);
+		});
+}
+
 module.exports = {
 	save: save,
 	show: show,
 	index: index,
 	update: update,
 	destroy: destroy,
+	like: like,
 };
