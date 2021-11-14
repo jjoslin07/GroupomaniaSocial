@@ -14,8 +14,8 @@ app.use(morgan("common"));
 
 app.use("/uploads", express.static("uploads"));
 
-app.use("/api/users", userRoutes);
-app.use("/api/posts", postRoutes);
+app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
 app.use("/comments", commentRoute);
 app.use("/images", imageRoute);
 

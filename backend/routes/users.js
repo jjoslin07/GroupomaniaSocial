@@ -4,18 +4,18 @@ const userCtrl = require("../controllers/user-controller");
 const router = express.Router();
 
 // Signup Route
-router.post("/sign-up", userCtrl.signup);
+router.post("/sign-up", userCtrl.signUp);
 // Login Route
 router.post("/login", userCtrl.login);
 // Update Route
-router.put("/:id", userCtrl.updateUser);
+//router.put("/:id", userCtrl.updateUser);
 // Delete Route
-router.delete("/:id", userCtrl.deleteUser);
+//outer.delete("/:id", userCtrl.deleteUser);
 // Get a User
-router.get("/:id", userCtrl.getUser);
+//router.get("/:id", userCtrl.getUser);
 // Follow a User
-router.put("/:id", userCtrl.followUser);
+//router.put("/:id", userCtrl.followUser);
 // Unfollow a User
-router.put("/:id", userCtrl.unfollowUser);
+//router.put("/:id", userCtrl.unfollowUser);
 
 module.exports = router;
