@@ -1,0 +1,21 @@
+const express = require("express");
+const userCtrl = require("../controllers/user-controller");
+
+const router = express.Router();
+
+// Signup Route
+router.post("/sign-up", userCtrl.signup);
+// Login Route
+router.post("/login", userCtrl.login);
+// Update Route
+router.put("/:id", userCtrl.updateUser);
+// Delete Route
+router.delete("/:id", userCtrl.deleteUser);
+// Get a User
+router.get("/:id", userCtrl.getUser);
+// Follow a User
+router.put("/:id", userCtrl.followUser);
+// Unfollow a User
+router.put("/:id", userCtrl.unfollowUser);
+
+module.exports = router;

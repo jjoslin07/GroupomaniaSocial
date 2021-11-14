@@ -1,25 +1,33 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models/User");
-const database = require("../config/database");
-const { request } = require("../app");
-
+const User = require("../models/user");
+const Validator = require("fastest-validator");
+require("dotenv").config();
 // Sign the user up with a unique id using a unique email and hash's the password to store in database.
-exports.register = (req, res) => {
+exports.signup = (req, res, next) => {
 	bcrypt.hash(req.body.password, 10).then((hash) => {
-		let email = req.body.email;
-		let password = hash;
-		if (email && password) {
-			database.query(
-				"INSERT INTO user WHERE email = ? AND password = ?",
-				[email, password],
-				function (error, results, fields) {
-					if (results.length > 0) {
-						request.session;
-					}
-				}
-			);
+		const user = new User({
+			email: req.body.email,
+			password: hash,
+		});
+		const schema = {
+			name: { type: "string", optional: false, min: 3, max: 255 },
+			email: {
+				type: "email",
+				optional: false,
+				max: 255,
+			},
+			password: { type: "string", optional: false, max: 255 },
+		};
+		const v = new Validator();
+		const validationResponse = v.validate(user, schema);
+		if (validationResponse !== true) {
+			return res.status(400).json({
+				message: "Validation failed",
+				error: validationResponse,
+			});
 		}
+
 		// Save user to database.
 		user
 			.save()
@@ -38,7 +46,7 @@ exports.register = (req, res) => {
 };
 
 // Searches for user in the database and if found compares password with bcrypt hash and logs user in.
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
 	User.findOne({
 		email: req.body.email,
 	})
@@ -84,6 +92,7 @@ exports.login = (req, res) => {
 			});
 		});
 };
+
 // Update user
 exports.updateUser = async (req, res) => {
 	if (req.body.userId === req.params.id || req.body.isAdmin) {
