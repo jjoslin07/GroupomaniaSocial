@@ -181,9 +181,48 @@ function destroy(req, res) {
 		});
 }
 
+// Get a user
+
+function show(req, res) {
+	try {
+		const id = req.params.id;
+		models.User.findByPk(id)
+			.then((result) => {
+				if (result) {
+					console.log(result);
+					res.status(200).json({
+						attributes: {
+							name: result.name,
+							profilePicture: result.profilePicture,
+							coverPicture: result.coverPicture,
+							followers: result.followers,
+							following: result.following,
+							desc: result.desc,
+							city: result.city,
+							hometown: result.from,
+						},
+					});
+				} else {
+					res.status(404).json({
+						message: "User not found!",
+					});
+				}
+			})
+			.catch((error) => {
+				res.status(500).json({
+					message: "Something went wrong!",
+				});
+			});
+	} catch (error) {
+		res.status(500).json({
+			message: "Something went wrong!",
+		});
+	}
+}
 module.exports = {
 	signUp: signUp,
 	login: login,
 	update: update,
 	destroy: destroy,
+	show: show,
 };
