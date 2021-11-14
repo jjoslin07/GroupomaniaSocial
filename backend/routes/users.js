@@ -11,7 +11,7 @@ router.post("/login", userCtrl.login);
 // Update Route
 router.patch("/:id", auth.checkAuth, userCtrl.update);
 // Delete Route
-//outer.delete("/:id", userCtrl.deleteUser);
+router.delete("/:id", auth.checkAuth, userCtrl.destroy);
 // Get a User
 //router.get("/:id", userCtrl.getUser);
 // Follow a User

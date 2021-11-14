@@ -181,7 +181,7 @@ function destroy(req, res) {
 
 function like(req, res) {
 	const like = { likes: req.userData.userid };
-	console.log(req.userData);
+	console.log(req.userData); //DEBUG
 	const post = models.Post.findByPk(req.params.id)
 		.then(() => {
 			if (!post.likes.includes(req.userData.userId)) {

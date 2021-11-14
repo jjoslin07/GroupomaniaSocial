@@ -156,8 +156,34 @@ function update(req, res) {
 	});
 }
 
+// Delete User
+function destroy(req, res) {
+	const id = req.params.id;
+	const userId = req.userData.userId;
+
+	models.User.destroy({ where: { id: id, id: userId } })
+		.then((result) => {
+			if (result) {
+				res.status(200).json({
+					message: "User deleted successfully",
+				});
+			} else {
+				res.status(403).json({
+					message: "You can only delete your account",
+				});
+			}
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Something went wrong",
+				error: error,
+			});
+		});
+}
+
 module.exports = {
 	signUp: signUp,
 	login: login,
 	update: update,
+	destroy: destroy,
 };
