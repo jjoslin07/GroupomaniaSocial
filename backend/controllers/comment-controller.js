@@ -2,6 +2,9 @@ const Validator = require("fastest-validator");
 const models = require("../models");
 
 function save(req, res) {
+	console.log(req.userData);
+	console.log(req.params);
+
 	const comment = {
 		content: req.body.content,
 		postId: req.body.postId,
