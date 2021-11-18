@@ -1,19 +1,25 @@
 const Validator = require("fastest-validator");
 const models = require("../models");
-
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ */
 function save(req, res) {
 	console.log(req.userData);
 	console.log(req.params);
 
 	const comment = {
 		content: req.body.content,
-		postId: req.body.postId,
+		postId: req.params.id,
 		userId: req.userData.userId,
 	};
 
 	const schema = {
 		content: { type: "string", optional: false, max: "500" },
-		postId: { type: "number", optional: false },
+		postId: { type: "string", optional: false },
+		userId: { type: "number", optional: false },
 	};
 
 	const v = new Validator();
@@ -26,7 +32,7 @@ function save(req, res) {
 		});
 	}
 
-	models.Post.findByPk(req.body.postId)
+	models.Post.findByPk(req.params.id)
 		.then((post) => {
 			if (post === null) {
 				res.status(404).json({
@@ -55,14 +61,20 @@ function save(req, res) {
 			});
 		});
 }
-
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 function show(req, res) {
 	const id = req.params.id;
 
 	models.Comment.findByPk(id)
 		.then((result) => {
 			if (result) {
-				res.status(200).json(result);
+				res.status(200).json({
+					comment: result,
+				});
 			} else {
 				res.status(404).json({
 					message: "Comment not found!",
@@ -75,11 +87,25 @@ function show(req, res) {
 			});
 		});
 }
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+function showAll(req, res) {
+	const postId = req.params.id;
 
-function index(req, res) {
-	models.Comment.findAll()
+	models.Comment.findAll({ where: { postId: postId } })
 		.then((result) => {
-			res.status(200).json(result);
+			if (result.length > 0) {
+				res.status(200).json({
+					Comments: result,
+				});
+			} else {
+				res.status(404).json({
+					message: "No comments found!",
+				});
+			}
 		})
 		.catch((error) => {
 			res.status(500).json({
@@ -87,7 +113,12 @@ function index(req, res) {
 			});
 		});
 }
-
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ */
 function update(req, res) {
 	const id = req.params.id;
 	const updatedComment = {
@@ -124,7 +155,11 @@ function update(req, res) {
 			});
 		});
 }
-
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 function destroy(req, res) {
 	const id = req.params.id;
 	const userId = req.userData.userId;
@@ -145,8 +180,8 @@ function destroy(req, res) {
 
 module.exports = {
 	save: save,
+	showAll: showAll,
 	show: show,
-	index: index,
 	update: update,
 	destroy: destroy,
 };

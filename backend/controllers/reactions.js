@@ -201,6 +201,9 @@ function unfunny(req, res) {
 // Function to get Reactions
 function getReaction(req, res) {
 	const postId = req.params.id;
+	let likeCount = 0;
+	let loveCount = 0;
+	let funnyCount = 0;
 	// Find all posts that have a reaction
 	models.Reactions.findAll({
 		where: { postId: postId, hasReaction: true },
@@ -211,9 +214,7 @@ function getReaction(req, res) {
 					message: "Here are the reactions",
 					posts: result,
 				});
-				let likeCount = 0;
-				let loveCount = 0;
-				let funnyCount = 0;
+
 				// Count likes
 				for (i = 0; i < result.length; i++) {
 					if (result[i].isLiked === true) {

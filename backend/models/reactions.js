@@ -13,6 +13,18 @@ module.exports = (sequelize, DataTypes) => {
 			Reactions.belongsTo(models.Comment, { foreignKey: "postId" });
 			Reactions.belongsTo(models.User, { foreignKey: "userId" });
 		}
+		toJSON() {
+			return {
+				...this.get(),
+				createdAt: undefined,
+				updatedAt: undefined,
+				userId: undefined,
+				id: undefined,
+				// postId: undefined,
+				PostId: undefined,
+				hasReaction: undefined,
+			};
+		}
 	}
 	Reactions.init(
 		{
