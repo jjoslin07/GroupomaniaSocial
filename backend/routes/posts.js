@@ -1,5 +1,6 @@
 const express = require("express");
 const postsCtrl = require("../controllers/post-controller");
+const reactions = require("../controllers/reactions");
 const router = express.Router();
 const auth = require("../middleware/auth");
 
@@ -14,8 +15,15 @@ router.patch("/:id", auth.checkAuth, postsCtrl.update);
 // Delete a Post
 router.delete("/:id", auth.checkAuth, postsCtrl.destroy);
 // Like a Post
-router.put("/:id/like", auth.checkAuth, postsCtrl.like);
+router.post("/:id/like", auth.checkAuth, reactions.like);
+// Unlike a Post
+router.delete("/:id/like", auth.checkAuth, reactions.unlike);
 // Love a post
-router.put("/:id", auth.checkAuth, postsCtrl.love);
-
+router.post("/:id/love", auth.checkAuth, reactions.love);
+// Unlove a post
+router.delete("/:id/love", auth.checkAuth, reactions.unlove);
+// Lol a Post
+router.post("/:id/funny", auth.checkAuth, reactions.funny);
+// Remove Lol
+router.delete("/:id/funny", auth.checkAuth, reactions.unfunny);
 module.exports = router;

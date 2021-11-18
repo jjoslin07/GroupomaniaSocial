@@ -24,10 +24,13 @@ module.exports = {
 				type: Sequelize.INTEGER,
 			},
 			likes: {
-				type: Sequelize.JSON,
+				type: Sequelize.INTEGER,
 			},
 			loves: {
-				type: Sequelize.JSON,
+				type: Sequelize.INTEGER,
+			},
+			funny: {
+				type: Sequelize.INTEGER,
 			},
 			createdAt: {
 				allowNull: false,

@@ -77,6 +77,9 @@ function login(req, res) {
 									userId: user.id,
 								},
 								process.env.SECRET_TOKEN,
+								{
+									expiresIn: process.env.JWT_EXPIRE,
+								},
 								function (err, token) {
 									res.status(200).json({
 										message: "Authentication successful!",

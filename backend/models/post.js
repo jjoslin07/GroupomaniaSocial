@@ -9,13 +9,15 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			Post.belongsTo(models.User, { foreignKey: "userId" });
+			Post.hasMany(models.Comment);
+			Post.hasMany(models.Reactions);
 		}
 		toJSON() {
 			return {
 				...this.get(),
 				createdAt: undefined,
 				updatedAt: undefined,
-				id: undefined,
 				userId: undefined,
 			};
 		}
@@ -27,8 +29,9 @@ module.exports = (sequelize, DataTypes) => {
 			imageUrl: DataTypes.STRING,
 			categoryId: DataTypes.INTEGER,
 			userId: DataTypes.INTEGER,
-			likes: DataTypes.JSON,
-			loves: DataTypes.JSON,
+			likes: DataTypes.INTEGER,
+			loves: DataTypes.INTEGER,
+			funny: DataTypes.INTEGER,
 		},
 		{
 			sequelize,
