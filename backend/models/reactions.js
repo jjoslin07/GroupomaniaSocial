@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 			isLiked: DataTypes.BOOLEAN,
 			isLoved: DataTypes.BOOLEAN,
 			isFunny: DataTypes.BOOLEAN,
+			hasReaction: DataTypes.BOOLEAN,
 		},
 
 		{

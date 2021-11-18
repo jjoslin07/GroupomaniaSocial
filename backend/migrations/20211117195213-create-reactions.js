@@ -35,6 +35,11 @@ module.exports = {
 					allowNull: false,
 					default: false,
 				},
+				hasReaction: {
+					type: Sequelize.BOOLEAN,
+					allowNull: false,
+					default: false,
+				},
 				createdAt: {
 					allowNull: false,
 					type: Sequelize.DATE,

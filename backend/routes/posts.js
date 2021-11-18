@@ -26,4 +26,9 @@ router.delete("/:id/love", auth.checkAuth, reactions.unlove);
 router.post("/:id/funny", auth.checkAuth, reactions.funny);
 // Remove Lol
 router.delete("/:id/funny", auth.checkAuth, reactions.unfunny);
+// Get Reactions
+router.get("/:id/reactions", reactions.getReaction);
+// Get loves
+// router.get("/:id/love", reactions.getLoves);
+
 module.exports = router;
