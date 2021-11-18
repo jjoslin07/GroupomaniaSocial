@@ -143,14 +143,20 @@ function update(req, res) {
 
 	models.Comment.update(updatedComment, { where: { id: id, userId: userId } })
 		.then((result) => {
-			res.status(200).json({
-				message: "Comment updated successfully",
-				post: updatedComment,
-			});
+			if (result > 0) {
+				res.status(200).json({
+					message: "Comment updated successfully",
+					post: updatedComment,
+				});
+			} else {
+				res.status(404).json({
+					message: "Comment not found!",
+				});
+			}
 		})
 		.catch((error) => {
-			res.status(200).json({
-				message: "Something went wrong",
+			res.status(404).json({
+				message: "Nothing to see here",
 				error: error,
 			});
 		});

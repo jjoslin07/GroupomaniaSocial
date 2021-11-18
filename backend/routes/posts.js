@@ -37,8 +37,8 @@ router.get("/:id/comment/:id", commentCtrl.show);
 // Get all comments
 router.get("/:id/comment", commentCtrl.showAll);
 // Update a comment
-router.patch("/:id/comment", auth.checkAuth, commentCtrl.update);
+router.patch("/:id/comment/:id", auth.checkAuth, commentCtrl.update);
 // Delete a comment
-router.delete("/:id/comment", auth.checkAuth, commentCtrl.destroy);
+router.delete("/:id/comment/:id", auth.checkAuth, commentCtrl.destroy);
 
 module.exports = router;
