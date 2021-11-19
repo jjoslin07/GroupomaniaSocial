@@ -14,6 +14,8 @@ router.patch("/:id", auth.checkAuth, userCtrl.update);
 router.delete("/:id", auth.checkAuth, userCtrl.destroy);
 // Get a User
 router.get("/:id", userCtrl.show);
+// Get all Users
+router.get("/", userCtrl.showAll);
 // Follow a User
 //router.put("/:id", userCtrl.followUser);
 // Unfollow a User

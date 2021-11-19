@@ -122,9 +122,11 @@ function showAll(req, res) {
 function update(req, res) {
 	const id = req.params.id;
 	const updatedComment = {
+		id: req.params.id,
 		content: req.body.content,
+		userId: req.userData.userId,
 	};
-
+	//
 	const userId = req.userData.userId;
 
 	const schema = {
@@ -146,7 +148,7 @@ function update(req, res) {
 			if (result > 0) {
 				res.status(200).json({
 					message: "Comment updated successfully",
-					post: updatedComment,
+					comment: updatedComment,
 				});
 			} else {
 				res.status(404).json({
@@ -172,9 +174,15 @@ function destroy(req, res) {
 
 	models.Comment.destroy({ where: { id: id, userId: userId } })
 		.then((result) => {
-			res.status(200).json({
-				message: "Comment deleted successfully",
-			});
+			if (result > 0) {
+				res.status(200).json({
+					message: "Comment deleted successfully",
+				});
+			} else {
+				res.status(404).json({
+					message: "Comment not found!",
+				});
+			}
 		})
 		.catch((error) => {
 			res.status(200).json({

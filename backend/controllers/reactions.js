@@ -1,7 +1,11 @@
 const models = require("../models");
 
-// Function to Like Post
-
+// Function to Like Posts
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 function like(req, res) {
 	const like = {
 		postId: req.params.id,
@@ -16,15 +20,14 @@ function like(req, res) {
 			if (result !== null) {
 				models.Reactions.create(like)
 					.then((result) => {
+						console.log(result.dataValues.isLiked);
 						res.status(201).json({
-							message: "Like created successfully",
-							like: result,
+							message: "LIKE created successfully",
 						});
 					})
 					.catch((error) => {
 						res.status(400).json({
-							message: "You already liked this post",
-							error: error.message,
+							message: "You already reacted this post",
 						});
 					});
 			} else {
@@ -36,35 +39,39 @@ function like(req, res) {
 		})
 		.catch((error) => {
 			res.status(404).json({
-				message: "Nothing to see here",
+				message: "Post unavailable",
 			});
 		});
 }
 
 // Function to Unlike Post
-
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 function unlike(req, res) {
 	const id = req.params.id;
 	const userId = req.userData.userId;
-	try {
-		models.Reactions.destroy({ where: { postId: id, userId: userId } })
-			.then((result) => {
+
+	models.Reactions.destroy({ where: { postId: id, userId: userId } })
+		.then((result) => {
+			if (result > 0) {
 				res.status(200).json({
-					message: "Post unliked successfully",
-					unlike: result,
+					message: "Reaction removed successfully",
 				});
-			})
-			.catch((error) => {
-				res.status(403).json({
-					message: "Post already unliked",
-					error: error,
+			} else {
+				res.status(400).json({
+					message: "You already removed your LIKE",
 				});
+			}
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Something went wrong",
+				error: error,
 			});
-	} catch (error) {
-		res.status(500).json({
-			message: "Something went wrong",
 		});
-	}
 }
 
 // Function to Love Post
@@ -84,14 +91,12 @@ function love(req, res) {
 				models.Reactions.create(love)
 					.then((result) => {
 						res.status(201).json({
-							message: "Love created successfully",
-							like: result,
+							message: "LOVE created successfully",
 						});
 					})
 					.catch((error) => {
 						res.status(400).json({
-							message: "You already loved this post",
-							error: error.message,
+							message: "You already reacted this post",
 						});
 					});
 			} else {
@@ -103,7 +108,7 @@ function love(req, res) {
 		})
 		.catch((error) => {
 			res.status(404).json({
-				message: "Nothing to see here",
+				message: "Post unavailable",
 			});
 		});
 }
@@ -112,27 +117,26 @@ function love(req, res) {
 function unlove(req, res) {
 	const id = req.params.id;
 	const userId = req.userData.userId;
-	try {
-		models.Reactions.destroy({ where: { postId: id, userId: userId } })
-			.then((result) => {
-				res.status(200).json({
-					message: "Post unloved successfully",
-					unlove: result,
-				});
-			})
-			.catch((error) => {
-				res.status(403).json({
-					message: "Post already unloved",
-					error: error,
-				});
-			});
-	} catch (error) {
-		res.status(500).json({
-			message: "Something went wrong",
-		});
-	}
-}
 
+	models.Reactions.destroy({ where: { postId: id, userId: userId } })
+		.then((result) => {
+			if (result > 0) {
+				res.status(200).json({
+					message: "Reaction removed successfully",
+				});
+			} else {
+				res.status(400).json({
+					message: "You already removed your LOVE",
+				});
+			}
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Something went wrong",
+				error: error,
+			});
+		});
+}
 // Function to Lol post
 
 function funny(req, res) {
@@ -150,14 +154,12 @@ function funny(req, res) {
 				models.Reactions.create(funny)
 					.then((result) => {
 						res.status(201).json({
-							message: "Lol created successfully",
-							funny: result,
+							message: "LOL created successfully",
 						});
 					})
 					.catch((error) => {
 						res.status(400).json({
-							message: "You already Lol this post",
-							error: error.message,
+							message: "You already reacted to this post",
 						});
 					});
 			} else {
@@ -169,7 +171,7 @@ function funny(req, res) {
 		})
 		.catch((error) => {
 			res.status(404).json({
-				message: "Nothing to see here",
+				message: "Post unavailable",
 			});
 		});
 }
@@ -177,25 +179,24 @@ function funny(req, res) {
 function unfunny(req, res) {
 	const id = req.params.id;
 	const userId = req.userData.userId;
-	try {
-		models.Reactions.destroy({ where: { postId: id, userId: userId } })
-			.then((result) => {
+
+	models.Reactions.destroy({ where: { postId: id, userId: userId } })
+		.then((result) => {
+			if (result > 0) {
 				res.status(200).json({
-					message: "Lol removed successfully",
-					unFunny: result,
+					message: "Reaction removed successfully",
 				});
-			})
-			.catch((error) => {
-				res.status(403).json({
-					message: "Lol alredy removed",
-					error: error,
+			} else {
+				res.status(400).json({
+					message: "You already removed your LOL",
 				});
+			}
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Something went wrong",
 			});
-	} catch (error) {
-		res.status(500).json({
-			message: "Something went wrong",
 		});
-	}
 }
 
 // Function to get Reactions
@@ -209,7 +210,7 @@ function getReaction(req, res) {
 		where: { postId: postId, hasReaction: true },
 	})
 		.then((result) => {
-			if (result !== null) {
+			if (result.length > 0) {
 				res.status(200).json({
 					message: "Here are the reactions",
 					posts: result,
@@ -238,12 +239,15 @@ function getReaction(req, res) {
 				console.log("Funny :" + funnyCount);
 			} else {
 				res.status(404).json({
-					message: "Nothing to see here",
+					message: "No reaction's on this post",
 				});
 			}
 		})
 		.catch((error) => {
-			error;
+			res.status(500).json({
+				message: "Something went wrong",
+				error: error,
+			});
 		});
 }
 

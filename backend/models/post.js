@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 			Post.belongsTo(models.User, { foreignKey: "userId" });
-			Post.hasMany(models.Comment);
-			Post.hasMany(models.Reactions);
+			Post.hasMany(models.Comment, { foreignKey: "postId" });
+			Post.hasMany(models.Reactions, { foreignKey: "postId" });
+			Post.hasMany(models.Category, { foreignKey: "postId" });
 		}
 		toJSON() {
 			return {
