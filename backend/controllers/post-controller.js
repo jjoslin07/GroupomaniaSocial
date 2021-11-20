@@ -3,6 +3,9 @@ const { restart } = require("nodemon");
 const Validator = require("fastest-validator");
 // Import models
 const models = require("../models");
+// Import Reaction Controller
+const reactionCtrl = require("../controllers/reactions");
+const { set } = require("../app");
 
 // Function to create a new Post
 function save(req, res) {

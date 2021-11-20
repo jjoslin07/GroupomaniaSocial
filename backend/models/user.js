@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 				email: undefined,
 				createdAt: undefined,
 				updatedAt: undefined,
-				isAdmin: undefined,
+				// isAdmin: undefined,
 				id: undefined,
 			};
 		}
@@ -32,8 +32,6 @@ module.exports = (sequelize, DataTypes) => {
 			password: DataTypes.STRING,
 			profilePicture: DataTypes.STRING,
 			coverPicture: DataTypes.STRING,
-			followers: DataTypes.JSON,
-			following: DataTypes.JSON,
 			isAdmin: DataTypes.BOOLEAN,
 			desc: DataTypes.STRING,
 			city: DataTypes.STRING,

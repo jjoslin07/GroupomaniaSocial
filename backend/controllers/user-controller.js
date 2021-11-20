@@ -8,7 +8,7 @@ function signUp(req, res) {
 	models.User.findOne({ where: { email: req.body.email } })
 		.then((result) => {
 			if (result) {
-				res.status(409).json({
+				res.status(403).json({
 					message: "Email already exists!",
 				});
 			} else {
@@ -18,6 +18,10 @@ function signUp(req, res) {
 							name: req.body.name,
 							email: req.body.email,
 							password: hash,
+							isAdmin: req.body.isAdmin,
+							desc: req.body.desc,
+							city: req.body.city,
+							from: req.body.from,
 						};
 						const schema = {
 							name: { type: "string", optional: false, min: 3, max: 255 },
@@ -27,6 +31,7 @@ function signUp(req, res) {
 								max: 255,
 							},
 							password: { type: "string", optional: false, max: 255 },
+							isAdmin: { type: "boolean", default: false },
 						};
 						const v = new Validator();
 						const validationResponse = v.validate(user, schema);

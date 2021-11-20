@@ -12,6 +12,9 @@ module.exports = {
 				type: Sequelize.TEXT,
 				allowNull: false,
 			},
+			imageUrl: {
+				type: Sequelize.STRING,
+			},
 			postId: {
 				type: Sequelize.INTEGER,
 				allowNull: false,

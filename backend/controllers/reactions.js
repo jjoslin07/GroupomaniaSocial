@@ -199,10 +199,10 @@ function unfunny(req, res) {
 		});
 }
 
-// Function to get Reactions
+// Function to get Reactions and set them to Post
 function getReaction(req, res) {
 	const postId = req.params.id;
-	let likeCount = 0;
+	var likeCount = 0;
 	let loveCount = 0;
 	let funnyCount = 0;
 	// Find all posts that have a reaction
@@ -211,32 +211,38 @@ function getReaction(req, res) {
 	})
 		.then((result) => {
 			if (result.length > 0) {
-				res.status(200).json({
-					message: "Here are the reactions",
-					posts: result,
-				});
-
 				// Count likes
 				for (i = 0; i < result.length; i++) {
 					if (result[i].isLiked === true) {
 						likeCount++;
 					}
 				}
-				console.log("Like :" + likeCount);
 				// Count Loves
 				for (k = 0; k < result.length; k++) {
 					if (result[k].isLoved === true) {
 						loveCount++;
 					}
 				}
-				console.log("Love: " + loveCount);
 				// Count funny
 				for (j = 0; j < result.length; j++) {
 					if (result[j].isFunny === true) {
 						funnyCount++;
 					}
 				}
-				console.log("Funny :" + funnyCount);
+				res.status(200).json({
+					message: "Here are the reactions",
+					Likes: likeCount,
+					Loves: loveCount,
+					Funny: funnyCount,
+				});
+
+				// Update the Post Table with likes, loves and funny count
+				models.Post.update(
+					{ likes: likeCount, loves: loveCount, funny: funnyCount },
+					{
+						where: { id: postId },
+					}
+				);
 			} else {
 				res.status(404).json({
 					message: "No reaction's on this post",

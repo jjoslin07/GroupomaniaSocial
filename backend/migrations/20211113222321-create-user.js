@@ -12,12 +12,15 @@ module.exports = {
 			},
 			name: {
 				type: Sequelize.STRING,
+				allowNull: false,
 			},
 			email: {
 				type: Sequelize.STRING,
+				allowNull: false,
 			},
 			password: {
 				type: Sequelize.STRING,
+				allowNull: false,
 			},
 			profilePicture: {
 				type: Sequelize.STRING,
@@ -25,17 +28,12 @@ module.exports = {
 			coverPicture: {
 				type: Sequelize.STRING,
 			},
-			followers: {
-				type: Sequelize.JSON,
-			},
-			following: {
-				type: Sequelize.JSON,
-			},
 			isAdmin: {
 				type: Sequelize.BOOLEAN,
+				allowNull: false,
 			},
 			desc: {
-				type: Sequelize.STRING,
+				type: Sequelize.TEXT,
 			},
 			city: {
 				type: Sequelize.STRING,
