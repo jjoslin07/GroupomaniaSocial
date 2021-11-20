@@ -1,43 +1,38 @@
 import "./leftbar.css";
 import {
 	RssFeed,
-	Chat,
-	Groups,
-	VideoCall,
 	Bookmarks,
-	LiveHelp,
 	Event,
 	School,
 	WorkOutline,
+	PeopleAlt,
+	EmojiPeople,
+	EmojiEmotions,
+	EmojiObjects,
+	DirectionsCar,
+	MarkunreadMailboxOutlined,
 } from "@mui/icons-material";
 export default function Leftbar() {
 	return (
 		<div className="leftbarContainer">
 			<div className="leftbarWrapper">
 				<ul className="leftbarList">
+					<div className="leftbarTitle">Categories</div>
+					<li className="leftbarListItem">
+						<MarkunreadMailboxOutlined className="leftbarIcon" />
+						<span className="leftbarListItemText">Unread Posts</span>
+					</li>
 					<li className="leftbarListItem">
 						<RssFeed className="leftbarIcon" />
 						<span className="leftbarListItemText">Feed</span>
-					</li>
-					<li className="leftbarListItem">
-						<Chat className="leftbarIcon" />
-						<span className="leftbarListItemText">Chats</span>
-					</li>
-					<li className="leftbarListItem">
-						<VideoCall className="leftbarIcon" />
-						<span className="leftbarListItemText">Video Call</span>
-					</li>
-					<li className="leftbarListItem">
-						<Groups className="leftbarIcon" />
-						<span className="leftbarListItemText">Friends</span>
 					</li>
 					<li className="leftbarListItem">
 						<Bookmarks className="leftbarIcon" />
 						<span className="leftbarListItemText">Bookmarks</span>
 					</li>
 					<li className="leftbarListItem">
-						<LiveHelp className="leftbarIcon" />
-						<span className="leftbarListItemText">Live Help</span>
+						<EmojiPeople className="leftbarIcon" />
+						<span className="leftbarListItemText">Questions</span>
 					</li>
 					<li className="leftbarListItem">
 						<Event className="leftbarIcon" />
@@ -51,9 +46,25 @@ export default function Leftbar() {
 						<WorkOutline className="leftbarIcon" />
 						<span className="leftbarListItemText">Job Openings</span>
 					</li>
+					<li className="leftbarListItem">
+						<EmojiEmotions className="leftbarIcon" />
+						<span className="leftbarListItemText">For Laughs</span>
+					</li>
+					<li className="leftbarListItem">
+						<PeopleAlt className="leftbarIcon" />
+						<span className="leftbarListItemText">New People</span>
+					</li>
+					<li className="leftbarListItem">
+						<EmojiObjects className="leftbarIcon" />
+						<span className="leftbarListItemText">Ideas</span>
+					</li>
+					<li className="leftbarListItem">
+						<DirectionsCar className="leftbarIcon" />
+						<span className="leftbarListItemText">Carpool</span>
+					</li>
 				</ul>
-				<button className="leftbarButton">Show More</button>
 				<hr className="leftbarHr" />
+				<div className="leftbarTitle">Profiles</div>
 				<ul className="leftbarFriendList">
 					<li className="leftbarFriend">
 						<img

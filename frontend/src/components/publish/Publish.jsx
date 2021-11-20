@@ -20,7 +20,7 @@ export default function Publish() {
 					<div className="publishOptions">
 						<div className="publishOption">
 							<PermMedia className="publishIcon" style={{ color: "green" }} />
-							<span className="publishOptionText">Photo or Video</span>
+							<span className="publishOptionText">Photo</span>
 						</div>
 						<div className="publishOption">
 							<Label className="publishIcon" style={{ color: "blue" }} />

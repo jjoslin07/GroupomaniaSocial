@@ -21,7 +21,7 @@ function save(req, res) {
 	const schema = {
 		title: { type: "string", optional: false, max: "100" },
 		content: { type: "string", optional: false, max: "500" },
-		categoryId: { type: "number", optional: false },
+		categoryId: { type: "number", optional: false, default: 1 },
 	};
 	// Create instance of Validator class
 	const v = new Validator();
@@ -35,7 +35,7 @@ function save(req, res) {
 		});
 	}
 	models.Category.findByPk(req.body.categoryId).then((result) => {
-		if (result !== null) {
+		if (result || !result) {
 			// Create new Post and save to database
 			models.Post.create(post)
 				.then((result) => {

@@ -30,6 +30,11 @@
 
 .leftbarIcon {
 	margin-right: 15px;
+	cursor: pointer;
+}
+.leftbarListItemText {
+	cursor: pointer;
+	font-weight: 400;
 }
 
 .leftbarButton {
@@ -42,6 +47,11 @@
 
 .leftbarHr {
 	margin: 20px 0;
+}
+.leftbarTitle {
+	margin: 20px;
+	font-weight: 600;
+	font-size: 20px;
 }
 .leftbarFriendList {
 	padding: 0;
@@ -60,4 +70,9 @@
 	border-radius: 50%;
 	object-fit: cover;
 	margin-right: 10px;
+	cursor: pointer;
+}
+.leftbarFriendName {
+	cursor: pointer;
+	font-weight: 400;
 }

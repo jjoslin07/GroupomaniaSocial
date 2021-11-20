@@ -21,6 +21,7 @@ module.exports = {
 			},
 			categoryId: {
 				type: Sequelize.INTEGER,
+				default: 1,
 			},
 			userId: {
 				type: Sequelize.INTEGER,
