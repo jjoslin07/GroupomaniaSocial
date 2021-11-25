@@ -17,7 +17,7 @@ export default function Leftbar() {
 		<div className="leftbarContainer">
 			<div className="leftbarWrapper">
 				<ul className="leftbarList">
-					<div className="leftbarTitle">Categories</div>
+					<h4 className="leftbarTitle">Categories</h4>
 					<li className="leftbarListItem">
 						<MarkunreadMailboxOutlined className="leftbarIcon" />
 						<span className="leftbarListItemText">Unread Posts</span>
@@ -64,7 +64,7 @@ export default function Leftbar() {
 					</li>
 				</ul>
 				<hr className="leftbarHr" />
-				<div className="leftbarTitle">Profiles</div>
+				<h4 className="leftbarTitle">Profiles</h4>
 				<ul className="leftbarFriendList">
 					<li className="leftbarFriend">
 						<img
@@ -113,6 +113,86 @@ export default function Leftbar() {
 							alt=""
 						/>
 						<span className="leftbarFriendName"> Jane Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
+					</li>
+					<li className="leftbarFriend">
+						<img
+							className="leftbarFriendImg"
+							src="/assets/Profile/male.png"
+							alt=""
+						/>
+						<span className="leftbarFriendName"> James Doe</span>
 					</li>
 					<li className="leftbarFriend">
 						<img

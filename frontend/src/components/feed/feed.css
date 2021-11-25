@@ -3,8 +3,9 @@
 	display: flex;
 	justify-content: center;
 	height: calc(100vh - 65px);
-	outline: red dotted 2px;
+	/* outline: red dotted 2px; */
 }
+
 .feedWrapper {
 	padding: 20px;
 }
