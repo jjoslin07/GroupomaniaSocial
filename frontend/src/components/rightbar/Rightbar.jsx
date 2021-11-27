@@ -1,5 +1,4 @@
 import "./rightbar.css";
-
 export default function Rightbar() {
 	return (
 		<div className="rightbar">
@@ -16,7 +15,7 @@ export default function Rightbar() {
 						<div className="rightbarProfileImgContainer">
 							<img
 								className="rightbarProfileImg"
-								src="/assets/Profile/7.jpg"
+								src="/assets/Profile/2.jpg"
 								alt=""
 							/>
 							<span className="rightbarOnline"></span>
@@ -68,7 +67,6 @@ export default function Rightbar() {
 						<span className="rightbarUsername"> Khloe Buttons</span>
 					</li>
 				</ul>
-				<h4 className="rightbarTitle">Calendar</h4>
 			</div>
 		</div>
 	);

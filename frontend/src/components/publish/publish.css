@@ -22,6 +22,7 @@
 .publishInput {
 	border: none;
 	width: 80%;
+	resize: none;
 }
 
 .publishInput:focus {

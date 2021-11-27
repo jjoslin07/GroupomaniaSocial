@@ -1,6 +1,11 @@
 // Import statements
 import "./topbar.css";
-import { Search, Person, Chat, Notifications } from "@mui/icons-material";
+import {
+	Search,
+	Notifications,
+	ArrowDropDownCircle,
+} from "@mui/icons-material";
+import { Badge, Chip, Avatar } from "@mui/material";
 
 // Component
 export default function Topbar() {
@@ -27,23 +32,22 @@ export default function Topbar() {
 				</div>
 				<div className="topbarIcons">
 					<div className="topbarIconItem">
-						<Person />
-						<span className="topbarIconBadge">12</span>
-					</div>
-					<div className="topbarIconItem">
-						<Chat />
-						<span className="topbarIconBadge">5</span>
-					</div>
-					<div className="topbarIconItem">
-						<Notifications />
-						<span className="topbarIconBadge">20</span>
+						<Badge className="topbarBadge" badgeContent={6} color="primary">
+							<Notifications />
+						</Badge>
 					</div>
 				</div>
-				<img
-					src="/assets/Profile/6.jpg"
-					alt="Profile Pic"
-					className="profilePicture"
-				/>
+				<div className="userProfile">
+					<Chip
+						className="profileChip"
+						variant="outlined"
+						label="Jimmy"
+						avatar={<Avatar src="/assets/Profile/6.jpg" />}
+						style={{ color: "white" }}
+					/>
+
+					<ArrowDropDownCircle className="profileDropdownArrow" />
+				</div>
 			</div>
 		</div>
 	);

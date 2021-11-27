@@ -64,6 +64,7 @@
 	margin-right: 10px;
 	font-size: 14px;
 	cursor: pointer;
+	font-weight: 500;
 }
 
 .topbarIcons {
@@ -74,26 +75,16 @@
 	cursor: pointer;
 	position: relative;
 }
-
-.topbarIconBadge {
-	width: 15px;
-	height: 15px;
-	background-color: red;
-	border-radius: 50%;
-	color: white;
-	position: absolute;
-	top: -7px;
-	right: -5px;
+.userProfile {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	font-size: 10px;
 }
-
-.profilePicture {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	object-fit: cover;
+.profileChip {
+	cursor: pointer;
+	margin-right: 10px;
+	font-weight: 500;
+	color: white;
+}
+.profileDropdownArrow {
 	cursor: pointer;
 }

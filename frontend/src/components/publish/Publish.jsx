@@ -1,5 +1,6 @@
 import "./publish.css";
 import { PermMedia, Room, EmojiEmotions, Label } from "@mui/icons-material";
+import { TextareaAutosize } from "@mui/core";
 export default function Publish() {
 	return (
 		<div className="publishContainer">
@@ -10,9 +11,11 @@ export default function Publish() {
 						src="/assets/Profile/male.png"
 						alt=""
 					/>
-					<input
+					<TextareaAutosize
+						maxRows={4}
 						placeholder="Share something with us ..."
 						className="publishInput"
+						style={{ width: "100%" }}
 					/>
 				</div>
 				<hr className="publishHr" />
