@@ -1,6 +1,7 @@
 import "./post.css";
 import { MoreVert } from "@mui/icons-material";
 import { Users } from "../../demoData";
+import { Avatar } from "@mui/material";
 
 const Post = ({ post }) => {
 	return (
@@ -8,7 +9,7 @@ const Post = ({ post }) => {
 			<div className="postWrapper">
 				<div className="postTop">
 					<div className="postTopLeft">
-						<img
+						<Avatar
 							className="postProfileImg"
 							src={Users.filter((u) => u.id === post.userId)[0].profilePicture}
 							alt="Profile Pic"
