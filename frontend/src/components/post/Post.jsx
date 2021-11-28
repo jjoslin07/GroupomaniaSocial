@@ -1,6 +1,8 @@
 import "./post.css";
 import { MoreVert } from "@mui/icons-material";
-const Post = () => {
+import { Users } from "../../demoData";
+
+const Post = ({ post }) => {
 	return (
 		<div className="post">
 			<div className="postWrapper">
@@ -8,37 +10,33 @@ const Post = () => {
 					<div className="postTopLeft">
 						<img
 							className="postProfileImg"
-							src="/assets/Profile/6.jpg"
+							src={Users.filter((u) => u.id === post.userId)[0].profilePicture}
 							alt="Profile Pic"
 						/>
-						<span className="postUsername">Jimmy Butler</span>
-						<span className="postDate">5 mins ago</span>
+						<span className="postUsername">
+							{Users.filter((u) => u.id === post.userId)[0].username}
+						</span>
+						<span className="postDate">{post.date}</span>
 					</div>
 					<div className="postTopRight">
-						<MoreVert />
+						<MoreVert className="postMore" />
 					</div>
 				</div>
 				<div className="postCenter">
-					<span className="postText">
-						This was a beautiful scene I just had to get this shot!
-					</span>
-					<img
-						className="postImg"
-						src="/assets/Posts/field-6574455_1920.jpg"
-						alt="Field"
-					/>
+					<span className="postText">{post?.desc}</span>
+					<img className="postImg" src={post?.photo} alt="Field" />
 				</div>
 				<div className="postBottom">
 					<div className="postBottomLeft">
 						<img className="postIcon" src="/assets/like.png" alt="" />
-						<span className="postReactionCounter">25</span>
+						<span className="postReactionCounter">{post.likes}</span>
 						<img className="postIcon" src="/assets/love.png" alt="" />
-						<span className="postReactionCounter">12</span>
+						<span className="postReactionCounter">{post.loves}</span>
 						<img className="postIcon" src="/assets/haha.png" alt="" />
-						<span className="postReactionCounter">1</span>
+						<span className="postReactionCounter">{post.funny}</span>
 					</div>
 					<div className="postBottomRight">
-						<span className="postCommentText">9 Comments</span>
+						<span className="postCommentText">{post.comment} Comments</span>
 					</div>
 				</div>
 			</div>

@@ -5,7 +5,7 @@ import {
 	Notifications,
 	ArrowDropDownCircle,
 } from "@mui/icons-material";
-import { Badge, Chip, Avatar } from "@mui/material";
+import { Badge, Avatar } from "@mui/material";
 
 // Component
 export default function Topbar() {
@@ -38,14 +38,7 @@ export default function Topbar() {
 					</div>
 				</div>
 				<div className="userProfile">
-					<Chip
-						className="profileChip"
-						variant="outlined"
-						label="Jimmy"
-						avatar={<Avatar src="/assets/Profile/6.jpg" />}
-						style={{ color: "white" }}
-					/>
-
+					<Avatar className="profilePic" src="/assets/Profile/6.jpg" />
 					<ArrowDropDownCircle className="profileDropdownArrow" />
 				</div>
 			</div>

@@ -1,5 +1,9 @@
 .rightbar {
 	flex: 4;
+	/* height: calc(100vh - 50px);
+	overflow-y: scroll;
+	position: sticky;
+	top: 50px; */
 }
 .rightbarWrapper {
 	padding: 20px 20px 0 0;
@@ -25,32 +29,4 @@
 	padding: 0;
 	margin: 0;
 	list-style: none;
-}
-.rightbarProfile {
-	display: flex;
-	align-items: center;
-	margin-bottom: 15px;
-}
-.rightbarProfileImgContainer {
-	margin-right: 10px;
-	position: relative;
-}
-.rightbarProfileImg {
-	width: 32px;
-	height: 32px;
-	border-radius: 50%;
-	object-fit: cover;
-}
-.rightbarOnline {
-	width: 12px;
-	height: 12px;
-	border-radius: 50%;
-	background-color: limegreen;
-	position: absolute;
-	bottom: -2px;
-	right: 0;
-	border: 2px solid white;
-}
-.rightbarUsername {
-	font-weight: 500;
 }

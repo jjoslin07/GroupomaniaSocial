@@ -1,0 +1,14 @@
+.leftbarFriend {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.leftbarFriendImg {
+	margin-right: 10px;
+	cursor: pointer;
+}
+.leftbarFriendName {
+	cursor: pointer;
+	font-weight: 400;
+}

@@ -1,4 +1,6 @@
 import "./rightbar.css";
+import { Users } from "../../demoData";
+import Online from "../online/Online";
 export default function Rightbar() {
 	return (
 		<div className="rightbar">
@@ -11,61 +13,9 @@ export default function Rightbar() {
 				</div>
 				<h4 className="rightbarTitle">People Online</h4>
 				<ul className="rightbarProfileList">
-					<li className="rightbarProfile">
-						<div className="rightbarProfileImgContainer">
-							<img
-								className="rightbarProfileImg"
-								src="/assets/Profile/2.jpg"
-								alt=""
-							/>
-							<span className="rightbarOnline"></span>
-						</div>
-						<span className="rightbarUsername"> Vicki Smith</span>
-					</li>
-					<li className="rightbarProfile">
-						<div className="rightbarProfileImgContainer">
-							<img
-								className="rightbarProfileImg"
-								src="/assets/Profile/7.jpg"
-								alt=""
-							/>
-							<span className="rightbarOnline"></span>
-						</div>
-						<span className="rightbarUsername"> Jason Michael Thomas</span>
-					</li>
-					<li className="rightbarProfile">
-						<div className="rightbarProfileImgContainer">
-							<img
-								className="rightbarProfileImg"
-								src="/assets/Profile/10.jpg"
-								alt=""
-							/>
-							<span className="rightbarOnline"></span>
-						</div>
-						<span className="rightbarUsername"> Jim Cauldwell</span>
-					</li>
-					<li className="rightbarProfile">
-						<div className="rightbarProfileImgContainer">
-							<img
-								className="rightbarProfileImg"
-								src="/assets/Profile/1.jpg"
-								alt=""
-							/>
-							<span className="rightbarOnline"></span>
-						</div>
-						<span className="rightbarUsername"> Fanny Rodriguez</span>
-					</li>
-					<li className="rightbarProfile">
-						<div className="rightbarProfileImgContainer">
-							<img
-								className="rightbarProfileImg"
-								src="/assets/Profile/4.jpg"
-								alt=""
-							/>
-							<span className="rightbarOnline"></span>
-						</div>
-						<span className="rightbarUsername"> Khloe Buttons</span>
-					</li>
+					{Users.map((u) => (
+						<Online key={u.id} user={u} />
+					))}
 				</ul>
 			</div>
 		</div>

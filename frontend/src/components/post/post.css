@@ -34,6 +34,9 @@
 .postDate {
 	font-size: 13px;
 }
+.postMore {
+	cursor: pointer;
+}
 .postCenter {
 	margin: 20px 0;
 }
@@ -67,8 +70,6 @@
 	margin-right: 5px;
 }
 
-.postBottomRight {
-}
 .postCommentText {
 	cursor: pointer;
 	border-bottom: 1px dashed gray;
