@@ -1,12 +1,13 @@
 import "./publish.css";
 import { PermMedia, Room, EmojiEmotions, Label } from "@mui/icons-material";
 import { TextareaAutosize } from "@mui/core";
+import { Avatar } from "@mui/material";
 export default function Publish() {
 	return (
 		<div className="publishContainer">
 			<div className="publishWrapper">
 				<div className="publishTop">
-					<img
+					<Avatar
 						className="publishProfileImg"
 						src="/assets/Profile/male.png"
 						alt=""
@@ -27,7 +28,7 @@ export default function Publish() {
 						</div>
 						<div className="publishOption">
 							<Label className="publishIcon" style={{ color: "blue" }} />
-							<span className="publishOptionText">Tag</span>
+							<span className="publishOptionText">Category</span>
 						</div>
 						<div className="publishOption">
 							<Room className="publishIcon" style={{ color: "red" }} />

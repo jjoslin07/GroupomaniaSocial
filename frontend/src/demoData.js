@@ -49,6 +49,12 @@ export const Users = [
 		profilePicture: "assets/Profile/10.jpg",
 		username: "Jim Cauldwell",
 	},
+	{
+		id: 11,
+		profilePicture:
+			"https://pbs.twimg.com/profile_images/1432019279180812291/hcQfssM5_400x400.jpg",
+		username: "Joseph Joslin",
+	},
 ];
 
 export const Posts = [
@@ -151,6 +157,29 @@ export const Posts = [
 		photo: "assets/Posts/10.jpg",
 		date: "1 week ago",
 		userId: 10,
+		loves: Math.floor(Math.random() * 100),
+		funny: Math.floor(Math.random() * 100),
+		likes: Math.floor(Math.random() * 100),
+		comment: Math.floor(Math.random() * 100),
+	},
+	{
+		id: 11,
+		desc: "Bees are changing the game",
+		photo:
+			"https://cdn.britannica.com/s:800x450,c:crop/78/192578-138-DC7C6A32/conservation-efforts-bee-populations-plant-animal-species.jpg",
+		date: "1 week ago",
+		userId: 11,
+		loves: Math.floor(Math.random() * 100),
+		funny: Math.floor(Math.random() * 100),
+		likes: Math.floor(Math.random() * 100),
+		comment: Math.floor(Math.random() * 100),
+	},
+	{
+		id: 12,
+		desc: "If at first you don't succeed, you should probably quit. I mean did you really want to do this anyway?",
+		photo: "",
+		date: "1 week ago",
+		userId: 11,
 		loves: Math.floor(Math.random() * 100),
 		funny: Math.floor(Math.random() * 100),
 		likes: Math.floor(Math.random() * 100),

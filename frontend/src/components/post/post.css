@@ -42,7 +42,9 @@
 	max-height: 500px;
 	object-fit: contain;
 }
-
+img[src=""] {
+	display: none;
+}
 .postBottom {
 	display: flex;
 	align-items: center;

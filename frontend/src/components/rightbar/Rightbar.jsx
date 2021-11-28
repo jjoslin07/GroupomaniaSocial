@@ -6,7 +6,7 @@ export default function Rightbar() {
 		<div className="rightbar">
 			<div className="rightbarWrapper">
 				<div className="birthdayContainer">
-					<img className="birthdayImg" src="/assets/gift.png" alt="" />
+					<img className="birthdayImg" src="/assets/gift2.png" alt="" />
 					<span className="birthdayText">
 						<b>Vicki Smith</b> and <b>2 other people</b> have birthdays today.
 					</span>
