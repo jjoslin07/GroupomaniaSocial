@@ -6,7 +6,9 @@
 .rightbarProfileImgContainer {
 	margin-right: 10px;
 	position: relative;
+	cursor: pointer;
 }
 .rightbarUsername {
 	font-weight: 500;
+	cursor: pointer;
 }
