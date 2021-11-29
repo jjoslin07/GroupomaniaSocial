@@ -11,6 +11,10 @@
 	height: 70%;
 	display: flex;
 }
+.loginLeft {
+	align-items: center;
+	margin-right: 20px;
+}
 .loginLeft,
 .loginRight {
 	flex: 1;
@@ -46,7 +50,10 @@
 	font-size: 16px;
 	padding-left: 20px;
 }
-.loginInput:focus {
+.loginInput:focus,
+.loginButton:focus,
+.loginForgot:focus,
+.loginRegisterButton:focus {
 	outline: none;
 }
 
@@ -65,6 +72,7 @@
 	color: #fb2f01;
 	cursor: pointer;
 }
+
 .loginRegisterButton {
 	width: 50%;
 	align-self: center;

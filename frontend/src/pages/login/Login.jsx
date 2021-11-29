@@ -7,7 +7,7 @@ const Login = () => {
 				<div className="loginLeft">
 					<h3 className="loginLogo">Groupomania Social</h3>
 					<span className="loginDesc">
-						Connect with friends and the world around you on Groupomania.
+						Connect with friends and meet new coworkers at Groupomania.
 					</span>
 				</div>
 				<div className="loginRight">
@@ -16,6 +16,7 @@ const Login = () => {
 						<input placeholder="Password" className="loginInput" />
 						<button className="loginButton">Log In</button>
 						<span className="loginForgot">Forgot Password?</span>
+
 						<button className="loginRegisterButton">Register Account</button>
 					</div>
 				</div>
