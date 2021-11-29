@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 			User.hasMany(models.Post, { foreignKey: "userId" });
 			User.hasMany(models.Reactions, { foreignKey: "userId" });
 			User.hasMany(models.Comment, { foreignKey: "userId" });
+			User.hasMany(models.Follow, { foreignKey: "userId" });
 		}
 		toJSON() {
 			return {
@@ -22,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	User.init(
 		{
-			name: DataTypes.STRING,
+			firstName: DataTypes.STRING,
+			lastName: DataTypes.STRING,
 			email: DataTypes.STRING,
 			password: DataTypes.STRING,
 			profilePicture: DataTypes.STRING,

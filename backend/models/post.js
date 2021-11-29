@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 			Post.hasMany(models.Comment, { foreignKey: "postId" });
 			Post.hasMany(models.Reactions, { foreignKey: "postId" });
 			Post.hasMany(models.Category, { foreignKey: "postId" });
+			Post.hasMany(models.Mood, { foreignKey: "postId" });
 		}
 		toJSON() {
 			return {
@@ -20,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Post.init(
 		{
-			title: DataTypes.STRING,
 			content: DataTypes.TEXT,
 			imageUrl: DataTypes.STRING,
 			categoryId: DataTypes.INTEGER,
+			moodId: DataTypes.INTEGER,
 			userId: DataTypes.INTEGER,
 			likes: DataTypes.INTEGER,
 			loves: DataTypes.INTEGER,

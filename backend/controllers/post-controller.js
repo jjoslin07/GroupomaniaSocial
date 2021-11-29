@@ -10,17 +10,16 @@ const { set } = require("../app");
 // Function to create a new Post
 function save(req, res) {
 	const post = {
-		title: req.body.title,
 		content: req.body.content,
 		imageUrl: req.body.imageUrl,
 		categoryId: req.body.categoryId,
+		moodId: req.body.moodId,
 		userId: req.userData.userId,
 	};
 
 	// Define validation Schema
 	const schema = {
-		title: { type: "string", optional: false, max: "100" },
-		content: { type: "string", optional: false, max: "500" },
+		content: { type: "string", optional: false },
 		categoryId: { type: "number", optional: false, default: 1 },
 	};
 	// Create instance of Validator class

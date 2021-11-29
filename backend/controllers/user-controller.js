@@ -15,7 +15,8 @@ function signUp(req, res) {
 				bcrypt.genSalt(10, function (err, salt) {
 					bcrypt.hash(req.body.password, salt, function (err, hash) {
 						const user = {
-							name: req.body.name,
+							firstName: req.body.firstName,
+							lastName: req.body.lastName,
 							email: req.body.email,
 							password: hash,
 							isAdmin: req.body.isAdmin,
@@ -24,7 +25,8 @@ function signUp(req, res) {
 							from: req.body.from,
 						};
 						const schema = {
-							name: { type: "string", optional: false, min: 3, max: 255 },
+							firstName: { type: "string", optional: false, max: 255 },
+							lastName: { type: "string", optional: false, max: 255 },
 							email: {
 								type: "email",
 								optional: false,
