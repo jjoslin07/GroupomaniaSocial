@@ -176,7 +176,7 @@ export const Posts = [
 	},
 	{
 		id: 12,
-		desc: "If at first you don't succeed, you should probably quit. I mean did you really want to do this anyway?",
+		desc: "If at first you don't succeed, you should probably quit. I mean did you really want to do this anyway? Never give up!",
 		photo: "",
 		date: "1 week ago",
 		userId: 11,
