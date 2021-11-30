@@ -244,6 +244,95 @@ function showAll(req, res) {
 		});
 	}
 }
+// Follow User
+
+function follow(req, res) {
+	const follow = {
+		userId: req.params.id,
+		followerId: req.userData.userId,
+	};
+	models.User.findByPk(req.params.id)
+		.then((result) => {
+			if (result !== null && result.dataValues.id !== req.userData.userId) {
+				models.Follow.create(follow)
+					.then((result) => {
+						res.status(201).json({
+							message: "User followed successfully",
+						});
+					})
+					.catch((error) => {
+						res.status(400).json({
+							message: "You already follow this user",
+						});
+					});
+			} else {
+				res.status(400).json({
+					message: "You can't follow yourself",
+					error: error,
+				});
+			}
+		})
+		.catch((error) => {
+			res.status(404).json({
+				message: "User unavailable",
+			});
+		});
+}
+
+// Unfollow User
+function unfollow(req, res) {
+	const id = req.params.id;
+	const followerId = req.userData.userId;
+
+	models.Follow.destroy({ where: { userId: id, followerId: followerId } })
+		.then((result) => {
+			if (result > 0) {
+				res.status(200).json({
+					message: "User unfollow successful",
+				});
+			} else {
+				res.status(400).json({
+					message: "You don't follow user",
+				});
+			}
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Something went wrong",
+				error: error,
+			});
+		});
+}
+// Get Followers
+
+function getFollowers(req, res) {
+	const currentUser = req.userData.userId;
+	try {
+		models.Follow.findAll({ where: { userId: currentUser } })
+			.then((result) => {
+				if (result) {
+					console.log(result);
+					res.status(200).json(result);
+				} else {
+					res.status(404).json({
+						message: "User not found!",
+					});
+				}
+			})
+			.catch((error) => {
+				res.status(500).json({
+					message: "Something went wrong!",
+				});
+			});
+	} catch (error) {
+		res.status(500).json({
+			message: "Something went wrong!",
+		});
+	}
+}
+
+// Get Following
+
 module.exports = {
 	signUp: signUp,
 	login: login,
@@ -251,4 +340,6 @@ module.exports = {
 	destroy: destroy,
 	show: show,
 	showAll: showAll,
+	follow: follow,
+	unfollow: unfollow,
 };

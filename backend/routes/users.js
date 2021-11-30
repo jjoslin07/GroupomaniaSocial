@@ -17,8 +17,11 @@ router.get("/:id", userCtrl.show);
 // Get all Users
 router.get("/", userCtrl.showAll);
 // Follow a User
-//router.put("/:id", userCtrl.followUser);
+router.put("/:id/follow", auth.checkAuth, userCtrl.follow);
 // Unfollow a User
-//router.put("/:id", userCtrl.unfollowUser);
+router.delete("/:id/unfollow", auth.checkAuth, userCtrl.unfollow);
+// Get Followers
+
+// Get Following
 
 module.exports = router;

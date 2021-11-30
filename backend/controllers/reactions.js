@@ -20,7 +20,6 @@ function like(req, res) {
 			if (result !== null) {
 				models.Reactions.create(like)
 					.then((result) => {
-						console.log(result.dataValues.isLiked);
 						res.status(201).json({
 							message: "LIKE created successfully",
 						});
