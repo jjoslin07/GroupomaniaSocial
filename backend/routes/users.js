@@ -21,7 +21,8 @@ router.put("/:id/follow", auth.checkAuth, userCtrl.follow);
 // Unfollow a User
 router.delete("/:id/unfollow", auth.checkAuth, userCtrl.unfollow);
 // Get Followers
-
+router.get("/:id/followers", userCtrl.getFollowers);
 // Get Following
+router.get("/:id/following", userCtrl.getFollowing);
 
 module.exports = router;

@@ -306,16 +306,16 @@ function unfollow(req, res) {
 // Get Followers
 
 function getFollowers(req, res) {
-	const currentUser = req.userData.userId;
+	const id = req.params.id;
 	try {
-		models.Follow.findAll({ where: { userId: currentUser } })
+		models.Follow.findAll({ where: { userId: id } })
 			.then((result) => {
 				if (result) {
 					console.log(result);
 					res.status(200).json(result);
 				} else {
 					res.status(404).json({
-						message: "User not found!",
+						message: "No Followers found!",
 					});
 				}
 			})
@@ -333,6 +333,32 @@ function getFollowers(req, res) {
 
 // Get Following
 
+function getFollowing(req, res) {
+	const id = req.params.id;
+	try {
+		models.Follow.findAll({ where: { followerId: id } })
+			.then((result) => {
+				if (result) {
+					console.log(result);
+					res.status(200).json(result);
+				} else {
+					res.status(404).json({
+						message: "No Following found!",
+					});
+				}
+			})
+			.catch((error) => {
+				res.status(500).json({
+					message: "Something went wrong!",
+				});
+			});
+	} catch (error) {
+		res.status(500).json({
+			message: "Something went wrong!",
+		});
+	}
+}
+
 module.exports = {
 	signUp: signUp,
 	login: login,
@@ -342,4 +368,6 @@ module.exports = {
 	showAll: showAll,
 	follow: follow,
 	unfollow: unfollow,
+	getFollowers: getFollowers,
+	getFollowing: getFollowing,
 };

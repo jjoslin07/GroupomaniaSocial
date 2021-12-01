@@ -11,7 +11,7 @@ export default function Rightbar({ profile }) {
 						<b>Vicki Smith</b> and <b>2 other people</b> have birthdays today.
 					</span>
 				</div>
-				<h4 className="rightbarTitle">People Online</h4>
+				<h4 className="rightbarTitle">Followers</h4>
 				<ul className="rightbarProfileList">
 					{Users.map((u) => (
 						<Online key={u.id} user={u} />
@@ -39,7 +39,7 @@ export default function Rightbar({ profile }) {
 						<span className="rightbarInfoValue">Design</span>
 					</div>
 				</div>
-				<h4 className="rightbarTitle">Friends</h4>
+				<h4 className="rightbarTitle">Followers</h4>
 				<div className="rightbarFollowings">
 					<div className="rightbarFollowing">
 						<img
