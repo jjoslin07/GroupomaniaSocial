@@ -13,4 +13,3 @@ module.exports = mysql.createConnection({
 		idle: 10000,
 	},
 });
-console.log("Successfully connected to Database");

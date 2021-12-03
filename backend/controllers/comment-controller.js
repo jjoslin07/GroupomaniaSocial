@@ -7,9 +7,6 @@ const models = require("../models");
  * @returns
  */
 function save(req, res) {
-	console.log(req.userData);
-	console.log(req.params);
-
 	const comment = {
 		content: req.body.content,
 		postId: req.params.id,

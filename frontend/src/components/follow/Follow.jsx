@@ -1,12 +1,13 @@
 import "./follow.css";
 import { Avatar } from "@mui/material";
 const Follow = ({ user }) => {
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	return (
 		<div>
 			<li className="rightbarFollow">
 				<Avatar
 					className="rightbarFollowImg"
-					src={user.profilePicture}
+					src={PF + user.profilePicture}
 					alt="Avatar Picture"
 				/>
 				<span className="rightbarFriendName">{user.username}</span>

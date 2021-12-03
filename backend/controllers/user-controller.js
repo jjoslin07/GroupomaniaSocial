@@ -199,7 +199,6 @@ function show(req, res) {
 		models.User.findByPk(id)
 			.then((result) => {
 				if (result) {
-					console.log(result);
 					res.status(200).json(result);
 				} else {
 					res.status(404).json({
@@ -225,7 +224,6 @@ function showAll(req, res) {
 		models.User.findAll()
 			.then((result) => {
 				if (result) {
-					console.log(result);
 					res.status(200).json(result);
 				} else {
 					res.status(404).json({

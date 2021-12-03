@@ -5,6 +5,7 @@ import { Users } from "../../demoData";
 import { Avatar } from "@mui/material";
 
 const Post = ({ post }) => {
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [likes, setLike] = useState(post.likes);
 	const [isLiked, setIsLiked] = useState(false);
 
@@ -34,7 +35,9 @@ const Post = ({ post }) => {
 					<div className="postTopLeft">
 						<Avatar
 							className="postProfileImg"
-							src={Users.filter((u) => u.id === post.userId)[0].profilePicture}
+							src={
+								PF + Users.filter((u) => u.id === post.userId)[0].profilePicture
+							}
 							alt="Profile Pic"
 						/>
 						<span className="postUsername">
@@ -48,27 +51,27 @@ const Post = ({ post }) => {
 				</div>
 				<div className="postCenter">
 					<span className="postText">{post?.desc}</span>
-					<img className="postImg" src={post?.photo} alt=" " />
+					<img className="postImg" src={PF + post?.photo} alt=" " />
 				</div>
 				<div className="postBottom">
 					<div className="postBottomLeft">
 						<img
 							className="postIcon"
-							src="/assets/like.png"
+							src={`${PF}like.png`}
 							onClick={likeHandler}
 							alt=""
 						/>
 						<span className="postReactionCounter">{likes}</span>
 						<img
 							className="postIcon"
-							src="/assets/love.png"
+							src={`${PF}love.png`}
 							onClick={loveHandler}
 							alt=""
 						/>
 						<span className="postReactionCounter">{loves}</span>
 						<img
 							className="postIcon"
-							src="/assets/haha.png"
+							src={`${PF}haha.png`}
 							onClick={funnyHandler}
 							alt=""
 						/>

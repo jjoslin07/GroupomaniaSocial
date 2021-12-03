@@ -6,19 +6,24 @@ import {
 	ArrowDropDownCircle,
 } from "@mui/icons-material";
 import { Badge, Avatar } from "@mui/material";
+import { Link } from "react-router-dom";
 
 // Component
 export default function Topbar() {
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
 	return (
 		<div className="topbarContainer">
 			<div className="topbarLeft">
-				<div className="logo">
-					<img
-						src="/assets/Groupomania_Logos/icon-left-font-monochrome-white.png"
-						alt="Groupomania logo monocrhome white"
-						className="companyLogo"
-					/>
-				</div>
+				<Link to="/">
+					<div className="logo">
+						<img
+							src="/assets/Groupomania_Logos/icon-left-font-monochrome-white.png"
+							alt="Groupomania logo monocrhome white"
+							className="companyLogo"
+						/>
+					</div>
+				</Link>
 			</div>
 			<div className="topbarCenter">
 				<div className="searchbar">
@@ -28,7 +33,9 @@ export default function Topbar() {
 			</div>
 			<div className="topbarRight">
 				<div className="topbarLinks">
-					<span className="topbarLink">Home</span>
+					<Link to="/">
+						<span className="topbarLink">Home</span>
+					</Link>
 				</div>
 				<div className="topbarIcons">
 					<div className="topbarIconItem">
@@ -38,7 +45,7 @@ export default function Topbar() {
 					</div>
 				</div>
 				<div className="userProfile">
-					<Avatar className="profilePic" src="/assets/Profile/6.jpg" />
+					<Avatar className="profilePic" src={`${PF}Profile/6.jpg`} />
 					<ArrowDropDownCircle className="profileDropdownArrow" />
 				</div>
 			</div>
