@@ -1,0 +1,14 @@
+.rightbarFollow {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px u;
+}
+
+.rightbarFollowImg {
+	margin-right: 10px;
+	cursor: pointer;
+}
+.rightbarFriendName {
+	cursor: pointer;
+	font-weight: 400;
+}

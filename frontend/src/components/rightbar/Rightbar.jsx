@@ -1,6 +1,7 @@
 import "./rightbar.css";
 import { Users } from "../../demoData";
-import Online from "../online/Online";
+import { AvatarGroup } from "@mui/material";
+import Follow from "../follow/Follow";
 export default function Rightbar({ profile }) {
 	const HomeRightbar = () => {
 		return (
@@ -11,12 +12,18 @@ export default function Rightbar({ profile }) {
 						<b>Vicki Smith</b> and <b>2 other people</b> have birthdays today.
 					</span>
 				</div>
-				<h4 className="rightbarTitle">Followers</h4>
-				<ul className="rightbarProfileList">
+				{/* <h4 className="rightbarTitle">Followers</h4>
+				<AvatarGroup className="rightbarFollowing">
 					{Users.map((u) => (
-						<Online key={u.id} user={u} />
+						<Follow key={u.id} user={u} />
 					))}
-				</ul>
+				</AvatarGroup>
+				<h4 className="rightbarTitle">Following</h4>
+				<AvatarGroup className="rightbarFollowing">
+					{Users.map((u) => (
+						<Follow key={u.id} user={u} />
+					))}
+				</AvatarGroup> */}
 			</>
 		);
 	};
@@ -40,56 +47,17 @@ export default function Rightbar({ profile }) {
 					</div>
 				</div>
 				<h4 className="rightbarTitle">Followers</h4>
-				<div className="rightbarFollowings">
-					<div className="rightbarFollowing">
-						<img
-							className="rightbarFollowingImg"
-							src="/assets/Profile/6.jpg"
-							alt=""
-						/>
-						<span className="rightbarFollowingName">Jimmy Butler</span>
-					</div>
-					<div className="rightbarFollowing">
-						<img
-							className="rightbarFollowingImg"
-							src="/assets/Profile/5.jpg"
-							alt=""
-						/>
-						<span className="rightbarFollowingName">Jimmy Butler</span>
-					</div>
-					<div className="rightbarFollowing">
-						<img
-							className="rightbarFollowingImg"
-							src="/assets/Profile/4.jpg"
-							alt=""
-						/>
-						<span className="rightbarFollowingName">Jimmy Butler</span>
-					</div>
-					<div className="rightbarFollowing">
-						<img
-							className="rightbarFollowingImg"
-							src="/assets/Profile/9.jpg"
-							alt=""
-						/>
-						<span className="rightbarFollowingName">Jimmy Butler</span>
-					</div>
-					<div className="rightbarFollowing">
-						<img
-							className="rightbarFollowingImg"
-							src="/assets/Profile/8.jpg"
-							alt=""
-						/>
-						<span className="rightbarFollowingName">Jimmy Butler</span>
-					</div>
-					<div className="rightbarFollowing">
-						<img
-							className="rightbarFollowingImg"
-							src="/assets/Profile/10.jpg"
-							alt=""
-						/>
-						<span className="rightbarFollowingName">Jimmy Butler</span>
-					</div>
-				</div>
+				<AvatarGroup className="rightbarFollowing">
+					{Users.map((u) => (
+						<Follow key={u.id} user={u} />
+					))}
+				</AvatarGroup>
+				<h4 className="rightbarTitle">Following</h4>
+				<AvatarGroup className="rightbarFollowing">
+					{Users.map((u) => (
+						<Follow key={u.id} user={u} />
+					))}
+				</AvatarGroup>
 			</>
 		);
 	};

@@ -310,8 +310,7 @@ function getFollowers(req, res) {
 	try {
 		models.Follow.findAll({ where: { userId: id } })
 			.then((result) => {
-				if (result) {
-					console.log(result);
+				if (result.length > 0) {
 					res.status(200).json(result);
 				} else {
 					res.status(404).json({
@@ -338,12 +337,11 @@ function getFollowing(req, res) {
 	try {
 		models.Follow.findAll({ where: { followerId: id } })
 			.then((result) => {
-				if (result) {
-					console.log(result);
+				if (result.length > 0) {
 					res.status(200).json(result);
 				} else {
 					res.status(404).json({
-						message: "No Following found!",
+						message: "Not Following anyone!",
 					});
 				}
 			})
