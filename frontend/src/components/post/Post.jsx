@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./post.css";
 import { MoreVert } from "@mui/icons-material";
-import { Users } from "../../demoData";
+
 import { Avatar } from "@mui/material";
+import axios from "axios";
+import { format } from "timeago.js";
+import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -28,30 +31,43 @@ const Post = ({ post }) => {
 		setIsFunny(!isFunny);
 	};
 
+	const [user, setUser] = useState({});
+
+	useEffect(() => {
+		const fetchUser = async () => {
+			const res = await axios.get(`users/${post.userId}`);
+			setUser(res.data);
+		};
+		fetchUser();
+	}, [post.userId]);
 	return (
 		<div className="post">
 			<div className="postWrapper">
 				<div className="postTop">
 					<div className="postTopLeft">
-						<Avatar
-							className="postProfileImg"
-							src={
-								PF + Users.filter((u) => u.id === post.userId)[0].profilePicture
-							}
-							alt="Profile Pic"
-						/>
-						<span className="postUsername">
-							{Users.filter((u) => u.id === post.userId)[0].username}
-						</span>
-						<span className="postDate">{post.date}</span>
+						<Link to={`profile/${user.userName}`}>
+							<Avatar
+								className="postProfileImg"
+								src={user.profilePicture}
+								alt="Profile Pic"
+							/>
+						</Link>
+						<Link to={`profile/${user.userName}`}>
+							<span className="postUsername">{user.userName}</span>
+						</Link>
+						<span className="postDate">{format(post.createdAt)}</span>
 					</div>
 					<div className="postTopRight">
 						<MoreVert className="postMore" />
 					</div>
 				</div>
 				<div className="postCenter">
-					<span className="postText">{post?.desc}</span>
-					<img className="postImg" src={PF + post?.photo} alt=" " />
+					<span className="postText">{post?.content}</span>
+					<img
+						className="postImg"
+						src={`http://localhost:8800/api/uploads/` + post?.imageUrl}
+						alt=""
+					/>
 				</div>
 				<div className="postBottom">
 					<div className="postBottomLeft">

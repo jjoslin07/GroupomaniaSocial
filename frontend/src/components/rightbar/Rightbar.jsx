@@ -4,7 +4,7 @@ import { AvatarGroup } from "@mui/material";
 import Follow from "../follow/Follow";
 export default function Rightbar({ profile }) {
 	const HomeRightbar = () => {
-		const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+		// const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 		return (
 			<>

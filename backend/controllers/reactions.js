@@ -236,12 +236,12 @@ function getReaction(req, res) {
 				});
 
 				// Update the Post Table with likes, loves and funny count
-				models.Post.update(
-					{ likes: likeCount, loves: loveCount, funny: funnyCount },
-					{
-						where: { id: postId },
-					}
-				);
+				// models.Post.update(
+				// 	{ likes: likeCount, loves: loveCount, funny: funnyCount },
+				// 	{
+				// 		where: { id: postId },
+				// 	}
+				// );
 			} else {
 				res.status(404).json({
 					message: "No reaction's on this post",
