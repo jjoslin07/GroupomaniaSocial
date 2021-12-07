@@ -92,6 +92,37 @@ function index(req, res) {
 		});
 }
 
+// Function to get all Posts from User
+
+function indexUser(req, res) {
+	const username = req.params.username;
+	models.User.findOne({ username })
+		.then((result) => {
+			if (result === null) {
+				res.status(404).json({
+					message: "User not found",
+				});
+			} else {
+				console.log(result);
+				models.Post.findAll({ where: { userId: result.id } })
+					.then((result) => {
+						res.status(200).json(result);
+					})
+					.catch((error) => {
+						res.status(500).json({
+							message: "Something went wrong!",
+						});
+					});
+			}
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Something went wrong",
+				error: error,
+			});
+		});
+}
+
 // Function to update Post
 
 function update(req, res) {
@@ -183,6 +214,7 @@ module.exports = {
 	save: save,
 	show: show,
 	index: index,
+	indexUser: indexUser,
 	update: update,
 	destroy: destroy,
 };

@@ -15,7 +15,7 @@ function signUp(req, res) {
 				bcrypt.genSalt(10, function (err, salt) {
 					bcrypt.hash(req.body.password, salt, function (err, hash) {
 						const user = {
-							userName: req.body.userName,
+							username: req.body.username,
 							email: req.body.email,
 							password: hash,
 							isAdmin: req.body.isAdmin,
@@ -24,7 +24,7 @@ function signUp(req, res) {
 							from: req.body.from,
 						};
 						const schema = {
-							userName: { type: "string", optional: false, max: 255 },
+							username: { type: "string", optional: false, max: 255 },
 							email: {
 								type: "email",
 								optional: false,
@@ -114,7 +114,7 @@ function update(req, res) {
 	bcrypt.genSalt(10, function (err, salt) {
 		bcrypt.hash(req.body.password, salt, function (err, hash) {
 			const updatedUser = {
-				name: req.body.name,
+				username: req.body.username,
 				email: req.body.email,
 				password: hash,
 				profilePicture: req.body.profilePicture,
@@ -192,23 +192,26 @@ function destroy(req, res) {
 // Get a user
 
 function show(req, res) {
+	const userId = req.query.userId;
+	const username = req.query.username;
 	try {
-		const id = req.params.id;
-		models.User.findByPk(id)
-			.then((result) => {
-				if (result) {
-					res.status(200).json(result);
-				} else {
-					res.status(404).json({
-						message: "User not found!",
+		userId
+			? models.User.findByPk(userId)
+			: models.User.findOne({ where: { username: username } })
+					.then((result) => {
+						if (result) {
+							res.status(200).json(result);
+						} else {
+							res.status(404).json({
+								message: "User not found!",
+							});
+						}
+					})
+					.catch((error) => {
+						res.status(500).json({
+							message: "Something went wrong!",
+						});
 					});
-				}
-			})
-			.catch((error) => {
-				res.status(500).json({
-					message: "Something went wrong!",
-				});
-			});
 	} catch (error) {
 		res.status(500).json({
 			message: "Something went wrong!",

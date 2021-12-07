@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Feed from "../../components/feed/Feed";
 import Leftbar from "../../components/leftbar/Leftbar";
 import Rightbar from "../../components/rightbar/Rightbar";
@@ -6,7 +8,14 @@ import "./profile.css";
 
 export default function Profile() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
+	const [user, setUser] = useState({});
+	useEffect(() => {
+		const fetchUser = async () => {
+			const res = await axios.get(`/users?username=Joseph Joslin`);
+			setUser(res.data);
+		};
+		fetchUser();
+	}, []);
 	return (
 		<>
 			<Topbar />
@@ -17,25 +26,26 @@ export default function Profile() {
 						<div className="profileCover">
 							<img
 								className="profileCoverImg"
-								src={`${PF}Posts/2.jpg`}
+								src={
+									user.coverPicture ||
+									PF + "Groupomania_Logos/icon-left-font.svg"
+								}
 								alt=""
 							/>
 							<img
 								className="profileUserImg"
-								src={`${PF}Profile/2.jpg`}
+								src={user.profilePicture || PF + "Profile/noAvatar.png"}
 								alt=""
 							/>
 						</div>
 						<div className="profileInfo">
-							<h4 className="profileInfoName">Vicki Smith</h4>
-							<span className="profileInfoDesc">
-								Get to bag and nothing else.
-							</span>
+							<h4 className="profileInfoName">{user.username}</h4>
+							<span className="profileInfoDesc">{user.desc}</span>
 						</div>
 					</div>
 					<div className="profileRightBottom">
-						<Feed />
-						<Rightbar profile />
+						<Feed username="Joseph Joslin" />
+						<Rightbar user={user} />
 					</div>
 				</div>
 			</div>

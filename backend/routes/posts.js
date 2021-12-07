@@ -9,6 +9,8 @@ const auth = require("../middleware/auth");
 router.post("/", auth.checkAuth, postsCtrl.save);
 // Get all Posts
 router.get("/", postsCtrl.index);
+// Get all Users Posts
+router.get("/profile/:username", postsCtrl.indexUser);
 // Get individual Post
 router.get("/:id", postsCtrl.show);
 // Update a Post

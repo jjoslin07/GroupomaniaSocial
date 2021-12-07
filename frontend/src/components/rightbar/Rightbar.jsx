@@ -2,7 +2,7 @@ import "./rightbar.css";
 import { Users } from "../../demoData";
 import { AvatarGroup } from "@mui/material";
 import Follow from "../follow/Follow";
-export default function Rightbar({ profile }) {
+export default function Rightbar({ user }) {
 	const HomeRightbar = () => {
 		// const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -37,11 +37,11 @@ export default function Rightbar({ profile }) {
 				<div className="rightbarInfo">
 					<div className="rightbarInfoItem">
 						<span className="rightbarInfoKey">City:</span>
-						<span className="rightbarInfoValue">Los Angeles</span>
+						<span className="rightbarInfoValue">{user.city}</span>
 					</div>
 					<div className="rightbarInfoItem">
 						<span className="rightbarInfoKey">Hometown:</span>
-						<span className="rightbarInfoValue">Chicago</span>
+						<span className="rightbarInfoValue">{user.from}</span>
 					</div>
 					<div className="rightbarInfoItem">
 						<span className="rightbarInfoKey">Department:</span>
@@ -66,7 +66,7 @@ export default function Rightbar({ profile }) {
 	return (
 		<div className="rightbar">
 			<div className="rightbarWrapper">
-				{profile ? <ProfileRightbar /> : <HomeRightbar />}
+				{user ? <ProfileRightbar /> : <HomeRightbar />}
 			</div>
 		</div>
 	);
