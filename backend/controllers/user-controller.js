@@ -195,23 +195,39 @@ function show(req, res) {
 	const userId = req.query.userId;
 	const username = req.query.username;
 	try {
-		userId
-			? models.User.findByPk(userId)
-			: models.User.findOne({ where: { username: username } })
-					.then((result) => {
-						if (result) {
-							res.status(200).json(result);
-						} else {
-							res.status(404).json({
-								message: "User not found!",
-							});
-						}
-					})
-					.catch((error) => {
-						res.status(500).json({
-							message: "Something went wrong!",
+		if (username) {
+			models.User.findOne({ where: { username: username } })
+				.then((result) => {
+					if (result) {
+						res.status(200).json(result);
+					} else {
+						res.status(404).json({
+							message: "User not found!",
 						});
+					}
+				})
+				.catch((error) => {
+					res.status(500).json({
+						message: "Something went wrong!",
 					});
+				});
+		} else if (userId) {
+			models.User.findByPk(userId)
+				.then((result) => {
+					if (result) {
+						res.status(200).json(result);
+					} else {
+						res.status(404).json({
+							message: "User not found!",
+						});
+					}
+				})
+				.catch((error) => {
+					res.status(500).json({
+						message: "Something went wrong!",
+					});
+				});
+		}
 	} catch (error) {
 		res.status(500).json({
 			message: "Something went wrong!",
