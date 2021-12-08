@@ -1,15 +1,18 @@
 import "./publish.css";
 import { PermMedia, Room, EmojiEmotions, Label } from "@mui/icons-material";
 import { TextareaAutosize } from "@mui/core";
-import { Avatar } from "@mui/material";
+import { Avatar, Link } from "@mui/material";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 export default function Publish() {
+	const { user } = useContext(AuthContext);
 	return (
 		<div className="publishContainer">
 			<div className="publishWrapper">
 				<div className="publishTop">
 					<Avatar
 						className="publishProfileImg"
-						src="/assets/Profile/male.png"
+						src={user.info.profilePicture}
 						alt=""
 					/>
 					<TextareaAutosize

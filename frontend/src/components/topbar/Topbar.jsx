@@ -5,13 +5,23 @@ import {
 	Notifications,
 	ArrowDropDownCircle,
 } from "@mui/icons-material";
-import { Badge, Avatar } from "@mui/material";
+import { Badge, Avatar, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 // Component
 export default function Topbar() {
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
+	const { user } = useContext(AuthContext);
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const open = Boolean(anchorEl);
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
 	return (
 		<div className="topbarContainer">
 			<div className="topbarLeft">
@@ -45,8 +55,36 @@ export default function Topbar() {
 					</div>
 				</div>
 				<div className="userProfile">
-					<Avatar className="profilePic" src={`${PF}Profile/6.jpg`} />
-					<ArrowDropDownCircle className="profileDropdownArrow" />
+					<Link to={`/profile/${user.info.username}`}>
+						<Avatar className="profilePic" src={user.info.profilePicture} />
+					</Link>
+					<div>
+						<ArrowDropDownCircle
+							className="profileDropdownArrow"
+							id="basic-button"
+							aria-controls="basic-menu"
+							aria-haspopup="true"
+							aria-expanded={open ? "true" : undefined}
+							onClick={handleClick}
+						>
+							Dashboard
+						</ArrowDropDownCircle>
+						<Menu
+							id="basic-menu"
+							anchorEl={anchorEl}
+							open={open}
+							onClose={handleClose}
+							MenuListProps={{
+								"aria-labelledby": "basic-button",
+							}}
+						>
+							<Link to={`/profile/${user.info.username}`}>
+								<MenuItem onClick={handleClose}>Profile</MenuItem>
+							</Link>
+							<MenuItem onClick={handleClose}>My account</MenuItem>
+							<MenuItem onClick={handleClose}>Logout</MenuItem>
+						</Menu>
+					</div>
 				</div>
 			</div>
 		</div>

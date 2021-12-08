@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRef } from "react";
 import "./register.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
 	const username = useRef();
@@ -74,7 +74,11 @@ const Register = () => {
 							<button className="registerButton" type="submit">
 								Sign Up
 							</button>
-							<button className="registerLoginButton">Log into Account</button>
+							<Link className="registerLoginLink" to="/login">
+								<button className="registerLoginButton">
+									Log into Account
+								</button>
+							</Link>
 						</form>
 					</div>
 				</div>
