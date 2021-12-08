@@ -96,7 +96,7 @@ function index(req, res) {
 
 function indexUser(req, res) {
 	const username = req.params.username;
-	models.User.findOne({ username })
+	models.User.findOne({ where: { username: username } })
 		.then((result) => {
 			if (result === null) {
 				res.status(404).json({
