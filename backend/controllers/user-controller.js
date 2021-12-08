@@ -89,7 +89,7 @@ function login(req, res) {
 									res.status(200).json({
 										message: "Authentication successful!",
 										token: token,
-										info: user,
+										user: user,
 									});
 								}
 							);

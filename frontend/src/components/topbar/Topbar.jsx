@@ -5,7 +5,7 @@ import {
 	Notifications,
 	ArrowDropDownCircle,
 } from "@mui/icons-material";
-import { Badge, Avatar, Button } from "@mui/material";
+import { Badge, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -55,8 +55,8 @@ export default function Topbar() {
 					</div>
 				</div>
 				<div className="userProfile">
-					<Link to={`/profile/${user.info.username}`}>
-						<Avatar className="profilePic" src={user.info.profilePicture} />
+					<Link to={`/profile/${user.user.username}`}>
+						<Avatar className="profilePic" src={user.user.profilePicture} />
 					</Link>
 					<div>
 						<ArrowDropDownCircle
@@ -78,7 +78,7 @@ export default function Topbar() {
 								"aria-labelledby": "basic-button",
 							}}
 						>
-							<Link to={`/profile/${user.info.username}`}>
+							<Link to={`/profile/${user.user.username}`}>
 								<MenuItem onClick={handleClose}>Profile</MenuItem>
 							</Link>
 							<MenuItem onClick={handleClose}>My account</MenuItem>
