@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 				email: undefined,
 				createdAt: undefined,
 				updatedAt: undefined,
-				// isAdmin: undefined,
+				isAdmin: undefined,
 				id: undefined,
 			};
 		}
