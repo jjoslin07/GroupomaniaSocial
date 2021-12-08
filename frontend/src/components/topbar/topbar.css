@@ -82,6 +82,7 @@
 }
 .profilePic {
 	margin-right: 15px;
+	cursor: pointer;
 }
 .profileDropdownArrow {
 	cursor: pointer;

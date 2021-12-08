@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./post.css";
 import { MoreVert } from "@mui/icons-material";
 
@@ -6,13 +6,19 @@ import { Avatar } from "@mui/material";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
-
+import { AuthContext } from "../../context/AuthContext";
 const Post = ({ post }) => {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [likes, setLike] = useState(post.likes);
 	const [isLiked, setIsLiked] = useState(false);
+	const { user: currentUser } = useContext(AuthContext);
 
 	const likeHandler = () => {
+		try {
+			axios.post("/posts/" + post.id + "/like", {
+				userId: currentUser.user.id,
+			});
+		} catch (error) {}
 		setLike(isLiked ? likes - 1 : likes + 1);
 		setIsLiked(!isLiked);
 	};

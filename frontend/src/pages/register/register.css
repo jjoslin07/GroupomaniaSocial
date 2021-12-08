@@ -76,6 +76,9 @@
 	color: #fb2f01;
 	cursor: pointer;
 }
+.registerLoginLink {
+	text-align: center;
+}
 .registerLoginButton {
 	width: 50%;
 	align-self: center;

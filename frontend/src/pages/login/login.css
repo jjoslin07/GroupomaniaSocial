@@ -11,10 +11,10 @@
 	height: 70%;
 	display: flex;
 }
-.loginLeft {
+/* .loginLeft {
 	align-items: center;
 	margin-right: 20px;
-}
+} */
 .loginLeft,
 .loginRight {
 	flex: 1;
@@ -77,6 +77,9 @@
 	text-align: center;
 	color: #fb2f01;
 	cursor: pointer;
+}
+.loginRegisterLink {
+	text-align: center;
 }
 
 .loginRegisterButton {
