@@ -13,9 +13,21 @@ export default function Publish() {
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		const newPost = {
-			userId: user.user.Id,
+			userId: user.user.id,
 			content: content.current.value,
 		};
+		if (file) {
+			const data = new FormData();
+			const fileName = Date.now() + file.name;
+			data.append("file", file);
+			data.append("name", fileName);
+			newPost.imageUrl = fileName;
+			try {
+				await axios.post("/upload", data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
 		try {
 			await axios.post("/posts", newPost);
 		} catch (error) {}
