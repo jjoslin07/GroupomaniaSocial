@@ -76,11 +76,7 @@ const Post = ({ post }) => {
 				</div>
 				<div className="postCenter">
 					<span className="postText">{post?.content}</span>
-					<img
-						className="postImg"
-						src={`http://localhost:8800/api/uploads/` + post?.imageUrl}
-						alt=""
-					/>
+					<img className="postImg" src={PF + post?.imageUrl} alt="" />
 				</div>
 				<div className="postBottom">
 					<div className="postBottomLeft">

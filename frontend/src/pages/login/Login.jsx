@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
 	const email = useRef();
 	const password = useRef();
-	const { user, isFetching, dispatch } = useContext(AuthContext);
+	const { isFetching, dispatch } = useContext(AuthContext);
 
 	const handleClick = (e) => {
 		e.preventDefault();

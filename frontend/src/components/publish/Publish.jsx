@@ -6,6 +6,7 @@ import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { SelectCategory } from "../category/SelectCategory";
 import axios from "axios";
+
 export default function Publish() {
 	const { user } = useContext(AuthContext);
 	const content = useRef();
@@ -24,7 +25,7 @@ export default function Publish() {
 		console.log(newPost);
 		if (file) {
 			const data = new FormData();
-			const fileName = Date.now() + file.name;
+			const fileName = file.name;
 			data.append("file", file);
 			data.append("image", fileName);
 			newPost.imageUrl = fileName;
