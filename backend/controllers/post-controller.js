@@ -210,6 +210,20 @@ function destroy(req, res) {
 		});
 }
 
+// Function to get Category's
+
+function category(req, res) {
+	models.Category.findAll()
+		.then((result) => {
+			res.status(200).json(result);
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Something went wrong!",
+			});
+		});
+}
+
 module.exports = {
 	save: save,
 	show: show,
@@ -217,4 +231,5 @@ module.exports = {
 	indexUser: indexUser,
 	update: update,
 	destroy: destroy,
+	category: category,
 };

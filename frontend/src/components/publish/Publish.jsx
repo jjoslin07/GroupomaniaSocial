@@ -1,36 +1,45 @@
 import "./publish.css";
-import { PermMedia, Room, EmojiEmotions, Label } from "@mui/icons-material";
+import { PermMedia, Room, EmojiEmotions } from "@mui/icons-material";
 import { TextareaAutosize } from "@mui/core";
 import { Avatar } from "@mui/material";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { SelectCategory } from "../category/SelectCategory";
 import axios from "axios";
 export default function Publish() {
 	const { user } = useContext(AuthContext);
 	const content = useRef();
 	const [file, setFile] = useState(null);
+	const config = {
+		headers: { Authorization: `Bearer ${user.token}` },
+	};
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		const newPost = {
 			userId: user.user.id,
 			content: content.current.value,
+			categoryId: 1,
 		};
+		console.log(newPost);
 		if (file) {
 			const data = new FormData();
 			const fileName = Date.now() + file.name;
 			data.append("file", file);
-			data.append("name", fileName);
+			data.append("image", fileName);
 			newPost.imageUrl = fileName;
 			try {
-				await axios.post("/upload", data);
+				await axios.post(`/images/upload`, data, config);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		try {
-			await axios.post("/posts", newPost);
-		} catch (error) {}
+			await axios.post("/posts", newPost, config);
+			window.location.reload(false);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<div className="publishContainer">
@@ -61,12 +70,14 @@ export default function Publish() {
 								id="file"
 								accept=".png,.jpeg,.jpg"
 								onChange={(e) => setFile(e.target.files[0])}
+								name="image"
 							/>
 						</label>
-						<div className="publishOption">
-							<Label className="publishIcon" style={{ color: "blue" }} />
-							<span className="publishOptionText">Category</span>
-						</div>
+						<label htmlFor="category" className="publishOption">
+							{/* <Label className="publishIcon" style={{ color: "blue" }} /> */}
+							<SelectCategory />
+							{/* <span className="publishOptionText">Category</span> */}
+						</label>
 						<div className="publishOption">
 							<Room className="publishIcon" style={{ color: "red" }} />
 							<span className="publishOptionText">Location</span>

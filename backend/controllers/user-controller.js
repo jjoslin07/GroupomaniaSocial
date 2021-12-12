@@ -76,7 +76,7 @@ function login(req, res) {
 					user.password,
 					function (err, result) {
 						if (result) {
-							const token = jwt.sign(
+							jwt.sign(
 								{
 									email: user.email,
 									userId: user.id,
@@ -91,6 +91,12 @@ function login(req, res) {
 										token: token,
 										user: user,
 									});
+									// const cookie = req.cookie.token;
+									// if (cookie == undefined) {
+									// 	res.cookie("token", token, { httpOnly: true });
+									// 	return res.status(200).json({ message: "login success" });
+									// }
+									// console.log(cookie);
 								}
 							);
 						} else {

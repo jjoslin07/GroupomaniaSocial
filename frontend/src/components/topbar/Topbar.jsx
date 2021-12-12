@@ -22,6 +22,11 @@ export default function Topbar() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+	async function logout() {
+		localStorage.clear();
+		sessionStorage.clear();
+		window.location.reload(false);
+	}
 	return (
 		<div className="topbarContainer">
 			<div className="topbarLeft">
@@ -82,7 +87,9 @@ export default function Topbar() {
 								<MenuItem onClick={handleClose}>Profile</MenuItem>
 							</Link>
 							<MenuItem onClick={handleClose}>My account</MenuItem>
-							<MenuItem onClick={handleClose}>Logout</MenuItem>
+							{/* <Link to={`/login`}> */}
+							<MenuItem onClick={(handleClose, logout)}>Logout</MenuItem>
+							{/* </Link> */}
 						</Menu>
 					</div>
 				</div>

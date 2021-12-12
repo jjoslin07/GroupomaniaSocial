@@ -8,7 +8,7 @@ const router = express.Router();
 router.post(
 	"/upload",
 	auth.checkAuth,
-	imgUploader.upload.single("image"),
+	imgUploader.upload.single("file"),
 	imgCtrl.upload
 );
 

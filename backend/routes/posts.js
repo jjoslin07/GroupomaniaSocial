@@ -18,6 +18,9 @@ router.patch("/:id", auth.checkAuth, postsCtrl.update);
 // Delete a Post
 router.delete("/:id", auth.checkAuth, postsCtrl.destroy);
 
+// Get category's
+router.get("/category/all", postsCtrl.category);
+
 // Like a Post
 router.post("/:id/like", auth.checkAuth, reactions.like);
 // Unlike a Post

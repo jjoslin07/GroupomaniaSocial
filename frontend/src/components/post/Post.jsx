@@ -12,12 +12,19 @@ const Post = ({ post }) => {
 	const [likes, setLike] = useState(post.likes);
 	const [isLiked, setIsLiked] = useState(false);
 	const { user: currentUser } = useContext(AuthContext);
+	const config = {
+		headers: { Authorization: `Bearer ${currentUser.token}` },
+	};
 
 	const likeHandler = () => {
 		try {
-			axios.post("/posts/" + post.id + "/like", {
-				userId: currentUser.user.id,
-			});
+			axios.post(
+				"/posts/" + post.id + "/like",
+				{
+					userId: currentUser.user.id,
+				},
+				config
+			);
 		} catch (error) {}
 		setLike(isLiked ? likes - 1 : likes + 1);
 		setIsLiked(!isLiked);
