@@ -222,6 +222,18 @@ function category(req, res) {
 			});
 		});
 }
+// Function go get Moods's
+function mood(req, res) {
+	models.Mood.findAll()
+		.then((result) => {
+			res.status(200).json(result);
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Something went wrong!",
+			});
+		});
+}
 
 module.exports = {
 	save: save,
@@ -231,4 +243,5 @@ module.exports = {
 	update: update,
 	destroy: destroy,
 	category: category,
+	mood: mood,
 };

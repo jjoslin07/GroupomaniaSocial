@@ -20,6 +20,8 @@ router.delete("/:id", auth.checkAuth, postsCtrl.destroy);
 
 // Get category's
 router.get("/category/all", postsCtrl.category);
+// Get moods
+router.get("/mood/all", postsCtrl.mood);
 
 // Like a Post
 router.post("/:id/like", auth.checkAuth, reactions.like);

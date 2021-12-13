@@ -1,5 +1,11 @@
 import "./publish.css";
-import { PermMedia, Room, EmojiEmotions, Label } from "@mui/icons-material";
+import {
+	PermMedia,
+	Room,
+	EmojiEmotions,
+	Label,
+	CancelPresentationOutlined,
+} from "@mui/icons-material";
 import { TextareaAutosize } from "@mui/core";
 import {
 	Avatar,
@@ -88,6 +94,19 @@ export default function Publish() {
 					/>
 				</div>
 				<hr className="publishHr" />
+				{file && (
+					<div className="publishImgContainer">
+						<img
+							src={URL.createObjectURL(file)}
+							alt=""
+							className="publishImg"
+						/>
+						<CancelPresentationOutlined
+							className="publishCancelImg"
+							onClick={() => setFile(null)}
+						/>
+					</div>
+				)}
 				<form className="publishBottom" onSubmit={submitHandler}>
 					<div className="publishOptions">
 						<label htmlFor="file" className="publishOption">
@@ -103,7 +122,6 @@ export default function Publish() {
 							/>
 						</label>
 						<label htmlFor="category" className="publishOption">
-							{/* <SelectCategory /> */}
 							<div>
 								<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
 									<InputLabel id="category">Category</InputLabel>

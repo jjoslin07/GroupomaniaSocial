@@ -1,6 +1,6 @@
 .publishContainer {
 	width: 100%;
-	height: 170px;
+
 	border-radius: 10px;
 	-webkit-box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.7);
 	box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.7);
@@ -63,4 +63,19 @@
 	margin-right: 15px;
 	cursor: pointer;
 	color: white;
+}
+.publishImgContainer {
+	padding: 0 20px 10px 20px;
+	position: relative;
+}
+.publishImg {
+	width: 100%;
+	object-fit: cover;
+}
+.publishCancelImg {
+	position: absolute;
+	top: 0;
+	right: 20px;
+	cursor: pointer;
+	opacity: 0.7;
 }
