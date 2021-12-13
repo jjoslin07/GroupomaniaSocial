@@ -16,8 +16,8 @@ module.exports = {
 				type: Sequelize.STRING,
 			},
 			categoryId: {
-				type: Sequelize.INTEGER,
-				default: 1,
+				type: Sequelize.STRING,
+				default: "General",
 			},
 			moodId: {
 				type: Sequelize.INTEGER,

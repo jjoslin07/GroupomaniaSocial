@@ -74,7 +74,7 @@ export default function Topbar() {
 							id="basic-button"
 							aria-controls="basic-menu"
 							aria-haspopup="true"
-							aria-expanded={open ? "true" : undefined}
+							// aria-expanded={open ? "true" : undefined}
 							onClick={handleClick}
 						>
 							Dashboard

@@ -4,7 +4,6 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const postRoutes = require("./routes/posts");
 const userRoutes = require("./routes/users");
-// const imageRoute = require("./routes/images");
 const multer = require("multer");
 const path = require("path");
 
@@ -34,7 +33,24 @@ const storage = multer.diskStorage({
 		cb(null, req.body.name);
 	},
 });
-const upload = multer({ storage: storage });
+const fileFilter = (req, file, callback) => {
+	if (
+		file.mimetype === "image/jpeg" ||
+		file.mimetype === "image/png" ||
+		file.mimetype === "image/jpg"
+	) {
+		callback(null, true);
+	} else {
+		callback(new Error("Unsupported files", false));
+	}
+};
+const upload = multer({
+	storage: storage,
+	limits: {
+		fileSize: 1024 * 1024 * 10,
+	},
+	fileFilter: fileFilter,
+});
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
 	try {
@@ -44,10 +60,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 	}
 });
 
-// app.use("/api/uploads", express.static("uploads"));
-
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
-// app.use("/api/images", imageRoute);
 
 module.exports = app;

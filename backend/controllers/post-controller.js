@@ -20,7 +20,7 @@ function save(req, res) {
 	// Define validation Schema
 	const schema = {
 		content: { type: "string", optional: false, default: "" },
-		categoryId: { type: "number", optional: false, default: 1 },
+		categoryId: { type: "string", optional: false, default: "General" },
 	};
 	// Create instance of Validator class
 	const v = new Validator();
