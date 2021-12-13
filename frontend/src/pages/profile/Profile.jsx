@@ -30,14 +30,19 @@ export default function Profile() {
 							<img
 								className="profileCoverImg"
 								src={
-									user.coverPicture ||
-									PF + "Groupomania_Logos/icon-left-font.svg"
+									user.coverPicture
+										? PF + user.coverPicture
+										: PF + "Groupomania_Logos/icon-left-font.svg"
 								}
 								alt=""
 							/>
 							<img
 								className="profileUserImg"
-								src={user.profilePicture || PF + "Profile/noAvatar.png"}
+								src={
+									user.profilePicture
+										? PF + user.profilePicture
+										: PF + "Profile/noAvatar.png"
+								}
 								alt=""
 							/>
 						</div>

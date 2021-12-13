@@ -11,6 +11,8 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
 // Component
 export default function Topbar() {
 	const { user } = useContext(AuthContext);
@@ -61,7 +63,10 @@ export default function Topbar() {
 				</div>
 				<div className="userProfile">
 					<Link to={`/profile/${user.user.username}`}>
-						<Avatar className="profilePic" src={user.user.profilePicture} />
+						<Avatar
+							className="profilePic"
+							src={PF + user.user.profilePicture}
+						/>
 					</Link>
 					<div>
 						<ArrowDropDownCircle

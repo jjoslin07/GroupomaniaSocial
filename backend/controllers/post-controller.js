@@ -103,7 +103,6 @@ function indexUser(req, res) {
 					message: "User not found",
 				});
 			} else {
-				console.log(result);
 				models.Post.findAll({ where: { userId: result.id } })
 					.then((result) => {
 						res.status(200).json(result);

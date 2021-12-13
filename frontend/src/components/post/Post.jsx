@@ -63,8 +63,8 @@ const Post = ({ post }) => {
 						<Link to={`/profile/${user.username}`}>
 							<Avatar
 								className="postProfileImg"
-								src={user.profilePicture}
-								alt="Profile Pic"
+								src={PF + user.profilePicture}
+								alt=""
 							/>
 						</Link>
 						<span className="postUsername">{user.username}</span>

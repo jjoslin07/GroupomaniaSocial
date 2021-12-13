@@ -8,6 +8,8 @@ import { SelectCategory } from "../category/SelectCategory";
 import axios from "axios";
 
 export default function Publish() {
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
 	const { user } = useContext(AuthContext);
 	const content = useRef();
 	const [file, setFile] = useState(null);
@@ -22,15 +24,14 @@ export default function Publish() {
 			content: content.current.value,
 			categoryId: 1,
 		};
-		console.log(newPost);
 		if (file) {
 			const data = new FormData();
-			const fileName = file.name;
+			const fileName = Date.now() + file.name;
+			data.append("name", fileName);
 			data.append("file", file);
-			data.append("image", fileName);
 			newPost.imageUrl = fileName;
 			try {
-				await axios.post(`/images/upload`, data, config);
+				await axios.post("/upload", data);
 			} catch (error) {
 				console.log(error);
 			}
@@ -48,7 +49,7 @@ export default function Publish() {
 				<div className="publishTop">
 					<Avatar
 						className="publishProfileImg"
-						src={user.user.profilePicture}
+						src={PF + user.user.profilePicture}
 						alt=""
 					/>
 					<TextareaAutosize
