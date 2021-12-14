@@ -30,11 +30,11 @@ export default function Rightbar({ user }) {
 					</div>
 					<div className="rightbarInfoItem">
 						<span className="rightbarInfoKey">Department:</span>
-						<span className="rightbarInfoValue">Design</span>
+						<span className="rightbarInfoValue">{user.dept}</span>
 					</div>
 					<div className="rightbarInfoItem">
 						<span className="rightbarInfoKey">Years at company:</span>
-						<span className="rightbarInfoValue">5</span>
+						<span className="rightbarInfoValue">{user.year}</span>
 					</div>
 				</div>
 			</>

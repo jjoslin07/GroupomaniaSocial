@@ -43,7 +43,7 @@ export default function Publish() {
 
 	const { user } = useContext(AuthContext);
 	const content = useRef();
-
+	console.log(user);
 	const [file, setFile] = useState(null);
 	const config = {
 		headers: { Authorization: `Bearer ${user.token}` },

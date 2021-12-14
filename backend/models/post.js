@@ -21,11 +21,19 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Post.init(
 		{
+			id: {
+				type: DataTypes.UUID,
+				defaultValue: DataTypes.UUIDV4,
+				primaryKey: true,
+			},
 			content: DataTypes.TEXT,
 			imageUrl: DataTypes.STRING,
 			categoryId: DataTypes.STRING,
 			moodId: DataTypes.INTEGER,
-			userId: DataTypes.INTEGER,
+			userId: {
+				type: DataTypes.UUID,
+				defaultValue: DataTypes.UUIDV4,
+			},
 			likes: DataTypes.INTEGER,
 			loves: DataTypes.INTEGER,
 			funny: DataTypes.INTEGER,

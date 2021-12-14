@@ -138,7 +138,7 @@ function update(req, res) {
 	const schema = {
 		title: { type: "string", optional: false, max: "100" },
 		content: { type: "string", optional: false, max: "500" },
-		categoryId: { type: "number", optional: false },
+		categoryId: { type: "string", optional: false, default: "General" },
 	};
 	// Create instance of Validator class
 	const v = new Validator();
