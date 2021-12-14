@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -136,15 +136,11 @@ const Account = () => {
 			console.log(error);
 		}
 		// }
-		// await window.localStorage.clear();
-		// await window.sessionStorage.clear();
-		// await window.location.reload(false);
+
+		localStorage.clear();
+		localStorage.setItem("user", JSON.stringify(user));
 		await navigate("/profile/" + currentUser.user.username);
 	};
-	const [loading, setLoading] = React.useState(false);
-	function handleClick() {
-		setLoading(true);
-	}
 
 	return (
 		<>

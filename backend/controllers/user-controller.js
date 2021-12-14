@@ -129,6 +129,8 @@ function update(req, res) {
 				desc: req.body.desc,
 				city: req.body.city,
 				from: req.body.from,
+				dept: req.body.dept,
+				year: req.body.year,
 			};
 			const userId = req.userData.userId;
 
