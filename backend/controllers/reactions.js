@@ -197,7 +197,6 @@ function unfunny(req, res) {
 			});
 		});
 }
-
 // Function to get Reactions and set them to Post
 function getReaction(req, res) {
 	const postId = req.params.id;

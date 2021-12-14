@@ -42,10 +42,10 @@ const Register = () => {
 					<div className="registerRight">
 						<form className="registerBox" onSubmit={handleClick}>
 							<input
-								placeholder="Username"
+								placeholder="Name"
 								required
 								ref={username}
-								className="registerInputName"
+								className="registerInput"
 								type="text"
 							/>
 							<input

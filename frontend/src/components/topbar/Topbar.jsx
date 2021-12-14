@@ -91,7 +91,9 @@ export default function Topbar() {
 							<Link to={`/profile/${user.user.username}`}>
 								<MenuItem onClick={handleClose}>Profile</MenuItem>
 							</Link>
-							<MenuItem onClick={handleClose}>My account</MenuItem>
+							<Link to={`/account/${user.user.username}`}>
+								<MenuItem onClick={handleClose}>My account</MenuItem>
+							</Link>
 							{/* <Link to={`/login`}> */}
 							<MenuItem onClick={(handleClose, logout)}>Logout</MenuItem>
 							{/* </Link> */}

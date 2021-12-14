@@ -16,7 +16,6 @@ import {
 } from "@mui/material";
 import { useContext, useRef, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
-// import { SelectCategory } from "../category/SelectCategory";
 
 import axios from "axios";
 

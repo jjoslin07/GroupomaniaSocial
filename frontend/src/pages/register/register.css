@@ -39,14 +39,7 @@
 	-webkit-box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.7);
 	box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.7);
 }
-.registerInputName {
-	height: 50px;
-	border-radius: 10px;
-	border: 1px solid grey;
-	font-size: 16px;
-	padding-left: 20px;
-	margin-right: 5px;
-}
+
 .registerInput {
 	height: 50px;
 	border-radius: 10px;

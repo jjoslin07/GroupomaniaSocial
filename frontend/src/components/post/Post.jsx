@@ -15,7 +15,9 @@ const Post = ({ post }) => {
 	const config = {
 		headers: { Authorization: `Bearer ${currentUser.token}` },
 	};
-
+	// const getReaction = async () => {
+	// 	await axios.get("/posts/" + post.id + "/reactions");
+	// };
 	const likeHandler = () => {
 		try {
 			axios.post(
@@ -56,58 +58,60 @@ const Post = ({ post }) => {
 		fetchUser();
 	}, [post.userId]);
 	return (
-		<div className="post">
-			<div className="postWrapper">
-				<div className="postTop">
-					<div className="postTopLeft">
-						<Link to={`/profile/${user.username}`}>
-							<Avatar
-								className="postProfileImg"
-								src={PF + user.profilePicture}
+		<>
+			<div className="post">
+				<div className="postWrapper">
+					<div className="postTop">
+						<div className="postTopLeft">
+							<Link to={`/profile/${user.username}`}>
+								<Avatar
+									className="postProfileImg"
+									src={PF + user.profilePicture}
+									alt=""
+								/>
+							</Link>
+							<span className="postUsername">{user.username}</span>
+							<span className="postDate">{format(post.createdAt)}</span>
+						</div>
+						<div className="postTopRight">
+							<MoreVert className="postMore" />
+						</div>
+					</div>
+					<div className="postCenter">
+						<span className="postText">{post?.content}</span>
+						<img className="postImg" src={PF + post?.imageUrl} alt="" />
+					</div>
+					<div className="postBottom">
+						<div className="postBottomLeft">
+							<img
+								className="postIcon"
+								src={`${PF}like.png`}
+								onClick={likeHandler}
 								alt=""
 							/>
-						</Link>
-						<span className="postUsername">{user.username}</span>
-						<span className="postDate">{format(post.createdAt)}</span>
-					</div>
-					<div className="postTopRight">
-						<MoreVert className="postMore" />
-					</div>
-				</div>
-				<div className="postCenter">
-					<span className="postText">{post?.content}</span>
-					<img className="postImg" src={PF + post?.imageUrl} alt="" />
-				</div>
-				<div className="postBottom">
-					<div className="postBottomLeft">
-						<img
-							className="postIcon"
-							src={`${PF}like.png`}
-							onClick={likeHandler}
-							alt=""
-						/>
-						<span className="postReactionCounter">{likes}</span>
-						<img
-							className="postIcon"
-							src={`${PF}love.png`}
-							onClick={loveHandler}
-							alt=""
-						/>
-						<span className="postReactionCounter">{loves}</span>
-						<img
-							className="postIcon"
-							src={`${PF}haha.png`}
-							onClick={funnyHandler}
-							alt=""
-						/>
-						<span className="postReactionCounter">{funny}</span>
-					</div>
-					<div className="postBottomRight">
-						<span className="postCommentText">{post.comment} Comments</span>
+							<span className="postReactionCounter">{likes}</span>
+							<img
+								className="postIcon"
+								src={`${PF}love.png`}
+								onClick={loveHandler}
+								alt=""
+							/>
+							<span className="postReactionCounter">{loves}</span>
+							<img
+								className="postIcon"
+								src={`${PF}haha.png`}
+								onClick={funnyHandler}
+								alt=""
+							/>
+							<span className="postReactionCounter">{funny}</span>
+						</div>
+						<div className="postBottomRight">
+							<span className="postCommentText">{post.comment} Comments</span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
