@@ -1,5 +1,4 @@
 import "./leftbar.css";
-import { Users } from "../../demoData";
 import {
 	RssFeed,
 	Bookmarks,
@@ -14,7 +13,24 @@ import {
 	MarkunreadMailboxOutlined,
 } from "@mui/icons-material";
 import Profiles from "../profiles/Profiles";
+import { useEffect, useState } from "react";
+
+import axios from "axios";
+
 export default function Leftbar() {
+	const [users, setUsers] = useState([]);
+
+	useEffect(() => {
+		const fetchUsers = async () => {
+			const res = await axios.get("/users/all");
+			setUsers(
+				res.data.sort((u1, u2) => {
+					return new Date(u2.createdAt) - new Date(u1.createdAt);
+				})
+			);
+		};
+		fetchUsers();
+	}, []);
 	return (
 		<div className="leftbarContainer">
 			<div className="leftbarWrapper">
@@ -68,7 +84,7 @@ export default function Leftbar() {
 				<hr className="leftbarHr" />
 				<h4 className="leftbarTitle">Profiles</h4>
 				<ul className="leftbarFriendList">
-					{Users.map((u) => (
+					{users.map((u) => (
 						<Profiles key={u.id} user={u} />
 					))}
 				</ul>

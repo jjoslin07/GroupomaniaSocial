@@ -2,13 +2,14 @@
 	width: 100vw;
 	height: 100vh;
 	display: flex;
-	margin: 20px 0;
+	align-items: center;
 	justify-content: center;
+	background-color: #f0f2f5b3;
 }
 .accountWrapper {
-	width: 90%;
+	width: 100%;
+	height: 100%;
 	display: flex;
-	flex-direction: column;
 }
 .accountTop {
 	display: flex;
@@ -17,33 +18,52 @@
 	margin-bottom: 50px;
 }
 .accountLogo {
+	display: flex;
 	font-size: 50px;
 	font-weight: 800;
 	color: #fb2f01;
 	margin-bottom: 10px;
 }
 .accountDesc {
+	display: flex;
 	font-size: 24px;
 }
-.accountBottom {
+.accountLeft,
+.accountRight {
+	flex: 1;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 }
-/* .accountBox {
-	width: 500px;
+.accountRight {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.accountBox {
 	padding: 20px;
 	background-color: white;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	justify-content: space-between;
-	-webkit-box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.7);
-	box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.7);
-} */
-/* .accountInput {
-	border-radius: 10px;
-	border: 1px solid grey;
-	font-size: 16px;
-	padding-left: 20px;
-	margin-bottom: 10px;
-} */
+	/* -webkit-box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.7);
+	box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.7); */
+}
+.accountButtonContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 15px;
+}
+.accountSaveBtn {
+	width: 100%;
+}
+.saveButtonMsg {
+	margin-top: 15px;
+	font-size: 14px;
+	color: red;
+}

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import "./post.css";
 import { MoreVert } from "@mui/icons-material";
 
-import { Avatar } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
@@ -59,7 +59,12 @@ const Post = ({ post }) => {
 	}, [post.userId]);
 	return (
 		<>
-			<div className="post">
+			<Box
+				className="post"
+				sx={{
+					boxShadow: 2,
+				}}
+			>
 				<div className="postWrapper">
 					<div className="postTop">
 						<div className="postTopLeft">
@@ -72,6 +77,7 @@ const Post = ({ post }) => {
 							</Link>
 							<span className="postUsername">{user.username}</span>
 							<span className="postDate">{format(post.createdAt)}</span>
+							<span className="postCategory">in {post.categoryId}</span>
 						</div>
 						<div className="postTopRight">
 							<MoreVert className="postMore" />
@@ -110,7 +116,7 @@ const Post = ({ post }) => {
 						</div>
 					</div>
 				</div>
-			</div>
+			</Box>
 		</>
 	);
 };

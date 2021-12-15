@@ -9,6 +9,7 @@ import {
 import { TextareaAutosize } from "@mui/core";
 import {
 	Avatar,
+	Box,
 	FormControl,
 	InputLabel,
 	MenuItem,
@@ -43,7 +44,7 @@ export default function Publish() {
 
 	const { user } = useContext(AuthContext);
 	const content = useRef();
-	console.log(user);
+
 	const [file, setFile] = useState(null);
 	const config = {
 		headers: { Authorization: `Bearer ${user.token}` },
@@ -76,7 +77,12 @@ export default function Publish() {
 		}
 	};
 	return (
-		<div className="publishContainer">
+		<Box
+			className="publishContainer"
+			sx={{
+				boxShadow: 2,
+			}}
+		>
 			<div className="publishWrapper">
 				<div className="publishTop">
 					<Avatar
@@ -106,7 +112,11 @@ export default function Publish() {
 						/>
 					</div>
 				)}
-				<form className="publishBottom" onSubmit={submitHandler}>
+				<Box
+					component="form"
+					className="publishBottom"
+					onSubmit={submitHandler}
+				>
 					<div className="publishOptions">
 						<label htmlFor="file" className="publishOption">
 							<PermMedia className="publishIcon" style={{ color: "green" }} />
@@ -125,7 +135,7 @@ export default function Publish() {
 								<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
 									<InputLabel id="category">Category</InputLabel>
 									<Select
-										style={{ margin: 15, color: "primary" }}
+										// style={{ margin: 15, color: "primary" }}
 										labelId="category"
 										className="dropDownMenu"
 										IconComponent={Label}
@@ -158,8 +168,8 @@ export default function Publish() {
 						{" "}
 						Publish
 					</button>
-				</form>
+				</Box>
 			</div>
-		</div>
+		</Box>
 	);
 }

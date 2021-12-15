@@ -1,16 +1,13 @@
 // Import statements
 import "./topbar.css";
-import {
-	Search,
-	Notifications,
-	ArrowDropDownCircle,
-} from "@mui/icons-material";
-import { Badge, Avatar } from "@mui/material";
+import { Notifications, ArrowDropDownCircle } from "@mui/icons-material";
+import { Badge, Avatar, Autocomplete, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 // Component
@@ -29,6 +26,15 @@ export default function Topbar() {
 		sessionStorage.clear();
 		window.location.reload(false);
 	}
+	const [users, setUsers] = useState([]);
+
+	useEffect(() => {
+		const fetchUsers = async () => {
+			const res = await axios.get("/users/all");
+			setUsers(res.data);
+		};
+		fetchUsers();
+	}, []);
 	return (
 		<div className="topbarContainer">
 			<div className="topbarLeft">
@@ -43,10 +49,34 @@ export default function Topbar() {
 				</Link>
 			</div>
 			<div className="topbarCenter">
-				<div className="searchbar">
+				<Autocomplete
+					id="search-user-database"
+					options={users.map((user) => user.username)}
+					renderInput={(params) => (
+						<TextField
+							variant="standard"
+							{...params}
+							placeholder="Search"
+							sx={{
+								m: 1,
+								p: 1,
+								backgroundColor: "white",
+								width: 400,
+								height: 30,
+								borderRadius: 3,
+								border: "none",
+							}}
+							InputProps={{
+								disableUnderline: true,
+							}}
+						/>
+					)}
+				/>
+
+				{/* <div className="searchbar">
 					<Search className="searchIcon" />
 					<input placeholder="Search Groupomania " className="searchInput" />
-				</div>
+				</div> */}
 			</div>
 			<div className="topbarRight">
 				<div className="topbarLinks">

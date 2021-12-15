@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRef } from "react";
 import "./register.css";
 import { Link, useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const Register = () => {
 	const username = useRef();
@@ -40,7 +41,14 @@ const Register = () => {
 						</span>
 					</div>
 					<div className="registerRight">
-						<form className="registerBox" onSubmit={handleClick}>
+						<Box
+							component="form"
+							className="registerBox"
+							onSubmit={handleClick}
+							sx={{
+								boxShadow: 1,
+							}}
+						>
 							<input
 								placeholder="Name"
 								required
@@ -79,7 +87,7 @@ const Register = () => {
 									Log into Account
 								</button>
 							</Link>
-						</form>
+						</Box>
 					</div>
 				</div>
 			</div>

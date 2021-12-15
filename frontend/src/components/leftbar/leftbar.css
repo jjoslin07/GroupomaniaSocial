@@ -1,6 +1,6 @@
 .leftbarContainer {
 	flex: 3;
-	height: calc(100vh - 65px);
+	height: calc(100vh - 70px);
 	overflow-y: scroll;
 	position: sticky;
 	top: 65px;

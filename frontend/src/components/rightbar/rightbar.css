@@ -1,9 +1,9 @@
 .rightbar {
 	flex: 4;
-	/* height: calc(100vh - 50px);
-	overflow-y: scroll;
+	height: calc(100vh - 70px);
+	/* overflow-y: scroll;
 	position: sticky;
-	top: 50px; */
+	top: 50px;  */
 }
 .rightbarWrapper {
 	padding: 20px 20px 0 0;
@@ -22,11 +22,24 @@
 	font-weight: 300;
 	font-size: 15x;
 }
+.rightbarImgContainer {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+.rightbarImgTitle {
+	font-size: 20px;
+}
 .calendar {
 	width: 250px;
 }
+.rightbarContainer {
+	margin: 30px;
+	display: flex;
+	flex-direction: column;
+}
 .rightbarTitle {
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	font-size: 18px;
 	font-weight: 500;
 }

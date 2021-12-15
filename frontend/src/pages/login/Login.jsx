@@ -4,6 +4,7 @@ import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const Login = () => {
 	const email = useRef();
@@ -28,7 +29,14 @@ const Login = () => {
 					</span>
 				</div>
 				<div className="loginRight">
-					<form className="loginBox" onSubmit={handleClick}>
+					<Box
+						className="loginBox"
+						onSubmit={handleClick}
+						component="form"
+						sx={{
+							boxShadow: 1,
+						}}
+					>
 						<input
 							placeholder="Email"
 							type="email"
@@ -69,7 +77,7 @@ const Login = () => {
 								)}
 							</button>
 						</Link>
-					</form>
+					</Box>
 				</div>
 			</div>
 		</div>
