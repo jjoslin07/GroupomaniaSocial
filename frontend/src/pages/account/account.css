@@ -27,8 +27,57 @@
 .accountDesc {
 	display: flex;
 	font-size: 24px;
+	margin-top: 50px;
+	margin-bottom: 25px;
 }
-.accountLeft,
+.accountOption {
+	display: flex;
+	align-items: center;
+	margin: 0 25px;
+	cursor: pointer;
+}
+.accountIcon {
+	font-size: 22px !important;
+	margin-right: 5px;
+}
+.accountOptionText {
+	font-size: 15px;
+	font-weight: 500;
+}
+.accountHr {
+	margin: 18px;
+}
+.accountImgContainer {
+	padding: 0 20px 10px 20px;
+	position: relative;
+}
+.accountImg {
+	position: relative;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	object-fit: cover;
+	top: 25px;
+
+	border: 3px solid white;
+}
+.accountCancelImg {
+	font-size: 23px !important;
+
+	position: absolute;
+	top: -2px;
+	right: -18px;
+	cursor: pointer;
+	opacity: 0.6;
+}
+
+.accountLeft {
+	margin-top: 150px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 .accountRight {
 	flex: 1;
 	display: flex;

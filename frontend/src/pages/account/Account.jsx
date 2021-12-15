@@ -19,7 +19,11 @@ import { useNavigate } from "react-router-dom";
 import SaveIcon from "@mui/icons-material/Save";
 
 import "./account.css";
-import { PhotoCamera } from "@mui/icons-material";
+import {
+	CancelPresentationOutlined,
+	PermMedia,
+	PhotoCamera,
+} from "@mui/icons-material";
 
 const Account = () => {
 	// Navigate const for page redirection
@@ -36,9 +40,7 @@ const Account = () => {
 	const [passwordVerify, setPasswordVerify] = useState(
 		currentUser.user.password
 	);
-	const [profilePicture, setProfilePicture] = useState(
-		currentUser.user.profilePicture
-	);
+	const [profilePicture, setProfilePicture] = useState(null);
 
 	const [coverPicture, setCoverPicture] = useState(
 		currentUser.user.coverPicture
@@ -80,6 +82,9 @@ const Account = () => {
 	const handleChangeYear = (event) => {
 		setYear(event.currentTarget.value);
 	};
+	const handleProfileImg = (event) => {
+		setProfilePicture(event.target.files[0]);
+	};
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
@@ -96,6 +101,18 @@ const Account = () => {
 			dept: dept,
 			year: year,
 		};
+		if (profilePicture) {
+			const data = new FormData();
+			const fileName = Date.now() + profilePicture.name;
+			data.append("name", fileName);
+			data.append("file", profilePicture);
+			user.profilePicture = fileName;
+			try {
+				await axios.post("/upload", data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
 		try {
 			await axios.put("/users/" + currentUser.user.id, user, config);
 			await window.localStorage.clear();
@@ -123,26 +140,46 @@ const Account = () => {
 						<span className="accountDesc">
 							You can manage your account here.
 						</span>
-						<label htmlFor="icon-button-file">
-							<Input accept="image/*" id="icon-button-file" type="file" />
-							<IconButton
-								color="primary"
-								aria-label="upload picture"
-								component="span"
-							>
-								<PhotoCamera />
-							</IconButton>
-						</label>
-						<label htmlFor="icon-button-file">
-							<Input accept="image/*" id="icon-button-file" type="file" />
-							<IconButton
-								color="primary"
-								aria-label="upload picture"
-								component="span"
-							>
-								<PhotoCamera />
-							</IconButton>
-						</label>
+						<Box
+							sx={{
+								position: "relative",
+								display: "flex",
+								backgroundColor: "white",
+								width: 425,
+								height: 200,
+								boxShadow: 1,
+							}}
+						>
+							<label htmlFor="file" className="accountOption">
+								<PhotoCamera
+									className="accountIcon"
+									style={{ color: "green" }}
+								/>
+								<span className="accountOptionText">Profile Picture</span>
+								<input
+									style={{ display: "none" }}
+									type="file"
+									id="file"
+									accept=".png,.jpeg,.jpg"
+									onChange={handleProfileImg}
+									name="image"
+								/>
+							</label>
+							<hr className="accountHr" />
+							{profilePicture && (
+								<div className="accountImgContainer">
+									<img
+										src={URL.createObjectURL(profilePicture)}
+										alt=""
+										className="accountImg"
+									/>
+									<CancelPresentationOutlined
+										className="accountCancelImg"
+										onClick={() => setProfilePicture(null)}
+									/>
+								</div>
+							)}
+						</Box>
 					</div>
 					<div className="accountRight">
 						<Box
@@ -198,18 +235,6 @@ const Account = () => {
 								onChange={handleChangePassVerify}
 								defaultValue={currentUser.user.password}
 							/>
-							{/* <TextField
-								placeholder="profilePicture"
-								className="accountInput"
-								type="string"
-								onChange={setProfilePicture}
-							/>
-							<TextField
-								placeholder="coverPicture"
-								className="accountInput"
-								type="string"
-								onChange={setCoverPicture}
-							/> */}
 							<TextField
 								// placeholder="Description"
 								className="accountInput"

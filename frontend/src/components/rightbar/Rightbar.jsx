@@ -44,6 +44,7 @@ export default function Rightbar({ user, username }) {
 				</div>
 				<div className="rightbarImgContainer">
 					<span className="rightbarImgTitle">Latest Photos</span>
+
 					<ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
 						{posts.map((item) => (
 							<ImageListItem key={item.id}>
