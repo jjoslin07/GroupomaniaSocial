@@ -52,7 +52,7 @@ const upload = multer({
 	fileFilter: fileFilter,
 });
 
-app.post("/api/upload", upload.single("file"), (req, res) => {
+app.post("/api/upload", upload.array("file"), (req, res) => {
 	try {
 		return res.status(200).json("File uploaded successfully.");
 	} catch (error) {

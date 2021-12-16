@@ -1,57 +1,39 @@
 // import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-	Button,
-	IconButton,
-	Input,
-	// IconButton,
-	// Input,
-	// InputAdornment,
-	// InputLabel,
-	// OutlinedInput,
-	TextField,
-} from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import SaveIcon from "@mui/icons-material/Save";
 
 import "./account.css";
-import {
-	CancelPresentationOutlined,
-	PermMedia,
-	PhotoCamera,
-} from "@mui/icons-material";
+import { CancelPresentationOutlined, PhotoCamera } from "@mui/icons-material";
 
 const Account = () => {
 	// Navigate const for page redirection
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	// Set user to Alias to currentUser
 	const { user: currentUser } = useContext(AuthContext);
 	// Send user token to header
 	const config = {
 		headers: { Authorization: `Bearer ${currentUser.token}` },
 	};
+
+	// Reference
+
+	// State
 	const [username, setUsername] = useState(currentUser.user.username);
 	const [email, setEmail] = useState(currentUser.user.email);
 	const [password, setPassword] = useState(currentUser.user.password);
-	const [passwordVerify, setPasswordVerify] = useState(
-		currentUser.user.password
-	);
 	const [profilePicture, setProfilePicture] = useState(null);
+	const [coverPicture, setCoverPicture] = useState(null);
 
-	const [coverPicture, setCoverPicture] = useState(
-		currentUser.user.coverPicture
-	);
 	const [desc, setDesc] = useState(currentUser.user.desc);
 	const [city, setCity] = useState(currentUser.user.city);
-	// const city = useRef();
 	const [from, setFrom] = useState(currentUser.user.from);
-	// const from = useRef();
 	const [dept, setDept] = useState(currentUser.user.dept);
-	// const dept = useRef();
 	const [year, setYear] = useState(currentUser.user.year);
 
 	// Handle change for form
@@ -63,9 +45,6 @@ const Account = () => {
 	};
 	const handleChangePass = (event) => {
 		setPassword(event.currentTarget.value);
-	};
-	const handleChangePassVerify = (event) => {
-		setPasswordVerify(event.currentTarget.value);
 	};
 	const handleChangeDesc = (event) => {
 		setDesc(event.currentTarget.value);
@@ -85,16 +64,17 @@ const Account = () => {
 	const handleProfileImg = (event) => {
 		setProfilePicture(event.target.files[0]);
 	};
+	const handleCoverImg = (event) => {
+		setCoverPicture(event.target.files[0]);
+	};
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
+
 		const user = {
 			username: username,
 			email: email,
 			password: password,
-			passwordVerify: passwordVerify,
-			profilePicture: profilePicture,
-			coverPicture: coverPicture,
 			desc: desc,
 			city: city,
 			from: from,
@@ -107,6 +87,18 @@ const Account = () => {
 			data.append("name", fileName);
 			data.append("file", profilePicture);
 			user.profilePicture = fileName;
+			try {
+				await axios.post("/upload", data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		if (coverPicture) {
+			const data = new FormData();
+			const fileName = Date.now() + coverPicture.name;
+			data.append("name", fileName);
+			data.append("file", coverPicture);
+			user.coverPicture = fileName;
 			try {
 				await axios.post("/upload", data);
 			} catch (error) {
@@ -145,12 +137,12 @@ const Account = () => {
 								position: "relative",
 								display: "flex",
 								backgroundColor: "white",
-								width: 425,
+								width: 500,
 								height: 200,
 								boxShadow: 1,
 							}}
 						>
-							<label htmlFor="file" className="accountOption">
+							<label htmlFor="profileImg" className="accountOption">
 								<PhotoCamera
 									className="accountIcon"
 									style={{ color: "green" }}
@@ -159,7 +151,7 @@ const Account = () => {
 								<input
 									style={{ display: "none" }}
 									type="file"
-									id="file"
+									id="profileImg"
 									accept=".png,.jpeg,.jpg"
 									onChange={handleProfileImg}
 									name="image"
@@ -180,6 +172,47 @@ const Account = () => {
 								</div>
 							)}
 						</Box>
+						<Box
+							sx={{
+								marginTop: 3,
+								position: "relative",
+								display: "flex",
+								backgroundColor: "white",
+								width: 500,
+								height: 200,
+								boxShadow: 1,
+							}}
+						>
+							<label htmlFor="coverImg" className="accountOption">
+								<PhotoCamera
+									className="accountIcon"
+									style={{ color: "green" }}
+								/>
+								<span className="accountOptionText">Cover Picture</span>
+								<input
+									style={{ display: "none" }}
+									type="file"
+									id="coverImg"
+									accept=".png,.jpeg,.jpg"
+									onChange={handleCoverImg}
+									name="image"
+								/>
+							</label>
+							<hr className="accountHr" />
+							{coverPicture && (
+								<div className="accountImgContainer">
+									<img
+										src={URL.createObjectURL(coverPicture)}
+										alt=""
+										className="accountImgAlt"
+									/>
+									<CancelPresentationOutlined
+										className="accountCancelImgAlt"
+										onClick={() => setCoverPicture(null)}
+									/>
+								</div>
+							)}
+						</Box>
 					</div>
 					<div className="accountRight">
 						<Box
@@ -194,7 +227,6 @@ const Account = () => {
 							autoComplete="off"
 						>
 							<TextField
-								id="outlined-start-adornment"
 								// placeholder="Name"
 								required
 								className="accountInput"
@@ -204,7 +236,6 @@ const Account = () => {
 								defaultValue={currentUser.user.username}
 							/>
 							<TextField
-								id="outlined-start-adornment"
 								// placeholder="Email"
 								required
 								className="accountInput"
@@ -214,7 +245,6 @@ const Account = () => {
 								defaultValue={currentUser.user.email}
 							/>
 							<TextField
-								// placeholder={currentUser.user.password}
 								required
 								className="accountInput"
 								type="password"
@@ -225,14 +255,12 @@ const Account = () => {
 								defaultValue={currentUser.user.password}
 							/>
 							<TextField
-								// placeholder="Verify Password"
 								required
 								className="accountInput"
 								type="password"
 								minLength="6"
 								label="verify password"
 								// ref={verify}
-								onChange={handleChangePassVerify}
 								defaultValue={currentUser.user.password}
 							/>
 							<TextField

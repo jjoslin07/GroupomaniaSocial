@@ -53,24 +53,38 @@
 }
 .accountImg {
 	position: relative;
-	width: 150px;
-	height: 150px;
+	width: 160px;
+	height: 160px;
 	border-radius: 50%;
+	right: -25px;
 	object-fit: cover;
 	top: 25px;
-
-	border: 3px solid white;
+}
+.accountImgAlt {
+	position: relative;
+	width: 225px;
+	height: 125px;
+	object-fit: cover;
+	top: 35px;
 }
 .accountCancelImg {
 	font-size: 23px !important;
 
 	position: absolute;
 	top: -2px;
-	right: -18px;
+	right: -90px;
 	cursor: pointer;
-	opacity: 0.6;
+	opacity: 0.5;
 }
+.accountCancelImgAlt {
+	font-size: 23px !important;
 
+	position: absolute;
+	top: -2px;
+	right: -25px;
+	cursor: pointer;
+	opacity: 0.5;
+}
 .accountLeft {
 	margin-top: 150px;
 	flex: 1;
