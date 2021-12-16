@@ -21,20 +21,37 @@ const Login = () => {
 
 	return (
 		<div className="login">
-			<div className="loginWrapper">
-				<div className="loginLeft">
+			<Box
+				className="loginWrapper"
+				sx={{
+					display: "flex",
+					flexDirection: { xs: "column", sm: "column", md: "row" },
+					alignItems: { xs: "center" },
+					justifyContent: "center",
+				}}
+			>
+				<Box
+					className="loginLeft"
+					sx={{
+						width: { xs: 320, s: 500, md: 600 },
+						textAlign: { xs: "justify", s: "initial", md: "initial" },
+					}}
+				>
 					<h3 className="loginLogo">Groupomania Social</h3>
 					<span className="loginDesc">
 						Connect with friends and meet new coworkers at Groupomania.
 					</span>
-				</div>
+				</Box>
 				<div className="loginRight">
 					<Box
 						className="loginBox"
 						onSubmit={handleClick}
 						component="form"
 						sx={{
+							width: { xs: 320, md: 400 },
 							boxShadow: 1,
+							marginTop: { xs: 5 },
+							marginLeft: { xs: 0, md: 5 },
 						}}
 					>
 						<input
@@ -79,7 +96,7 @@ const Login = () => {
 						</Link>
 					</Box>
 				</div>
-			</div>
+			</Box>
 		</div>
 	);
 };

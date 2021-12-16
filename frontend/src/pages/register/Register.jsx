@@ -32,21 +32,38 @@ const Register = () => {
 
 	return (
 		<>
-			<div className="register" maxwidth="sm">
-				<div className="registerWrapper">
-					<div className="registerLeft">
+			<div className="register">
+				<Box
+					className="registerWrapper"
+					sx={{
+						display: "flex",
+						flexDirection: { xs: "column", sm: "column", md: "row" },
+						alignItems: { xs: "center" },
+						justifyContent: "center",
+					}}
+				>
+					<Box
+						className="registerLeft"
+						sx={{
+							width: { xs: 320, s: 500, md: 600 },
+							textAlign: { xs: "justify", s: "initial", md: "initial" },
+						}}
+					>
 						<h3 className="registerLogo">Groupomania Social</h3>
 						<span className="registerDesc">
 							Connect with friends and meet new coworkers at Groupomania.
 						</span>
-					</div>
+					</Box>
 					<div className="registerRight">
 						<Box
 							component="form"
 							className="registerBox"
 							onSubmit={handleClick}
 							sx={{
+								width: { xs: 320, md: 400 },
 								boxShadow: 1,
+								marginTop: { xs: 5 },
+								marginLeft: { xs: 0, md: 5 },
 							}}
 						>
 							<input
@@ -89,7 +106,7 @@ const Register = () => {
 							</Link>
 						</Box>
 					</div>
-				</div>
+				</Box>
 			</div>
 		</>
 	);
