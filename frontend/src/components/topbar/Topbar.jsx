@@ -1,136 +1,244 @@
-// Import statements
+import * as React from "react";
 import "./topbar.css";
-import { Notifications, ArrowDropDownCircle } from "@mui/icons-material";
-import { Badge, Avatar, Autocomplete, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import Menu from "@mui/material/Menu";
+import { styled, alpha } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
-import axios from "axios";
-const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import { AuthContext } from "../../context/AuthContext";
+import { Link } from "@mui/material";
 
-// Component
+// import { useNavigate } from "react-router-dom";
+
+const Search = styled("div")(({ theme }) => ({
+	position: "relative",
+	borderRadius: theme.shape.borderRadius,
+	backgroundColor: alpha(theme.palette.common.white, 0.15),
+	"&:hover": {
+		backgroundColor: alpha(theme.palette.common.white, 0.25),
+	},
+	marginRight: theme.spacing(2),
+	marginLeft: 0,
+	width: "100%",
+	[theme.breakpoints.up("sm")]: {
+		marginLeft: theme.spacing(3),
+		width: "auto",
+	},
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+	padding: theme.spacing(0, 2),
+	height: "100%",
+	position: "absolute",
+	pointerEvents: "none",
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+	color: "inherit",
+	"& .MuiInputBase-input": {
+		padding: theme.spacing(1, 1, 1, 0),
+		// vertical padding + font size from searchIcon
+		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+		transition: theme.transitions.create("width"),
+		width: "100%",
+		[theme.breakpoints.up("md")]: {
+			width: "20ch",
+		},
+	},
+}));
+
 export default function Topbar() {
-	const { user } = useContext(AuthContext);
+	const { user } = React.useContext(AuthContext);
+
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const open = Boolean(anchorEl);
-	const handleClick = (event) => {
+	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+	const isMenuOpen = Boolean(anchorEl);
+	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+	const handleProfileMenuOpen = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
-	const handleClose = () => {
+
+	const handleMobileMenuClose = () => {
+		setMobileMoreAnchorEl(null);
+	};
+
+	const handleMenuClose = () => {
 		setAnchorEl(null);
+		handleMobileMenuClose();
+	};
+
+	const handleMobileMenuOpen = (event) => {
+		setMobileMoreAnchorEl(event.currentTarget);
 	};
 	async function logout() {
 		localStorage.clear();
 		sessionStorage.clear();
 		window.location.reload(false);
 	}
-	const [users, setUsers] = useState([]);
+	// const navigate = useNavigate();
 
-	useEffect(() => {
-		const fetchUsers = async () => {
-			const res = await axios.get("/users/all");
-			setUsers(res.data);
-		};
-		fetchUsers();
-	}, []);
+	const menuId = "primary-search-account-menu";
+	const renderMenu = (
+		<Menu
+			anchorEl={anchorEl}
+			anchorOrigin={{
+				vertical: "top",
+				horizontal: "right",
+			}}
+			id={menuId}
+			keepMounted
+			transformOrigin={{
+				vertical: "top",
+				horizontal: "right",
+			}}
+			open={isMenuOpen}
+			onClose={handleMenuClose}
+		>
+			<Link
+				href={`/profile/${user.user.username}`}
+				sx={{
+					textDecoration: "none",
+					color: "black",
+				}}
+			>
+				<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+			</Link>
+			<Link
+				href={`/account/${user.user.username}`}
+				sx={{
+					textDecoration: "none",
+					color: "black",
+				}}
+			>
+				<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			</Link>
+			<MenuItem onClick={(handleMenuClose, logout)}>Logout</MenuItem>
+		</Menu>
+	);
+
+	const mobileMenuId = "primary-search-account-menu-mobile";
+	const renderMobileMenu = (
+		<Menu
+			anchorEl={mobileMoreAnchorEl}
+			anchorOrigin={{
+				vertical: "top",
+				horizontal: "right",
+			}}
+			id={mobileMenuId}
+			keepMounted
+			transformOrigin={{
+				vertical: "top",
+				horizontal: "right",
+			}}
+			open={isMobileMenuOpen}
+			onClose={handleMobileMenuClose}
+		>
+			<MenuItem onClick={handleProfileMenuOpen}>
+				<IconButton
+					size="large"
+					aria-label="account of current user"
+					aria-controls="primary-search-account-menu"
+					aria-haspopup="true"
+					color="inherit"
+				>
+					<AccountCircle />
+				</IconButton>
+				{/* <p>Profile</p> */}
+			</MenuItem>
+		</Menu>
+	);
+
 	return (
-		<div className="topbarContainer">
-			<div className="topbarLeft">
-				<Link to="/">
-					<div className="logo">
-						<img
-							src="/assets/Groupomania_Logos/icon-left-font-monochrome-white.png"
-							alt="Groupomania logo monocrhome white"
-							className="companyLogo"
-						/>
-					</div>
-				</Link>
-			</div>
-			<div className="topbarCenter">
-				<Autocomplete
-					id="search-user-database"
-					options={users.map((user) => user.username)}
-					renderInput={(params) => (
-						<TextField
-							variant="standard"
-							{...params}
-							placeholder="Search"
+		<Box sx={{ flexGrow: 1 }}>
+			<AppBar
+				position="static"
+				sx={{
+					backgroundColor: "#fb2d01",
+				}}
+			>
+				<Toolbar>
+					<IconButton
+						size="large"
+						edge="start"
+						color="inherit"
+						aria-label="open drawer"
+						sx={{ mr: 2 }}
+					>
+						<Link
+							href={"/"}
 							sx={{
-								m: 1,
-								p: 1,
-								backgroundColor: "white",
-								width: 400,
-								height: 30,
-								borderRadius: 3,
-								border: "none",
+								textDecoration: "none",
+								color: "white",
 							}}
-							InputProps={{
-								disableUnderline: true,
-							}}
-						/>
-					)}
-				/>
+						>
+							<MenuIcon />
+						</Link>
+					</IconButton>
+					<Box
+						sx={{
+							display: { xs: "none", sm: "inline" },
+						}}
+					>
+						<Link to="/">
+							<img
+								src="/assets/Groupomania_Logos/icon-left-font-monochrome-white.png"
+								alt="Groupomania logo monocrhome white"
+								className="companyLogo"
+							/>
+						</Link>
+					</Box>
 
-				{/* <div className="searchbar">
-					<Search className="searchIcon" />
-					<input placeholder="Search Groupomania " className="searchInput" />
-				</div> */}
-			</div>
-			<div className="topbarRight">
-				<div className="topbarLinks">
-					<Link to="/">
-						<span className="topbarLink">Home</span>
-					</Link>
-				</div>
-				<div className="topbarIcons">
-					<div className="topbarIconItem">
-						<Badge className="topbarBadge" badgeContent={6} color="primary">
-							<Notifications />
-						</Badge>
-					</div>
-				</div>
-				<div className="userProfile">
-					<Link to={`/profile/${user.user.username}`}>
-						<Avatar
-							className="profilePic"
-							src={PF + user.user.profilePicture}
+					<Search>
+						<SearchIconWrapper>
+							<SearchIcon />
+						</SearchIconWrapper>
+						<StyledInputBase
+							placeholder="Search…"
+							inputProps={{ "aria-label": "search" }}
 						/>
-					</Link>
-					<div>
-						<ArrowDropDownCircle
-							className="profileDropdownArrow"
-							id="basic-button"
-							aria-controls="basic-menu"
+					</Search>
+					<Box sx={{ flexGrow: 1 }} />
+					<Box sx={{ display: { xs: "none", md: "flex" } }}>
+						<IconButton
+							size="large"
+							edge="end"
+							aria-label="account of current user"
+							aria-controls={menuId}
 							aria-haspopup="true"
-							// aria-expanded={open ? "true" : undefined}
-							onClick={handleClick}
+							onClick={handleProfileMenuOpen}
+							color="inherit"
 						>
-							Dashboard
-						</ArrowDropDownCircle>
-						<Menu
-							id="basic-menu"
-							anchorEl={anchorEl}
-							open={open}
-							onClose={handleClose}
-							MenuListProps={{
-								"aria-labelledby": "basic-button",
-							}}
+							<AccountCircle />
+						</IconButton>
+					</Box>
+					<Box sx={{ display: { xs: "flex", md: "none" } }}>
+						<IconButton
+							size="large"
+							aria-label="show more"
+							aria-controls={mobileMenuId}
+							aria-haspopup="true"
+							onClick={handleMobileMenuOpen}
+							color="inherit"
 						>
-							<Link to={`/profile/${user.user.username}`}>
-								<MenuItem onClick={handleClose}>Profile</MenuItem>
-							</Link>
-							<Link to={`/account/${user.user.username}`}>
-								<MenuItem onClick={handleClose}>My account</MenuItem>
-							</Link>
-							{/* <Link to={`/login`}> */}
-							<MenuItem onClick={(handleClose, logout)}>Logout</MenuItem>
-							{/* </Link> */}
-						</Menu>
-					</div>
-				</div>
-			</div>
-		</div>
+							<MoreIcon />
+						</IconButton>
+					</Box>
+				</Toolbar>
+			</AppBar>
+			{renderMobileMenu}
+			{renderMenu}
+		</Box>
 	);
 }

@@ -6,11 +6,11 @@
 	align-items: center;
 	justify-content: center;
 }
-/* .loginWrapper { */
-/* width: 70%;
-	height: 70%;
-	display: flex; */
-/* } */
+/* .loginWrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+} */
 /* .loginLeft {
 	align-items: center;
 	margin-right: 20px;

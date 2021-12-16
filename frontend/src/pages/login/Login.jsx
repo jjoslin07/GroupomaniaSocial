@@ -26,15 +26,15 @@ const Login = () => {
 				sx={{
 					display: "flex",
 					flexDirection: { xs: "column", sm: "column", md: "row" },
-					alignItems: { xs: "center" },
+					alignItems: "center",
 					justifyContent: "center",
 				}}
 			>
 				<Box
 					className="loginLeft"
 					sx={{
-						width: { xs: 320, s: 500, md: 600 },
-						textAlign: { xs: "justify", s: "initial", md: "initial" },
+						width: { xs: 375, md: 500 },
+						textAlign: "justify",
 					}}
 				>
 					<h3 className="loginLogo">Groupomania Social</h3>
@@ -48,7 +48,7 @@ const Login = () => {
 						onSubmit={handleClick}
 						component="form"
 						sx={{
-							width: { xs: 320, md: 400 },
+							width: 375,
 							boxShadow: 1,
 							marginTop: { xs: 5 },
 							marginLeft: { xs: 0, md: 5 },
