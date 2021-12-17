@@ -80,7 +80,8 @@ const Post = ({ post }) => {
 
 			setComments(
 				res.data.Comments.sort((c1, c2) => {
-					return new Date(c2.createdAt) - new Date(c1.createdAt);
+					console.log(res);
+					return new Date(c1.createdAt) - new Date(c2.createdAt);
 				})
 			);
 		};
@@ -255,7 +256,7 @@ const Post = ({ post }) => {
 					}}
 				></Box>
 				{comments.map((c) => (
-					<Comments key={c.id} user={c} />
+					<Comments key={c.id} comment={c} />
 				))}
 				<Box
 					component="form"
