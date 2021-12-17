@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import "./post.css";
-import { CatchingPokemonSharp, MoreVert, Send } from "@mui/icons-material";
+import { MoreVert, Send } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import Comments from "../comments/Comments";
 
 import {
 	Avatar,
@@ -63,6 +64,7 @@ const Post = ({ post }) => {
 		};
 		try {
 			await axios.post("/posts/" + post.id + "/comment", newComment, config);
+			window.location.reload(false);
 		} catch (error) {
 			console.log(error);
 		}
@@ -251,34 +253,10 @@ const Post = ({ post }) => {
 					sx={{
 						width: "100%",
 					}}
-				>
-					<Box
-						className="postCommentUser"
-						sx={{
-							display: "flex",
-							margin: "10px 20px",
-							alignItems: "center",
-						}}
-					>
-						<Avatar
-							className="postCommentImg"
-							src={PF + "Profile/7.jpg"}
-						></Avatar>
-						<span className="postCommentName"> Bill Thompson</span>
-					</Box>
-
-					<Box
-						className="postCommentDesc"
-						sx={{
-							backgroundColor: "#EEEEEE",
-							p: 2,
-							m: 2,
-							borderRadius: 2,
-						}}
-					>
-						{comments.map((c) => c.content)}
-					</Box>
-				</Box>
+				></Box>
+				{comments.map((c) => (
+					<Comments key={c.id} user={c} />
+				))}
 				<Box
 					component="form"
 					onSubmit={submitHandler}
