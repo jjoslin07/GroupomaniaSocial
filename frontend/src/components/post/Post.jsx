@@ -108,7 +108,6 @@ const Post = ({ post }) => {
 				className="post"
 				sx={{
 					boxShadow: 2,
-					zIndex: 1,
 				}}
 			>
 				<div className="postWrapper">
@@ -174,6 +173,7 @@ const Post = ({ post }) => {
 						<span className="postText">{post?.content}</span>
 						<img className="postImg" src={PF + post?.imageUrl} alt="" />
 					</div>
+
 					<div className="postBottom">
 						<div className="postBottomLeft">
 							<img
@@ -203,6 +203,109 @@ const Post = ({ post }) => {
 						</div>
 					</div>
 				</div>
+
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+					}}
+				>
+					<hr className="postHr" />
+				</Box>
+
+				<Box
+					className="commentSection"
+					sx={{
+						width: "100%",
+					}}
+				>
+					<Box
+						className="postCommentUser"
+						sx={{
+							display: "flex",
+							margin: "10px 20px",
+							alignItems: "center",
+						}}
+					>
+						<Avatar
+							className="postCommentImg"
+							src={PF + "Profile/7.jpg"}
+						></Avatar>
+						<span className="postCommentName"> Bill Thompson</span>
+					</Box>
+
+					<Box
+						className="postCommentDesc"
+						sx={{
+							backgroundColor: "#EEEEEE",
+							p: 2,
+							m: 2,
+							borderRadius: 2,
+						}}
+					>
+						Ex in labore nisi qui in. Dolor in veniam velit eiusmod proident
+						cillum. Lorem cupidatat ullamco nostrud enim non nisi ut pariatur
+						voluptate.
+					</Box>
+
+					<Box
+						className="postCommentUser"
+						sx={{
+							display: "flex",
+							margin: "10px 20px",
+							alignItems: "center",
+						}}
+					>
+						<Avatar
+							className="postCommentImg"
+							src={PF + "Profile/1.jpg"}
+						></Avatar>
+						<span className="postCommentName"> Jane Kraft</span>
+					</Box>
+					<Box
+						className="postCommentDesc"
+						sx={{
+							backgroundColor: "#EEEEEE",
+							p: 2,
+							m: 2,
+							borderRadius: 2,
+						}}
+					>
+						<span>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
+							veniam sunt quas tempora a. Exercitationem magnam, voluptatibus
+							tenetur beatae numquam, cum deserunt qui rerum accusantium
+							quibusdam consequuntur corporis officia! Doloribus?
+						</span>
+					</Box>
+
+					<Box
+						className="postCommentUser"
+						sx={{
+							display: "flex",
+							margin: "10px 20px",
+							alignItems: "center",
+						}}
+					>
+						<Avatar
+							className="postCommentImg"
+							src={PF + "Profile/6.jpg"}
+						></Avatar>
+						<span className="postCommentName"> Tom Ford</span>
+					</Box>
+					<Box
+						className="postCommentDesc"
+						sx={{
+							backgroundColor: "#EEEEEE",
+							p: 2,
+							m: 2,
+							borderRadius: 2,
+						}}
+					>
+						<span>Lorem</span>
+					</Box>
+				</Box>
 				<Box
 					component="form"
 					onSubmit={null}
@@ -229,48 +332,6 @@ const Post = ({ post }) => {
 					>
 						<Send />
 					</IconButton>
-				</Box>
-			</Box>
-			<Box
-				className="commentSection"
-				sx={{
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "center",
-					backgroundColor: "#EEEEEE",
-					position: "relative",
-					marginBottom: "25px",
-					top: -30,
-					right: -30,
-					zIndex: -1,
-					width: "90%",
-					borderRadius: "0 0 10px 10px",
-					padding: "10px",
-				}}
-			>
-				<Box
-					sx={{
-						display: "flex",
-						flexDirection: "column",
-						margin: "10px 20px",
-						alignItems: "space-between",
-					}}
-				>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
-					<span className="postCommentText">This is a comment</span>
 				</Box>
 			</Box>
 		</>

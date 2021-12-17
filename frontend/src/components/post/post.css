@@ -74,6 +74,10 @@ img[src=""] {
 	border-bottom: 1px dashed gray;
 	font-size: 15px;
 }
+.postHr {
+	margin: 18px;
+	width: 100%;
+}
 .commentInput {
 	border: none;
 	width: 100%;
@@ -84,7 +88,11 @@ img[src=""] {
 .commentInput:focus {
 	outline: none;
 }
-.postCommentText {
-	font-size: 16px;
-	margin-bottom: 20px;
+
+.postCommentImg {
+	position: relative;
+	left: -10px;
+}
+.postCommentName {
+	font-weight: 600;
 }
