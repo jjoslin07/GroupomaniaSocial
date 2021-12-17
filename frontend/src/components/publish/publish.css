@@ -16,6 +16,7 @@
 	border: none;
 	width: 80%;
 	resize: none;
+	font-size: 16px;
 }
 
 .publishInput:focus {

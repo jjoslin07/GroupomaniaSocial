@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./post.css";
-import { Label, MoreVert } from "@mui/icons-material";
+import { MoreVert, Send } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -12,12 +12,14 @@ import {
 	DialogActions,
 	DialogContent,
 	DialogContentText,
-	DialogTitle,
+	IconButton,
+	TextareaAutosize,
 } from "@mui/material";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { useRef } from "react";
 const Post = ({ post }) => {
 	const { user: currentUser } = useContext(AuthContext);
 	const config = {
@@ -28,7 +30,7 @@ const Post = ({ post }) => {
 	const handleClickOpen = () => {
 		setOpen2(true);
 	};
-
+	const content = useRef();
 	const handleClose2 = () => {
 		setOpen2(false);
 	};
@@ -106,6 +108,7 @@ const Post = ({ post }) => {
 				className="post"
 				sx={{
 					boxShadow: 2,
+					zIndex: 1,
 				}}
 			>
 				<div className="postWrapper">
@@ -200,6 +203,75 @@ const Post = ({ post }) => {
 						</div>
 					</div>
 				</div>
+				<Box
+					component="form"
+					onSubmit={null}
+					className="commentInput"
+					sx={{
+						display: "flex",
+						position: "relative",
+					}}
+				>
+					<TextareaAutosize
+						maxRows={4}
+						placeholder="Leave a comment ... "
+						className="commentInput"
+						ref={content}
+					/>
+					<IconButton
+						className="commentSend"
+						type="submit"
+						sx={{
+							position: "relative",
+							left: "-20px",
+							color: "#3690FF",
+						}}
+					>
+						<Send />
+					</IconButton>
+				</Box>
+			</Box>
+			<Box
+				className="commentSection"
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					backgroundColor: "#EEEEEE",
+					position: "relative",
+					marginBottom: "25px",
+					top: -30,
+					right: -30,
+					zIndex: -1,
+					width: "90%",
+					borderRadius: "0 0 10px 10px",
+					padding: "10px",
+				}}
+			>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						margin: "10px 20px",
+						alignItems: "space-between",
+					}}
+				>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+					<span className="postCommentText">This is a comment</span>
+				</Box>
 			</Box>
 		</>
 	);

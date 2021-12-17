@@ -74,3 +74,17 @@ img[src=""] {
 	border-bottom: 1px dashed gray;
 	font-size: 15px;
 }
+.commentInput {
+	border: none;
+	width: 100%;
+	resize: none;
+	padding: 10px;
+	font-size: 16px;
+}
+.commentInput:focus {
+	outline: none;
+}
+.postCommentText {
+	font-size: 16px;
+	margin-bottom: 20px;
+}
