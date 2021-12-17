@@ -56,6 +56,18 @@ const Post = ({ post }) => {
 		}
 	};
 
+	const submitHandler = async (e) => {
+		e.preventDefault();
+		const newComment = {
+			content: content.current.value,
+		};
+		try {
+			await axios.post("/posts/" + post.id + "/comment", newComment, config);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 	const [likes, setLike] = useState(post.likes);
@@ -259,37 +271,6 @@ const Post = ({ post }) => {
 					>
 						<Avatar
 							className="postCommentImg"
-							src={PF + "Profile/1.jpg"}
-						></Avatar>
-						<span className="postCommentName"> Jane Kraft</span>
-					</Box>
-					<Box
-						className="postCommentDesc"
-						sx={{
-							backgroundColor: "#EEEEEE",
-							p: 2,
-							m: 2,
-							borderRadius: 2,
-						}}
-					>
-						<span>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-							veniam sunt quas tempora a. Exercitationem magnam, voluptatibus
-							tenetur beatae numquam, cum deserunt qui rerum accusantium
-							quibusdam consequuntur corporis officia! Doloribus?
-						</span>
-					</Box>
-
-					<Box
-						className="postCommentUser"
-						sx={{
-							display: "flex",
-							margin: "10px 20px",
-							alignItems: "center",
-						}}
-					>
-						<Avatar
-							className="postCommentImg"
 							src={PF + "Profile/6.jpg"}
 						></Avatar>
 						<span className="postCommentName"> Tom Ford</span>
@@ -308,7 +289,7 @@ const Post = ({ post }) => {
 				</Box>
 				<Box
 					component="form"
-					onSubmit={null}
+					onSubmit={submitHandler}
 					className="commentInput"
 					sx={{
 						display: "flex",

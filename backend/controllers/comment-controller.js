@@ -15,8 +15,6 @@ function save(req, res) {
 
 	const schema = {
 		content: { type: "string", optional: false, max: "500" },
-		postId: { type: "string", optional: false },
-		userId: { type: "number", optional: false },
 	};
 
 	const v = new Validator();
