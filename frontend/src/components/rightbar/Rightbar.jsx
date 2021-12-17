@@ -1,4 +1,4 @@
-import { ImageList, ImageListItem } from "@mui/material";
+import { Box, ImageList, ImageListItem } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./rightbar.css";
@@ -36,36 +36,41 @@ export default function Rightbar({ user, username }) {
 
 		return (
 			<>
-				<div className="birthdayContainer">
-					<img className="birthdayImg" src="/assets/gift2.png" alt="" />
-					<span className="birthdayText">
-						<b>Vicki Smith</b> and <b>2 other people</b> have birthdays today.
-					</span>
-				</div>
-				<div className="rightbarImgContainer">
-					<span className="rightbarImgTitle">Latest Photos</span>
-
-					<ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-						{posts.map((item) => (
-							<ImageListItem key={item.id}>
-								<img
-									src={
-										PF + `${item.imageUrl}`
-											? PF + `${item.imageUrl}`
-											: PF + "Groupomania_Logos/icon-left-font.svg"
-									}
-									srcSet={
-										PF + `${item.imageUrl}`
-											? PF + `${item.imageUrl}`
-											: PF + "Groupomania_Logos/icon-left-font.svg"
-									}
-									alt=""
-									loading="lazy"
-								/>
-							</ImageListItem>
-						))}
-					</ImageList>
-				</div>
+				<Box>
+					<div className="birthdayContainer">
+						<img className="birthdayImg" src="/assets/gift2.png" alt="" />
+						<span className="birthdayText">
+							<b>Vicki Smith</b> and <b>2 other people</b> have birthdays today.
+						</span>
+					</div>
+					<div className="rightbarImgContainer">
+						<span className="rightbarImgTitle">Latest Photos</span>
+						<ImageList
+							sx={{ width: 500, height: 450 }}
+							cols={3}
+							rowHeight={164}
+						>
+							{posts.map((item) => (
+								<ImageListItem key={item.id}>
+									<img
+										src={
+											PF + `${item.imageUrl}`
+												? PF + `${item.imageUrl}`
+												: PF + "Groupomania_Logos/icon-left-font.svg"
+										}
+										srcSet={
+											PF + `${item.imageUrl}`
+												? PF + `${item.imageUrl}`
+												: PF + "Groupomania_Logos/icon-left-font.svg"
+										}
+										alt=""
+										loading="lazy"
+									/>
+								</ImageListItem>
+							))}
+						</ImageList>
+					</div>
+				</Box>
 			</>
 		);
 	};
@@ -98,10 +103,15 @@ export default function Rightbar({ user, username }) {
 		);
 	};
 	return (
-		<div className="rightbar">
+		<Box
+			className="rightbar"
+			sx={{
+				display: { xs: "none", md: "inherit" },
+			}}
+		>
 			<div className="rightbarWrapper">
 				{user ? <ProfileRightbar /> : <HomeRightbar />}
 			</div>
-		</div>
+		</Box>
 	);
 }

@@ -16,6 +16,7 @@ import Profiles from "../profiles/Profiles";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import { Box } from "@mui/material";
 
 export default function Leftbar() {
 	const [users, setUsers] = useState([]);
@@ -32,7 +33,12 @@ export default function Leftbar() {
 		fetchUsers();
 	}, []);
 	return (
-		<div className="leftbarContainer">
+		<Box
+			className="leftbarContainer"
+			sx={{
+				display: { xs: "none", md: "inherit" },
+			}}
+		>
 			<div className="leftbarWrapper">
 				<ul className="leftbarList">
 					<h4 className="leftbarTitle">Categories</h4>
@@ -89,6 +95,6 @@ export default function Leftbar() {
 					))}
 				</ul>
 			</div>
-		</div>
+		</Box>
 	);
 }

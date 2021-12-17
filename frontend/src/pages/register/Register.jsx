@@ -45,7 +45,7 @@ const Register = () => {
 					<Box
 						className="registerLeft"
 						sx={{
-							width: 375,
+							width: { xs: 375, md: 600 },
 							textAlign: { xs: "justify", s: "initial", md: "initial" },
 						}}
 					>
@@ -60,7 +60,7 @@ const Register = () => {
 							className="registerBox"
 							onSubmit={handleClick}
 							sx={{
-								width: 375,
+								width: { xs: 375, md: 425 },
 								height: 400,
 								boxShadow: 1,
 								marginTop: { xs: 5 },

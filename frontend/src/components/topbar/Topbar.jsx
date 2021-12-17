@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./topbar.css";
+// import "./topbar.css";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -155,13 +155,21 @@ export default function Topbar() {
 				>
 					<AccountCircle />
 				</IconButton>
-				{/* <p>Profile</p> */}
+				<p>Menu</p>
 			</MenuItem>
 		</Menu>
 	);
 
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<Box
+			sx={{
+				flexGrow: 1,
+				position: "sticky",
+				top: 0,
+				zIndex: 999,
+				width: "100%",
+			}}
+		>
 			<AppBar
 				position="static"
 				sx={{
@@ -183,19 +191,28 @@ export default function Topbar() {
 								color: "white",
 							}}
 						>
-							<MenuIcon />
+							<MenuIcon
+								sx={{
+									display: { sm: "none" },
+								}}
+							/>
 						</Link>
 					</IconButton>
 					<Box
 						sx={{
 							display: { xs: "none", sm: "inline" },
+							marginLeft: -5,
+							marginRight: 10,
+							cursor: "pointer",
 						}}
 					>
-						<Link to="/">
+						<Link href={"/"}>
 							<img
-								src="/assets/Groupomania_Logos/icon-left-font-monochrome-white.png"
+								src="/assets/Groupomania_Logos/icon-left-font-monochrome-white.svg"
 								alt="Groupomania logo monocrhome white"
 								className="companyLogo"
+								width="175"
+								height="50"
 							/>
 						</Link>
 					</Box>
@@ -209,6 +226,7 @@ export default function Topbar() {
 							inputProps={{ "aria-label": "search" }}
 						/>
 					</Search>
+
 					<Box sx={{ flexGrow: 1 }} />
 					<Box sx={{ display: { xs: "none", md: "flex" } }}>
 						<IconButton

@@ -33,7 +33,7 @@ const Login = () => {
 				<Box
 					className="loginLeft"
 					sx={{
-						width: { xs: 375, md: 500 },
+						width: { xs: 375, md: 600 },
 						textAlign: "justify",
 					}}
 				>
@@ -48,7 +48,7 @@ const Login = () => {
 						onSubmit={handleClick}
 						component="form"
 						sx={{
-							width: 375,
+							width: { xs: 375, md: 425 },
 							boxShadow: 1,
 							marginTop: { xs: 5 },
 							marginLeft: { xs: 0, md: 5 },

@@ -1,20 +1,63 @@
 import { useContext, useEffect, useState } from "react";
 import "./post.css";
-import { MoreVert } from "@mui/icons-material";
+import { Label, MoreVert } from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
-import { Avatar, Box } from "@mui/material";
+import {
+	Avatar,
+	Box,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogContentText,
+	DialogTitle,
+} from "@mui/material";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 const Post = ({ post }) => {
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const [likes, setLike] = useState(post.likes);
-	const [isLiked, setIsLiked] = useState(false);
 	const { user: currentUser } = useContext(AuthContext);
 	const config = {
 		headers: { Authorization: `Bearer ${currentUser.token}` },
 	};
+	const [open2, setOpen2] = useState(false);
+
+	const handleClickOpen = () => {
+		setOpen2(true);
+	};
+
+	const handleClose2 = () => {
+		setOpen2(false);
+	};
+	const [anchorEl, setAnchorEl] = useState(null);
+	const open = Boolean(anchorEl);
+
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	const deleteHandler = async (e) => {
+		e.preventDefault();
+		if (currentUser.user.id === post.userId) {
+			try {
+				await axios.delete("/posts/" + post.id, config);
+				window.location.reload(false);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	};
+
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+	const [likes, setLike] = useState(post.likes);
+	const [isLiked, setIsLiked] = useState(false);
 	// const getReaction = async () => {
 	// 	await axios.get("/posts/" + post.id + "/reactions");
 	// };
@@ -79,9 +122,50 @@ const Post = ({ post }) => {
 							<span className="postDate">{format(post.createdAt)}</span>
 							<span className="postCategory">in {post.categoryId}</span>
 						</div>
-						<div className="postTopRight">
-							<MoreVert className="postMore" />
-						</div>
+						{post.userId === currentUser.user.id && (
+							<div className="postTopRight">
+								<div className="postMenuWrapper">
+									<MoreVert
+										id="basic-button"
+										aria-controls="basic-menu"
+										aria-haspopup="true"
+										aria-expanded={open ? "true" : undefined}
+										onClick={handleClick}
+									></MoreVert>
+									<Menu
+										id="basic-menu"
+										anchorEl={anchorEl}
+										open={open}
+										onClose={handleClose}
+										MenuListProps={{
+											"aria-labelledby": "basic-button",
+										}}
+									>
+										<MenuItem onClick={handleClickOpen}>Delete</MenuItem>
+										<Dialog
+											open={open2}
+											onClose={handleClose2}
+											aria-labelledby="alert-dialog-title"
+											aria-describedby="alert-dialog-description"
+										>
+											<DialogContent>
+												<DialogContentText id="alert-dialog-description">
+													Delete this post?
+												</DialogContentText>
+											</DialogContent>
+											<DialogActions>
+												<Button onClick={handleClose2}>No</Button>
+												<Button onClick={deleteHandler} autoFocus>
+													Yes
+												</Button>
+											</DialogActions>
+										</Dialog>
+
+										<MenuItem>Modify</MenuItem>
+									</Menu>
+								</div>
+							</div>
+						)}
 					</div>
 					<div className="postCenter">
 						<span className="postText">{post?.content}</span>

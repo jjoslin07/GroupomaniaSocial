@@ -1,8 +1,6 @@
 import "./publish.css";
 import {
 	PermMedia,
-	Room,
-	EmojiEmotions,
 	Label,
 	CancelPresentationOutlined,
 } from "@mui/icons-material";
@@ -94,7 +92,7 @@ export default function Publish() {
 						maxRows={4}
 						placeholder="Share something with us ... "
 						className="publishInput"
-						style={{ width: "100%" }}
+						// style={{ width: "100%" }}
 						ref={content}
 					/>
 				</div>
@@ -116,6 +114,12 @@ export default function Publish() {
 					component="form"
 					className="publishBottom"
 					onSubmit={submitHandler}
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						padding: 1,
+						justifyContent: { xs: "center", md: "space-between" },
+					}}
 				>
 					<div className="publishOptions">
 						<label htmlFor="file" className="publishOption">
@@ -135,7 +139,7 @@ export default function Publish() {
 								<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
 									<InputLabel id="category">Category</InputLabel>
 									<Select
-										// style={{ margin: 15, color: "primary" }}
+										sx={{ margin: 1.5 }}
 										labelId="category"
 										className="dropDownMenu"
 										IconComponent={Label}
@@ -152,17 +156,17 @@ export default function Publish() {
 								</FormControl>
 							</div>
 						</label>
-						<div className="publishOption">
+						{/* <div className="publishOption">
 							<Room className="publishIcon" style={{ color: "red" }} />
 							<span className="publishOptionText">Location</span>
-						</div>
-						<div className="publishOption">
+						</div> */}
+						{/* <div className="publishOption">
 							<EmojiEmotions
 								className="publishIcon"
 								style={{ color: "orange" }}
 							/>
 							<span className="publishOptionText">Mood</span>
-						</div>
+						</div> */}
 					</div>
 					<button className="publishButton" type="submit">
 						{" "}
