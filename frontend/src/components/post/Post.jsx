@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./post.css";
-import { MoreVert, Send } from "@mui/icons-material";
+import { CatchingPokemonSharp, MoreVert, Send } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -68,6 +68,25 @@ const Post = ({ post }) => {
 		}
 	};
 
+	const [comments, setComments] = useState([]);
+
+	useEffect(() => {
+		const fetchComments = async () => {
+			const res = post.id
+				? await axios.get("/posts/" + post.id + "/comment")
+				: await axios.get("posts/" + post.id);
+
+			setComments(
+				res.data.Comments.sort((c1, c2) => {
+					return new Date(c2.createdAt) - new Date(c1.createdAt);
+				})
+			);
+		};
+		fetchComments();
+	}, [post]);
+
+	// console.log(comments.map((comment) => comment.content));
+
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 	const [likes, setLike] = useState(post.likes);
@@ -116,6 +135,7 @@ const Post = ({ post }) => {
 	}, [post.userId]);
 	return (
 		<>
+			{/* {comments.map((c) => c)}; */}
 			<Box
 				className="post"
 				sx={{
@@ -256,35 +276,7 @@ const Post = ({ post }) => {
 							borderRadius: 2,
 						}}
 					>
-						Ex in labore nisi qui in. Dolor in veniam velit eiusmod proident
-						cillum. Lorem cupidatat ullamco nostrud enim non nisi ut pariatur
-						voluptate.
-					</Box>
-
-					<Box
-						className="postCommentUser"
-						sx={{
-							display: "flex",
-							margin: "10px 20px",
-							alignItems: "center",
-						}}
-					>
-						<Avatar
-							className="postCommentImg"
-							src={PF + "Profile/6.jpg"}
-						></Avatar>
-						<span className="postCommentName"> Tom Ford</span>
-					</Box>
-					<Box
-						className="postCommentDesc"
-						sx={{
-							backgroundColor: "#EEEEEE",
-							p: 2,
-							m: 2,
-							borderRadius: 2,
-						}}
-					>
-						<span>Lorem</span>
+						{comments.map((c) => c.content)}
 					</Box>
 				</Box>
 				<Box
