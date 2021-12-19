@@ -26,7 +26,6 @@ export default function Publish() {
 	useEffect(() => {
 		fetchData();
 	}, []);
-
 	async function fetchData() {
 		try {
 			const data = await axios.get(`/posts/category/all`);

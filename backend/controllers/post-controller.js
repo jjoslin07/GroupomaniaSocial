@@ -130,6 +130,8 @@ function update(req, res) {
 		content: req.body.content,
 		imageUrl: req.body.imageUrl,
 		categoryId: req.body.categoryId,
+		moodId: req.body.moodId,
+		userId: req.userData.userId,
 	};
 
 	const userId = req.userData.userId;
@@ -151,7 +153,7 @@ function update(req, res) {
 	}
 	models.Category.findByPk(req.body.categoryId)
 		.then((result) => {
-			if (result !== null && userId === req.userData.userId) {
+			if (result || (!result && userId === req.userData.userId)) {
 				// Update the Post
 				models.Post.update(updatedPost, { where: { id: id, userId: userId } })
 					.then((result) => {

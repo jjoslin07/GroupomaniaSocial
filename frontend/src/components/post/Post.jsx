@@ -104,9 +104,6 @@ const Post = ({ post }) => {
 	const editContent = useRef();
 	const [category, setCategory] = useState("");
 	const [categories, setCategories] = useState([]);
-	useEffect(() => {
-		fetchData();
-	}, []);
 
 	async function fetchData() {
 		try {
@@ -117,6 +114,9 @@ const Post = ({ post }) => {
 		}
 	}
 
+	useEffect(() => {
+		fetchData();
+	}, []);
 	const updateSelectCategory = (e) => {
 		setCategory(e.target.value);
 	};
@@ -124,6 +124,7 @@ const Post = ({ post }) => {
 	const editHandler = async (e) => {
 		e.preventDefault();
 		const updatePost = {
+			userId: currentUser.user.id,
 			content: editContent.current.value,
 			categoryId: category ? category : "General",
 		};
