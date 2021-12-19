@@ -15,7 +15,6 @@ export default function Rightbar({ user, username }) {
 					params: { userId: user.userId },
 				});
 				setUser(res.data);
-				console.log(res.data);
 			};
 			fetchUser();
 		}, [user.userId]);

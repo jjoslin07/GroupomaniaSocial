@@ -8,8 +8,6 @@ import "./comments.css";
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 const Comments = ({ comment }) => {
-	console.log(comment.userId);
-
 	const [user, setUser] = useState({});
 
 	useEffect(() => {

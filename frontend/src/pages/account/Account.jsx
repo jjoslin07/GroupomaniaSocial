@@ -1,5 +1,5 @@
 // import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Button, TextField } from "@mui/material";
+import { Button, Link, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import React, { useContext, useState } from "react";
@@ -213,6 +213,18 @@ const Account = () => {
 								</div>
 							)}
 						</Box>
+						<span className="accountDeleteLink">
+							Want to delete your account? Click{" "}
+							<Link
+								sx={{
+									cursor: "pointer",
+									color: "#fb2f01",
+									textDecoration: "none",
+								}}
+							>
+								<b>Here</b>
+							</Link>
+						</span>
 					</div>
 					<div className="accountRight">
 						<Box

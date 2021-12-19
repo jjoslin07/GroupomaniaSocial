@@ -13,7 +13,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { AuthContext } from "../../context/AuthContext";
-import { Link } from "@mui/material";
+import { Chip, Link } from "@mui/material";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -228,6 +228,24 @@ export default function Topbar() {
 					</Search>
 
 					<Box sx={{ flexGrow: 1 }} />
+					<Link
+						href={`/profile/${user.user.username}`}
+						sx={{
+							textDecoration: "none",
+						}}
+					>
+						<Chip
+							label={user.user.username}
+							variant="outlined"
+							sx={{
+								color: "white",
+								fontSize: "14px",
+								fontWeight: "500",
+								cursor: "pointer",
+							}}
+						/>
+					</Link>
+
 					<Box sx={{ display: { xs: "none", md: "flex" } }}>
 						<IconButton
 							size="large"

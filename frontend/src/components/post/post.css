@@ -34,6 +34,29 @@
 .postMore {
 	cursor: pointer;
 }
+.postInput {
+	/* border: none; */
+	width: 80%;
+	resize: none;
+	font-size: 16px;
+}
+
+.postInput:focus {
+	outline: none;
+}
+.postImg {
+	width: 100%;
+	max-height: 500px;
+	object-fit: cover;
+}
+.postCancelImg {
+	position: absolute;
+	top: 275px;
+	right: 45px;
+	cursor: pointer;
+	opacity: 0.7;
+}
+
 .postCenter {
 	margin: 20px 0;
 }

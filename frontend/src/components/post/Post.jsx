@@ -1,6 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import "./post.css";
-import { MoreVert, Send } from "@mui/icons-material";
+import {
+	AddAPhoto,
+	CancelPresentationOutlined,
+	Delete,
+	DeleteForever,
+	Label,
+	MoreVert,
+	Send,
+} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,12 +17,18 @@ import Comments from "../comments/Comments";
 import {
 	Avatar,
 	Box,
+	Container,
 	Dialog,
 	DialogActions,
 	DialogContent,
 	DialogContentText,
+	DialogTitle,
+	FormControl,
 	IconButton,
+	InputLabel,
+	Select,
 	TextareaAutosize,
+	TextField,
 } from "@mui/material";
 import axios from "axios";
 import { format } from "timeago.js";
@@ -22,20 +36,35 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useRef } from "react";
 const Post = ({ post }) => {
+	// Get current user under the Alias currentUser
 	const { user: currentUser } = useContext(AuthContext);
+	// Const to get JWT and put in Header
 	const config = {
 		headers: { Authorization: `Bearer ${currentUser.token}` },
 	};
-	const [open2, setOpen2] = useState(false);
+	// Delete
+	const [del, setDel] = useState(false);
 
-	const handleClickOpen = () => {
-		setOpen2(true);
+	const handleDelOpen = () => {
+		setDel(true);
 	};
-	const content = useRef();
-	const handleClose2 = () => {
-		setOpen2(false);
+	const handleDelClose = () => {
+		setDel(false);
 	};
+
+	// Modify
+	const [mod, setMod] = useState(false);
+	const handleModOpen = () => {
+		setMod(true);
+	};
+	const handleModClose = () => {
+		setMod(false);
+	};
+
+	const commentText = useRef();
+
 	const [anchorEl, setAnchorEl] = useState(null);
+
 	const open = Boolean(anchorEl);
 
 	const handleClick = (event) => {
@@ -60,10 +89,58 @@ const Post = ({ post }) => {
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		const newComment = {
-			content: content.current.value,
+			content: commentText.current.value,
 		};
 		try {
 			await axios.post("/posts/" + post.id + "/comment", newComment, config);
+			window.location.reload(false);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const [file, setFile] = useState(null);
+
+	const editContent = useRef();
+	const [category, setCategory] = useState("");
+	const [categories, setCategories] = useState([]);
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	async function fetchData() {
+		try {
+			const data = await axios.get(`/posts/category/all`);
+			setCategories(data.data.map((cat) => cat.name));
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	const updateSelectCategory = (e) => {
+		setCategory(e.target.value);
+	};
+
+	const editHandler = async (e) => {
+		e.preventDefault();
+		const updatePost = {
+			content: editContent.current.value,
+			categoryId: category ? category : "General",
+		};
+		if (file) {
+			const data = new FormData();
+			const fileName = Date.now() + File.name;
+			data.append("name", fileName);
+			data.append("file", file);
+			updatePost.imageUrl = fileName;
+			try {
+				await axios.post("/upload", data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		try {
+			await axios.patch("/posts/" + post.id, updatePost, config);
 			window.location.reload(false);
 		} catch (error) {
 			console.log(error);
@@ -80,7 +157,6 @@ const Post = ({ post }) => {
 
 			setComments(
 				res.data.Comments.sort((c1, c2) => {
-					console.log(res);
 					return new Date(c1.createdAt) - new Date(c2.createdAt);
 				})
 			);
@@ -88,15 +164,15 @@ const Post = ({ post }) => {
 		fetchComments();
 	}, [post]);
 
-	// console.log(comments.map((comment) => comment.content));
-
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 	const [likes, setLike] = useState(post.likes);
 	const [isLiked, setIsLiked] = useState(false);
+
 	// const getReaction = async () => {
 	// 	await axios.get("/posts/" + post.id + "/reactions");
 	// };
+
 	const likeHandler = () => {
 		try {
 			axios.post(
@@ -178,10 +254,10 @@ const Post = ({ post }) => {
 											"aria-labelledby": "basic-button",
 										}}
 									>
-										<MenuItem onClick={handleClickOpen}>Delete</MenuItem>
+										<MenuItem onClick={handleDelOpen}>Delete</MenuItem>
 										<Dialog
-											open={open2}
-											onClose={handleClose2}
+											open={del}
+											onClose={handleDelClose}
 											aria-labelledby="alert-dialog-title"
 											aria-describedby="alert-dialog-description"
 										>
@@ -191,21 +267,128 @@ const Post = ({ post }) => {
 												</DialogContentText>
 											</DialogContent>
 											<DialogActions>
-												<Button onClick={handleClose2}>No</Button>
+												<Button onClick={handleDelClose}>No</Button>
 												<Button onClick={deleteHandler} autoFocus>
 													Yes
 												</Button>
 											</DialogActions>
 										</Dialog>
 
-										<MenuItem>Modify</MenuItem>
+										<MenuItem onClick={handleModOpen}>Edit</MenuItem>
+
+										<Dialog
+											open={mod}
+											onClose={handleModClose}
+											aria-labelledby="alert-dialog-title"
+											aria-describedby="alert-dialog-description"
+										>
+											<Box
+												component="form"
+												onSubmit={editHandler}
+												sx={{
+													display: "flex",
+													flexDirection: "column",
+													alignItems: "center",
+													justifyContent: "center",
+													textAlign: "center",
+												}}
+											>
+												<DialogTitle>Edit your post</DialogTitle>
+												<DialogContent>
+													<TextareaAutosize
+														maxRows={10}
+														placeholder="Share something with us ..."
+														className="postInput"
+														ref={editContent}
+														defaultValue={post.content}
+														style={{
+															width: "400px",
+														}}
+													/>
+													<div
+														className="postImgContainer"
+														sx={{
+															marginTop: 5,
+														}}
+													>
+														<img
+															src={PF + post.imageUrl}
+															alt=""
+															className="postImg"
+														/>
+														{post.imageUrl && (
+															<DeleteForever
+																className="postCancelImg"
+																onclick={() => post.imageUrl(null)}
+																sx={{
+																	color: "red",
+																}}
+															/>
+														)}
+														{!post.imageUrl && (
+															<label htmlFor="file" className="postOption">
+																<span className="postOptionText">Photo</span>
+																<AddAPhoto
+																	className="postAddImg"
+																	onClick={null}
+																	sx={{
+																		marginTop: 2,
+																		color: "green",
+																	}}
+																/>
+																<input
+																	style={{ display: "none" }}
+																	type="file"
+																	id="file"
+																	accept=".png, .jpeg, .jpg"
+																	onChange={(e) => setFile(e.target.files[0])}
+																/>
+															</label>
+														)}
+														<label htmlFor="category" className="publishOption">
+															<div>
+																<FormControl
+																	variant="standard"
+																	sx={{ m: 1, minWidth: 120 }}
+																>
+																	<InputLabel id="category">
+																		Category
+																	</InputLabel>
+																	<Select
+																		sx={{ margin: 1.5 }}
+																		labelId="category"
+																		className="dropDownMenu"
+																		IconComponent={Label}
+																		onChange={updateSelectCategory}
+																		value={category}
+																		label="Category"
+																	>
+																		{categories.map((item) => (
+																			<MenuItem key={item} value={item}>
+																				{item}
+																			</MenuItem>
+																		))}
+																	</Select>
+																</FormControl>
+															</div>
+														</label>
+													</div>
+												</DialogContent>
+												<DialogActions>
+													<Button onClick={handleModClose}>Cancel</Button>
+													<Button type="submit">Save</Button>
+												</DialogActions>
+											</Box>
+										</Dialog>
 									</Menu>
 								</div>
 							</div>
 						)}
 					</div>
-					<div className="postCenter">
-						<span className="postText">{post?.content}</span>
+					<div id="content" className="postCenter">
+						<span id="edit" className="postText">
+							{post?.content}
+						</span>
 						<img className="postImg" src={PF + post?.imageUrl} alt="" />
 					</div>
 
@@ -271,7 +454,7 @@ const Post = ({ post }) => {
 						maxRows={4}
 						placeholder="Leave a comment ... "
 						className="commentInput"
-						ref={content}
+						ref={commentText}
 					/>
 					<IconButton
 						className="commentSend"

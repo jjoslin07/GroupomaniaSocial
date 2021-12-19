@@ -127,7 +127,6 @@ function indexUser(req, res) {
 function update(req, res) {
 	const id = req.params.id;
 	const updatedPost = {
-		title: req.body.title,
 		content: req.body.content,
 		imageUrl: req.body.imageUrl,
 		categoryId: req.body.categoryId,
@@ -136,7 +135,6 @@ function update(req, res) {
 	const userId = req.userData.userId;
 	// Define validation Schema
 	const schema = {
-		title: { type: "string", optional: false, max: "100" },
 		content: { type: "string", optional: false, max: "500" },
 		categoryId: { type: "string", optional: false, default: "General" },
 	};

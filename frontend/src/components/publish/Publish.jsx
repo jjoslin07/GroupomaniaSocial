@@ -3,11 +3,13 @@ import {
 	PermMedia,
 	Label,
 	CancelPresentationOutlined,
+	AddAPhoto,
 } from "@mui/icons-material";
 import { TextareaAutosize } from "@mui/core";
 import {
 	Avatar,
 	Box,
+	Container,
 	FormControl,
 	InputLabel,
 	MenuItem,
@@ -17,7 +19,6 @@ import { useContext, useRef, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 import axios from "axios";
-
 export default function Publish() {
 	const [category, setCategory] = useState("");
 	const [categories, setCategories] = useState([]);
@@ -89,7 +90,7 @@ export default function Publish() {
 						alt=""
 					/>
 					<TextareaAutosize
-						maxRows={4}
+						maxRows={10}
 						placeholder="Share something with us ... "
 						className="publishInput"
 						// style={{ width: "100%" }}
@@ -123,7 +124,7 @@ export default function Publish() {
 				>
 					<div className="publishOptions">
 						<label htmlFor="file" className="publishOption">
-							<PermMedia className="publishIcon" style={{ color: "green" }} />
+							<AddAPhoto className="publishIcon" style={{ color: "green" }} />
 							<span className="publishOptionText">Photo</span>
 							<input
 								style={{ display: "none" }}

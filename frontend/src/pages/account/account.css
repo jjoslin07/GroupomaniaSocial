@@ -85,6 +85,10 @@
 	cursor: pointer;
 	opacity: 0.5;
 }
+.accountDeleteLink {
+	color: #fb2f01;
+	margin-top: 25px;
+}
 .accountLeft {
 	margin-top: 150px;
 	flex: 1;

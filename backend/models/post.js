@@ -28,7 +28,10 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			content: DataTypes.TEXT,
 			imageUrl: DataTypes.STRING,
-			categoryId: DataTypes.STRING,
+			categoryId: {
+				type: DataTypes.UUID,
+				defaultValue: DataTypes.UUIDV4,
+			},
 			moodId: DataTypes.INTEGER,
 			userId: {
 				type: DataTypes.UUID,

@@ -4,7 +4,7 @@ import Post from "../post/Post";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 export default function Feed({ username }) {
 	const [posts, setPosts] = useState([]);
@@ -25,18 +25,18 @@ export default function Feed({ username }) {
 	}, [username]);
 
 	return (
-		<Box
+		<Container
 			className="feedContainer"
 			sx={{
 				padding: { lg: 5 },
 			}}
 		>
-			<div className="feedWrapper">
+			<Box className="feedWrapper">
 				{(!username || username === user.user.username) && <Publish />}
 				{posts.map((p) => (
 					<Post key={p.id} post={p} />
 				))}
-			</div>
-		</Box>
+			</Box>
+		</Container>
 	);
 }
