@@ -1,6 +1,5 @@
 import "./publish.css";
 import {
-	PermMedia,
 	Label,
 	CancelPresentationOutlined,
 	AddAPhoto,
@@ -9,7 +8,6 @@ import { TextareaAutosize } from "@mui/core";
 import {
 	Avatar,
 	Box,
-	Container,
 	FormControl,
 	InputLabel,
 	MenuItem,

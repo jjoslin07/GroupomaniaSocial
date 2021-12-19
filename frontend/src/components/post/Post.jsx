@@ -1,14 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./post.css";
-import {
-	AddAPhoto,
-	CancelPresentationOutlined,
-	Delete,
-	DeleteForever,
-	Label,
-	MoreVert,
-	Send,
-} from "@mui/icons-material";
+import { AddAPhoto, Label, MoreVert, Send } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,7 +9,6 @@ import Comments from "../comments/Comments";
 import {
 	Avatar,
 	Box,
-	Container,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -28,7 +19,6 @@ import {
 	InputLabel,
 	Select,
 	TextareaAutosize,
-	TextField,
 } from "@mui/material";
 import axios from "axios";
 import { format } from "timeago.js";
@@ -113,7 +103,7 @@ const Post = ({ post }) => {
 			console.error(e);
 		}
 	}
-
+	const [imageUrl, setImageUrl] = useState(post.imageUrl);
 	useEffect(() => {
 		fetchData();
 	}, []);
@@ -127,6 +117,7 @@ const Post = ({ post }) => {
 			userId: currentUser.user.id,
 			content: editContent.current.value,
 			categoryId: category ? category : "General",
+			imageUrl: imageUrl,
 		};
 		if (file) {
 			const data = new FormData();
@@ -187,20 +178,20 @@ const Post = ({ post }) => {
 		setLike(isLiked ? likes - 1 : likes + 1);
 		setIsLiked(!isLiked);
 	};
-	const [loves, setLove] = useState(post.loves);
-	const [isLoved, setIsLoved] = useState(false);
+	// const [loves, setLove] = useState(post.loves);
+	// const [isLoved, setIsLoved] = useState(false);
 
-	const loveHandler = () => {
-		setLove(isLoved ? loves - 1 : loves + 1);
-		setIsLoved(!isLoved);
-	};
-	const [funny, setFunny] = useState(post.funny);
-	const [isFunny, setIsFunny] = useState(false);
+	// const loveHandler = () => {
+	// 	setLove(isLoved ? loves - 1 : loves + 1);
+	// 	setIsLoved(!isLoved);
+	// };
+	// const [funny, setFunny] = useState(post.funny);
+	// const [isFunny, setIsFunny] = useState(false);
 
-	const funnyHandler = () => {
-		setFunny(isFunny ? funny - 1 : funny + 1);
-		setIsFunny(!isFunny);
-	};
+	// const funnyHandler = () => {
+	// 	setFunny(isFunny ? funny - 1 : funny + 1);
+	// 	setIsFunny(!isFunny);
+	// };
 
 	const [user, setUser] = useState({});
 
@@ -313,25 +304,30 @@ const Post = ({ post }) => {
 														}}
 													>
 														<img
-															src={PF + post.imageUrl}
+															src={PF + imageUrl}
 															alt=""
 															className="postImg"
+															style={{
+																maxHeight: "300px",
+																width: "100%",
+															}}
 														/>
+
 														{post.imageUrl && (
-															<DeleteForever
+															<Button
 																className="postCancelImg"
-																onclick={() => post.imageUrl(null)}
+																onClick={() => setImageUrl(null)}
 																sx={{
 																	color: "red",
 																}}
-															/>
+															>
+																Remove
+															</Button>
 														)}
 														{!post.imageUrl && (
 															<label htmlFor="file" className="postOption">
-																<span className="postOptionText">Photo</span>
 																<AddAPhoto
 																	className="postAddImg"
-																	onClick={null}
 																	sx={{
 																		marginTop: 2,
 																		color: "green",
@@ -343,6 +339,7 @@ const Post = ({ post }) => {
 																	id="file"
 																	accept=".png, .jpeg, .jpg"
 																	onChange={(e) => setFile(e.target.files[0])}
+																	name="image"
 																/>
 															</label>
 														)}
@@ -405,17 +402,17 @@ const Post = ({ post }) => {
 							<img
 								className="postIcon"
 								src={`${PF}love.png`}
-								onClick={loveHandler}
+								onClick={null}
 								alt=""
 							/>
-							<span className="postReactionCounter">{loves}</span>
+							<span className="postReactionCounter">{null}</span>
 							<img
 								className="postIcon"
 								src={`${PF}haha.png`}
-								onClick={funnyHandler}
+								onClick={null}
 								alt=""
 							/>
-							<span className="postReactionCounter">{funny}</span>
+							<span className="postReactionCounter">{null}</span>
 						</div>
 						<div className="postBottomRight">
 							<span className="postCommentText">{post.comment} Comments</span>

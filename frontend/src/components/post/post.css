@@ -44,17 +44,14 @@
 .postInput:focus {
 	outline: none;
 }
+.postImgContainer {
+	/* padding: 0 15px 10px 15px; */
+	position: relative;
+}
 .postImg {
 	width: 100%;
 	max-height: 500px;
 	object-fit: cover;
-}
-.postCancelImg {
-	position: absolute;
-	top: 275px;
-	right: 45px;
-	cursor: pointer;
-	opacity: 0.7;
 }
 
 .postCenter {

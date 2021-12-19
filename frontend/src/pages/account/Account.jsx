@@ -216,6 +216,7 @@ const Account = () => {
 						<span className="accountDeleteLink">
 							Want to delete your account? Click{" "}
 							<Link
+								href={`/account/${currentUser.user.username}/delete`}
 								sx={{
 									cursor: "pointer",
 									color: "#fb2f01",
