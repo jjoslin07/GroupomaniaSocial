@@ -195,6 +195,7 @@ function destroy(req, res) {
 	const id = req.params.id;
 	const userId = req.userData.userId;
 
+	models.Comment.destroy({ where: { postId: id } });
 	models.Post.destroy({ where: { id: id, userId: userId } })
 		.then((result) => {
 			res.status(200).json({

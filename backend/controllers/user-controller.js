@@ -177,6 +177,7 @@ function update(req, res) {
 function destroy(req, res) {
 	const id = req.params.id;
 	const userId = req.userData.userId;
+	models.Comment.destroy({ where: { userId: userId } });
 	models.Post.destroy({ where: { userId: userId } });
 	models.User.destroy({ where: { id: id, id: userId } })
 		.then((result) => {
