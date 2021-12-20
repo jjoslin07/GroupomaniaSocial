@@ -3,6 +3,7 @@ import {
 	Label,
 	CancelPresentationOutlined,
 	AddAPhoto,
+	Mood,
 } from "@mui/icons-material";
 import { TextareaAutosize } from "@mui/core";
 import {
@@ -21,20 +22,39 @@ export default function Publish() {
 	const [category, setCategory] = useState("");
 	const [categories, setCategories] = useState([]);
 
-	useEffect(() => {
-		fetchData();
-	}, []);
+	const [mood, setMood] = useState("");
+	const [moods, setMoods] = useState([]);
+
+	async function fetchData2() {
+		try {
+			const moodData = await axios.get("/posts/mood/all");
+			setMoods(moodData.data.map((moo) => moo.name));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	// useEffect(() => {
+	// 	fetchData2();
+	// }, []);
 	async function fetchData() {
 		try {
-			const data = await axios.get(`/posts/category/all`);
-			setCategories(data.data.map((cat) => cat.name));
+			const categoryData = await axios.get(`/posts/category/all`);
+			setCategories(categoryData.data.map((cat) => cat.name));
 		} catch (e) {
 			console.error(e);
 		}
 	}
 
+	useEffect(() => {
+		fetchData();
+		fetchData2();
+	}, []);
 	const updateSelectCategory = (e) => {
 		setCategory(e.target.value);
+	};
+	const updateSelectMood = (e) => {
+		setMood(e.target.value);
 	};
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -52,6 +72,7 @@ export default function Publish() {
 			userId: user.user.id,
 			content: content.current.value,
 			categoryId: category ? category : "General",
+			moodId: mood ? mood : "",
 		};
 		if (file) {
 			const data = new FormData();
@@ -146,6 +167,28 @@ export default function Publish() {
 										label="Category"
 									>
 										{categories.map((item) => (
+											<MenuItem key={item} value={item}>
+												{item}
+											</MenuItem>
+										))}
+									</Select>
+								</FormControl>
+							</div>
+						</label>
+						<label htmlFor="mood" className="publishOption">
+							<div>
+								<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+									<InputLabel id="mood">Mood</InputLabel>
+									<Select
+										sx={{ margin: 1.5 }}
+										labelId="mood"
+										className="dropDownMenu"
+										IconComponent={Mood}
+										onChange={updateSelectMood}
+										value={mood}
+										label="Mood"
+									>
+										{moods.map((item) => (
 											<MenuItem key={item} value={item}>
 												{item}
 											</MenuItem>

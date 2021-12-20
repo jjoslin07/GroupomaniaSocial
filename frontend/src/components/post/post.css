@@ -27,7 +27,8 @@
 .postDate {
 	font-size: 13px;
 }
-.postCategory {
+.postCategory,
+.postMood {
 	font-size: 13px;
 	margin-left: 10px;
 }

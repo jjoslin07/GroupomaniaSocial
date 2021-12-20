@@ -21,6 +21,7 @@ function save(req, res) {
 	const schema = {
 		content: { type: "string", optional: false, default: "" },
 		categoryId: { type: "string", optional: false, default: "General" },
+		// moodId: { type: "string", optional: false, default: "Cheerful" },
 	};
 	// Create instance of Validator class
 	const v = new Validator();
@@ -33,28 +34,29 @@ function save(req, res) {
 			error: validationResponse,
 		});
 	}
-	models.Category.findByPk(req.body.categoryId).then((result) => {
-		if (result || !result) {
-			// Create new Post and save to database
-			models.Post.create(post)
-				.then((result) => {
-					res.status(201).json({
-						message: "Post created successfully",
-						post: result,
+	models.Mood.findByPk(req.body.moodId) &&
+		models.Category.findByPk(req.body.categoryId).then((result) => {
+			if (result || !result) {
+				// Create new Post and save to database
+				models.Post.create(post)
+					.then((result) => {
+						res.status(201).json({
+							message: "Post created successfully",
+							post: result,
+						});
+					})
+					.catch((error) => {
+						res.status(500).json({
+							message: "Something went wrong",
+							error: error,
+						});
 					});
-				})
-				.catch((error) => {
-					res.status(500).json({
-						message: "Something went wrong",
-						error: error,
-					});
+			} else {
+				res.status(400).json({
+					message: "Invalid Category ID",
 				});
-		} else {
-			res.status(400).json({
-				message: "Invalid Category ID",
-			});
-		}
-	});
+			}
+		});
 }
 
 // Function to get an individual Post
@@ -139,6 +141,7 @@ function update(req, res) {
 	const schema = {
 		content: { type: "string", optional: false, max: "500" },
 		categoryId: { type: "string", optional: false, default: "General" },
+		// moodId: { type: "string", optional: false, default: "Cheerful" },
 	};
 	// Create instance of Validator class
 	const v = new Validator();

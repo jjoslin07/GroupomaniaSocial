@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./post.css";
-import { AddAPhoto, Label, MoreVert, Send } from "@mui/icons-material";
+import { AddAPhoto, Label, Mood, MoreVert, Send } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -94,21 +94,38 @@ const Post = ({ post }) => {
 	const editContent = useRef();
 	const [category, setCategory] = useState("");
 	const [categories, setCategories] = useState([]);
+	const [mood, setMood] = useState("");
+	const [moods, setMoods] = useState([]);
+
+	async function fetchData2() {
+		try {
+			const moodData = await axios.get("/posts/mood/all");
+			setMoods(moodData.data.map((moo) => moo.name));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	useEffect(() => {
+		fetchData2();
+	}, []);
 
 	async function fetchData() {
 		try {
-			const data = await axios.get(`/posts/category/all`);
-			setCategories(data.data.map((cat) => cat.name));
+			const categoryData = await axios.get(`/posts/category/all`);
+			setCategories(categoryData.data.map((cat) => cat.name));
 		} catch (e) {
 			console.error(e);
 		}
 	}
-	const [imageUrl, setImageUrl] = useState(post.imageUrl);
 	useEffect(() => {
 		fetchData();
 	}, []);
+	const [imageUrl, setImageUrl] = useState(post.imageUrl);
 	const updateSelectCategory = (e) => {
 		setCategory(e.target.value);
+	};
+	const updateSelectMood = (e) => {
+		setMood(e.target.value);
 	};
 
 	const editHandler = async (e) => {
@@ -117,6 +134,7 @@ const Post = ({ post }) => {
 			userId: currentUser.user.id,
 			content: editContent.current.value,
 			categoryId: category ? category : "General",
+			moodId: mood ? mood : "",
 			imageUrl: imageUrl,
 		};
 		if (file) {
@@ -161,30 +179,71 @@ const Post = ({ post }) => {
 	const [likes, setLike] = useState(post.likes);
 	const [isLiked, setIsLiked] = useState(false);
 
-	// const getReaction = async () => {
-	// 	await axios.get("/posts/" + post.id + "/reactions");
-	// };
-
 	const likeHandler = () => {
-		try {
-			axios.post(
-				"/posts/" + post.id + "/like",
-				{
+		if (!isLiked) {
+			try {
+				axios.post(
+					"/posts/" + post.id + "/like",
+					{
+						userId: currentUser.user.id,
+					},
+					config
+				);
+			} catch (error) {
+				console.log(error);
+			}
+			setLike(isLiked ? likes - 1 : likes + 1);
+			setIsLiked(!isLiked);
+		} else {
+			try {
+				axios.delete("/posts/" + post.id + "/like", {
+					headers: {
+						Authorization: `Bearer ${currentUser.token}`,
+					},
 					userId: currentUser.user.id,
-				},
-				config
-			);
-		} catch (error) {}
-		setLike(isLiked ? likes - 1 : likes + 1);
-		setIsLiked(!isLiked);
+				});
+			} catch (error) {
+				console.log(error);
+			}
+			setLike(isLiked ? likes - 1 : likes + 1);
+			setIsLiked(!isLiked);
+		}
 	};
+
 	// const [loves, setLove] = useState(post.loves);
 	// const [isLoved, setIsLoved] = useState(false);
 
 	// const loveHandler = () => {
-	// 	setLove(isLoved ? loves - 1 : loves + 1);
-	// 	setIsLoved(!isLoved);
+	// 	if (!isLoved) {
+	// 		try {
+	// 			axios.post(
+	// 				"/posts/" + post.id + "/love",
+	// 				{
+	// 					userId: currentUser.user.id,
+	// 				},
+	// 				config
+	// 			);
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 		setLove(isLoved ? loves - 1 : loves + 1);
+	// 		setIsLoved(!isLoved);
+	// 	} else {
+	// 		try {
+	// 			axios.delete("/posts/" + post.id + "/love", {
+	// 				headers: {
+	// 					Authorization: `Bearer ${currentUser.token}`,
+	// 				},
+	// 				userId: currentUser.user.id,
+	// 			});
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 		setLove(isLoved ? loves - 1 : loves + 1);
+	// 		setIsLoved(!isLoved);
+	// 	}
 	// };
+
 	// const [funny, setFunny] = useState(post.funny);
 	// const [isFunny, setIsFunny] = useState(false);
 
@@ -204,9 +263,9 @@ const Post = ({ post }) => {
 		};
 		fetchUser();
 	}, [post.userId]);
+
 	return (
 		<>
-			{/* {comments.map((c) => c)}; */}
 			<Box
 				className="post"
 				sx={{
@@ -225,7 +284,13 @@ const Post = ({ post }) => {
 							</Link>
 							<span className="postUsername">{user.username}</span>
 							<span className="postDate">{format(post.createdAt)}</span>
-							<span className="postCategory">in {post.categoryId}</span>
+							<span className="postCategory">
+								in <b>{post.categoryId}</b>
+							</span>
+							<span className="postMood">
+								{post.moodId ? "feeling " : post.moodId}
+								<b>{post.moodId ? post.moodId : post.moodId}</b>
+							</span>
 						</div>
 						{post.userId === currentUser.user.id && (
 							<div className="postTopRight">
@@ -367,6 +432,23 @@ const Post = ({ post }) => {
 																			</MenuItem>
 																		))}
 																	</Select>
+																	<Select
+																		sx={{
+																			margin: 1.5,
+																		}}
+																		labelId="mood"
+																		className="dropDownMenu"
+																		IconComponent={Mood}
+																		onChange={updateSelectMood}
+																		value={mood}
+																		label="Mood"
+																	>
+																		{moods.map((item) => (
+																			<MenuItem key={item} value={item}>
+																				{item}
+																			</MenuItem>
+																		))}
+																	</Select>
 																</FormControl>
 															</div>
 														</label>
@@ -399,23 +481,27 @@ const Post = ({ post }) => {
 								alt=""
 							/>
 							<span className="postReactionCounter">{likes}</span>
-							<img
+							{/* <img
 								className="postIcon"
 								src={`${PF}love.png`}
-								onClick={null}
+								onClick={loveHandler}
 								alt=""
 							/>
-							<span className="postReactionCounter">{null}</span>
+							<span className="postReactionCounter">{loves}</span>
 							<img
 								className="postIcon"
 								src={`${PF}haha.png`}
-								onClick={null}
+								onClick={funnyHandler}
 								alt=""
 							/>
-							<span className="postReactionCounter">{null}</span>
+							<span className="postReactionCounter">{funny}</span> */}
 						</div>
 						<div className="postBottomRight">
-							<span className="postCommentText">{post.comment} Comments</span>
+							<span className="postCommentText">
+								{(comments.length === 0 && comments.length + " Comments") ||
+									(comments.length === 1 && comments.length + " Comment") ||
+									comments.length + " Comments"}
+							</span>
 						</div>
 					</div>
 				</div>

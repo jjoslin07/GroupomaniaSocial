@@ -22,8 +22,19 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Reactions.init(
 		{
-			postId: DataTypes.INTEGER,
-			userId: DataTypes.INTEGER,
+			id: {
+				type: DataTypes.UUID,
+				defaultValue: DataTypes.UUIDV4,
+				primaryKey: true,
+			},
+			postId: {
+				type: DataTypes.UUID,
+				defaultValue: DataTypes.UUIDV4,
+			},
+			userId: {
+				type: DataTypes.UUID,
+				defaultValue: DataTypes.UUIDV4,
+			},
 			isLiked: DataTypes.BOOLEAN,
 			isLoved: DataTypes.BOOLEAN,
 			isFunny: DataTypes.BOOLEAN,

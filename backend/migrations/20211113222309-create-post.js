@@ -19,7 +19,8 @@ module.exports = {
 				default: "General",
 			},
 			moodId: {
-				type: Sequelize.INTEGER,
+				type: Sequelize.STRING,
+				default: "None",
 			},
 			userId: {
 				type: Sequelize.UUID,
