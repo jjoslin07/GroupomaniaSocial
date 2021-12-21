@@ -1,6 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import "./post.css";
-import { AddAPhoto, Label, Mood, MoreVert, Send } from "@mui/icons-material";
+import {
+	AddAPhoto,
+	CancelPresentationOutlined,
+	Label,
+	Mood,
+	MoreVert,
+	Send,
+} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -89,7 +96,7 @@ const Post = ({ post }) => {
 		}
 	};
 
-	const [file, setFile] = useState(null);
+	const [editFile, setEditFile] = useState(null);
 
 	const editContent = useRef();
 	const [category, setCategory] = useState("");
@@ -137,11 +144,11 @@ const Post = ({ post }) => {
 			moodId: mood ? mood : "",
 			imageUrl: imageUrl,
 		};
-		if (file) {
+		if (editFile) {
 			const data = new FormData();
-			const fileName = Date.now() + File.name;
+			const fileName = Date.now() + editFile.name;
 			data.append("name", fileName);
-			data.append("file", file);
+			data.append("file", editFile);
 			updatePost.imageUrl = fileName;
 			try {
 				await axios.post("/upload", data);
@@ -172,6 +179,19 @@ const Post = ({ post }) => {
 			);
 		};
 		fetchComments();
+	}, [post]);
+
+	const [reactions, setReactions] = useState(null);
+	console.log("get " + reactions);
+	useEffect(() => {
+		const fetchReactions = async () => {
+			const res = post.id
+				? await axios.get("/posts/" + post.id + "/reactions")
+				: await axios.get("/posts/" + post.id);
+
+			setReactions(res.data.Likes);
+		};
+		fetchReactions();
 	}, [post]);
 
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -390,7 +410,7 @@ const Post = ({ post }) => {
 															</Button>
 														)}
 														{!post.imageUrl && (
-															<label htmlFor="file" className="postOption">
+															<label htmlFor="editFile" className="postOption">
 																<AddAPhoto
 																	className="postAddImg"
 																	sx={{
@@ -401,15 +421,44 @@ const Post = ({ post }) => {
 																<input
 																	style={{ display: "none" }}
 																	type="file"
-																	id="file"
+																	id="editFile"
 																	accept=".png, .jpeg, .jpg"
-																	onChange={(e) => setFile(e.target.files[0])}
+																	onChange={(e) =>
+																		setEditFile(e.target.files[0])
+																	}
 																	name="image"
 																/>
 															</label>
 														)}
-														<label htmlFor="category" className="publishOption">
-															<div>
+														{editFile && (
+															<div className="postImgContainer">
+																<img
+																	src={URL.createObjectURL(editFile)}
+																	alt=""
+																	className="postImg"
+																	style={{
+																		maxHeight: "300px",
+																		width: "100%",
+																	}}
+																/>
+																<CancelPresentationOutlined
+																	className="postCancelImg"
+																	onClick={() => setEditFile(null)}
+																/>
+															</div>
+														)}
+														<Box
+															sx={{
+																display: "flex",
+																flexDirection: "row",
+																alignItems: "flex-start",
+																justifyContent: "flex-start",
+															}}
+														>
+															<label
+																htmlFor="category"
+																className="publishOption"
+															>
 																<FormControl
 																	variant="standard"
 																	sx={{ m: 1, minWidth: 120 }}
@@ -450,8 +499,8 @@ const Post = ({ post }) => {
 																		))}
 																	</Select>
 																</FormControl>
-															</div>
-														</label>
+															</label>
+														</Box>
 													</div>
 												</DialogContent>
 												<DialogActions>
@@ -480,7 +529,7 @@ const Post = ({ post }) => {
 								onClick={likeHandler}
 								alt=""
 							/>
-							<span className="postReactionCounter">{likes}</span>
+							<span className="postReactionCounter">{reactions}</span>
 							{/* <img
 								className="postIcon"
 								src={`${PF}love.png`}

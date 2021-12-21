@@ -25,18 +25,20 @@ export default function Feed({ username }) {
 	}, [username]);
 
 	return (
-		<Container
-			className="feedContainer"
-			sx={{
-				padding: { lg: 5 },
-			}}
-		>
-			<Box className="feedWrapper">
-				{(!username || username === user.user.username) && <Publish />}
-				{posts.map((p) => (
-					<Post key={p.id} post={p} />
-				))}
-			</Box>
-		</Container>
+		<>
+			<Container
+				className="feedContainer"
+				sx={{
+					padding: { lg: 5 },
+				}}
+			>
+				<Box className="feedWrapper">
+					{(!username || username === user.user.username) && <Publish />}
+					{posts.map((p) => (
+						<Post key={p.id} post={p} />
+					))}
+				</Box>
+			</Container>
+		</>
 	);
 }
