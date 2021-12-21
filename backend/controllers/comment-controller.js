@@ -14,7 +14,7 @@ function save(req, res) {
 	};
 
 	const schema = {
-		content: { type: "string", optional: false, max: "500" },
+		content: { type: "string", optional: false },
 	};
 
 	const v = new Validator();

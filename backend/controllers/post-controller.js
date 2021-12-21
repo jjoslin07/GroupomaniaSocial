@@ -139,7 +139,7 @@ function update(req, res) {
 	const userId = req.userData.userId;
 	// Define validation Schema
 	const schema = {
-		content: { type: "string", optional: false, max: "500" },
+		content: { type: "string", optional: false, default: "" },
 		categoryId: { type: "string", optional: false, default: "General" },
 		// moodId: { type: "string", optional: false, default: "Cheerful" },
 	};

@@ -182,7 +182,7 @@ const Post = ({ post }) => {
 	}, [post]);
 
 	const [reactions, setReactions] = useState(null);
-	console.log("get " + reactions);
+
 	useEffect(() => {
 		const fetchReactions = async () => {
 			const res = post.id
@@ -515,9 +515,16 @@ const Post = ({ post }) => {
 						)}
 					</div>
 					<div id="content" className="postCenter">
-						<span id="edit" className="postText">
+						<Box
+							sx={{
+								overflowWrap: "anywhere",
+								whiteSpace: "pre-wrap",
+							}}
+							id="edit"
+							className="postText"
+						>
 							{post?.content}
-						</span>
+						</Box>
 						<img className="postImg" src={PF + post?.imageUrl} alt="" />
 					</div>
 
