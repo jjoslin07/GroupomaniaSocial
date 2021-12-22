@@ -72,7 +72,7 @@ export default function Publish() {
 			userId: user.user.id,
 			content: content.current.value,
 			categoryId: category ? category : "General",
-			moodId: mood ? mood : "",
+			moodId: mood ? mood : "--",
 		};
 		if (file) {
 			const data = new FormData();

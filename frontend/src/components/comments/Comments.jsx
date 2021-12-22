@@ -204,6 +204,9 @@ const Comments = ({ comment }) => {
 												defaultValue={comment.content}
 												style={{
 													width: "400px",
+													outline: "1px solid black",
+													margin: 2,
+													padding: 2,
 												}}
 											/>
 										</DialogContent>

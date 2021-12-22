@@ -128,6 +128,7 @@ const Post = ({ post }) => {
 		fetchData();
 	}, []);
 	const [imageUrl, setImageUrl] = useState(post.imageUrl);
+
 	const updateSelectCategory = (e) => {
 		setCategory(e.target.value);
 	};
@@ -140,8 +141,12 @@ const Post = ({ post }) => {
 		const updatePost = {
 			userId: currentUser.user.id,
 			content: editContent.current.value,
-			categoryId: category ? category : "General",
-			moodId: mood ? mood : "",
+			categoryId: category
+				? category
+				: post.categoryId
+				? post.categoryId
+				: "General",
+			moodId: mood ? mood : post.moodId ? post.moodId : "--",
 			imageUrl: imageUrl,
 		};
 		if (editFile) {
@@ -308,8 +313,8 @@ const Post = ({ post }) => {
 								in <b>{post.categoryId}</b>
 							</span>
 							<span className="postMood">
-								{post.moodId ? "feeling " : post.moodId}
-								<b>{post.moodId ? post.moodId : post.moodId}</b>
+								{post.moodId ? post.moodId !== "--" && " feeling " : " "}
+								<b>{post.moodId === "--" ? (post.moodId = "") : post.moodId}</b>
 							</span>
 						</div>
 						{post.userId === currentUser.user.id && (
@@ -481,6 +486,7 @@ const Post = ({ post }) => {
 																			</MenuItem>
 																		))}
 																	</Select>
+																	<InputLabel id="">Mood</InputLabel>
 																	<Select
 																		sx={{
 																			margin: 1.5,
