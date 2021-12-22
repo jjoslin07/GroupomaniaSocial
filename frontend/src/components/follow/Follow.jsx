@@ -7,7 +7,7 @@ const Follow = ({ user }) => {
 			<li className="rightbarFollow">
 				<Avatar
 					className="rightbarFollowImg"
-					src={PF + user.profilePicture}
+					src={PF + user.profile_picture}
 					alt="Avatar Picture"
 				/>
 				<span className="rightbarFriendName">{user.username}</span>

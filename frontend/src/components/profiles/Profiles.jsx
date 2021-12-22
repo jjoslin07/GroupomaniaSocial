@@ -9,10 +9,10 @@ const Profiles = ({ user }) => {
 				<div className="leftbarFriend">
 					<Avatar
 						className="leftbarFriendImg"
-						src={PF + user.profilePicture}
+						src={PF + user.profile_picture}
 						alt=""
 					/>
-					<span className="leftbarFriendName">{user.username}</span>
+					<span className="leftbarFriendName">{user.display_name}</span>
 				</div>
 			</a>
 		</div>

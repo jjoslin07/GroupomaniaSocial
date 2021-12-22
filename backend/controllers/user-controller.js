@@ -14,24 +14,30 @@ function signUp(req, res) {
 			} else {
 				bcrypt.genSalt(10, function (err, salt) {
 					bcrypt.hash(req.body.password, salt, function (err, hash) {
+						const rand = Math.floor(Math.random() * 999999999);
 						const user = {
-							username: req.body.username,
+							username: req.body.username + rand,
+							display_name: req.body.username,
 							email: req.body.email,
 							password: hash,
-							isAdmin: req.body.isAdmin,
+							is_admin: req.body.is_admin,
 							desc: req.body.desc,
 							city: req.body.city,
 							from: req.body.from,
 						};
 						const schema = {
-							username: { type: "string", optional: false, max: 255 },
+							username: {
+								type: "string",
+								optional: false,
+								max: 255,
+							},
 							email: {
 								type: "email",
 								optional: false,
 								max: 255,
 							},
 							password: { type: "string", optional: false, max: 255 },
-							isAdmin: { type: "boolean", default: false },
+							is_admin: { type: "boolean", default: false },
 						};
 						const v = new Validator();
 						const validationResponse = v.validate(user, schema);
@@ -122,10 +128,11 @@ function update(req, res) {
 		bcrypt.hash(req.body.password, salt, function (err, hash) {
 			const updatedUser = {
 				username: req.body.username,
+				display_name: req.body.display_name,
 				email: req.body.email,
 				password: hash,
-				profilePicture: req.body.profilePicture,
-				coverPicture: req.body.coverPicture,
+				profile_picture: req.body.profile_picture,
+				cover_picture: req.body.cover_picture,
 				desc: req.body.desc,
 				city: req.body.city,
 				from: req.body.from,

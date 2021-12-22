@@ -15,13 +15,14 @@ function save(req, res) {
 		categoryId: req.body.categoryId,
 		moodId: req.body.moodId,
 		userId: req.userData.userId,
+		is_read: req.body.is_read,
 	};
 
 	// Define validation Schema
 	const schema = {
 		content: { type: "string", optional: false, default: "" },
 		categoryId: { type: "string", optional: false, default: "General" },
-		// moodId: { type: "string", optional: false, default: "Cheerful" },
+		is_read: { type: "boolean", optional: false, default: false },
 	};
 	// Create instance of Validator class
 	const v = new Validator();

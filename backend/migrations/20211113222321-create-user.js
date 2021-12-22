@@ -12,6 +12,7 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
+			display_name: Sequelize.STRING,
 			email: {
 				type: Sequelize.STRING,
 				allowNull: false,
@@ -20,13 +21,13 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
-			profilePicture: {
+			profile_picture: {
 				type: Sequelize.STRING,
 			},
-			coverPicture: {
+			cover_picture: {
 				type: Sequelize.STRING,
 			},
-			isAdmin: {
+			is_admin: {
 				type: Sequelize.BOOLEAN,
 				allowNull: false,
 			},

@@ -27,8 +27,8 @@ const Account = () => {
 	const [username, setUsername] = useState(currentUser.user.username);
 	const [email, setEmail] = useState(currentUser.user.email);
 	const [password, setPassword] = useState(currentUser.user.password);
-	const [profilePicture, setProfilePicture] = useState(null);
-	const [coverPicture, setCoverPicture] = useState(null);
+	const [profile_picture, set_profile_picture] = useState(null);
+	const [cover_picture, set_cover_picture] = useState(null);
 
 	const [desc, setDesc] = useState(currentUser.user.desc);
 	const [city, setCity] = useState(currentUser.user.city);
@@ -62,10 +62,10 @@ const Account = () => {
 		setYear(event.currentTarget.value);
 	};
 	const handleProfileImg = (event) => {
-		setProfilePicture(event.target.files[0]);
+		set_profile_picture(event.target.files[0]);
 	};
 	const handleCoverImg = (event) => {
-		setCoverPicture(event.target.files[0]);
+		set_cover_picture(event.target.files[0]);
 	};
 
 	const submitHandler = async (e) => {
@@ -81,24 +81,24 @@ const Account = () => {
 			dept: dept,
 			year: year,
 		};
-		if (profilePicture) {
+		if (profile_picture) {
 			const data = new FormData();
-			const fileName = Date.now() + profilePicture.name;
+			const fileName = Date.now() + profile_picture.name;
 			data.append("name", fileName);
-			data.append("file", profilePicture);
-			user.profilePicture = fileName;
+			data.append("file", profile_picture);
+			user.profile_picture = fileName;
 			try {
 				await axios.post("/upload", data);
 			} catch (error) {
 				console.log(error);
 			}
 		}
-		if (coverPicture) {
+		if (cover_picture) {
 			const data = new FormData();
-			const fileName = Date.now() + coverPicture.name;
+			const fileName = Date.now() + cover_picture.name;
 			data.append("name", fileName);
-			data.append("file", coverPicture);
-			user.coverPicture = fileName;
+			data.append("file", cover_picture);
+			user.cover_picture = fileName;
 			try {
 				await axios.post("/upload", data);
 			} catch (error) {
@@ -158,16 +158,16 @@ const Account = () => {
 								/>
 							</label>
 							<hr className="accountHr" />
-							{profilePicture && (
+							{profile_picture && (
 								<div className="accountImgContainer">
 									<img
-										src={URL.createObjectURL(profilePicture)}
+										src={URL.createObjectURL(profile_picture)}
 										alt=""
 										className="accountImg"
 									/>
 									<CancelPresentationOutlined
 										className="accountCancelImg"
-										onClick={() => setProfilePicture(null)}
+										onClick={() => set_profile_picture(null)}
 									/>
 								</div>
 							)}
@@ -199,16 +199,16 @@ const Account = () => {
 								/>
 							</label>
 							<hr className="accountHr" />
-							{coverPicture && (
+							{cover_picture && (
 								<div className="accountImgContainer">
 									<img
-										src={URL.createObjectURL(coverPicture)}
+										src={URL.createObjectURL(cover_picture)}
 										alt=""
 										className="accountImgAlt"
 									/>
 									<CancelPresentationOutlined
 										className="accountCancelImgAlt"
-										onClick={() => setCoverPicture(null)}
+										onClick={() => set_cover_picture(null)}
 									/>
 								</div>
 							)}

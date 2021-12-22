@@ -8,7 +8,7 @@ export default function Online({ user }) {
 		<div>
 			<li className="rightbarProfile">
 				<div className="rightbarProfileImgContainer">
-					<Avatar alt="Avatar Picture" src={PF + user.profilePicture} />
+					<Avatar alt="Avatar Picture" src={PF + user.profile_picture} />
 				</div>
 				<span className="rightbarUsername">{user.username}</span>
 			</li>

@@ -104,7 +104,7 @@ export default function Publish() {
 				<div className="publishTop">
 					<Avatar
 						className="publishProfileImg"
-						src={PF + user.user.profilePicture}
+						src={PF + user.user.profile_picture}
 						alt=""
 					/>
 					<TextareaAutosize

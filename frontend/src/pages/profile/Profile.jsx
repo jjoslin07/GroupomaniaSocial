@@ -30,8 +30,8 @@ export default function Profile() {
 							<img
 								className="profileCoverImg"
 								src={
-									user.coverPicture
-										? PF + user.coverPicture
+									user.cover_picture
+										? PF + user.cover_picture
 										: PF + "Groupomania_Logos/icon-left-font.svg"
 								}
 								alt=""
@@ -39,15 +39,15 @@ export default function Profile() {
 							<img
 								className="profileUserImg"
 								src={
-									user.profilePicture
-										? PF + user.profilePicture
+									user.profile_picture
+										? PF + user.profile_picture
 										: PF + "Profile/noAvatar.png"
 								}
 								alt=""
 							/>
 						</div>
 						<div className="profileInfo">
-							<h4 className="profileInfoName">{user.username}</h4>
+							<h4 className="profileInfoName">{user.display_name}</h4>
 							<span className="profileInfoDesc">{user.desc}</span>
 						</div>
 					</div>

@@ -303,11 +303,11 @@ const Post = ({ post }) => {
 							<Link to={`/profile/${user.username}`}>
 								<Avatar
 									className="postProfileImg"
-									src={PF + user.profilePicture}
+									src={PF + user.profile_picture}
 									alt=""
 								/>
 							</Link>
-							<span className="postUsername">{user.username}</span>
+							<span className="postUsername">{user.display_name}</span>
 							<span className="postDate">{format(post.createdAt)}</span>
 							<span className="postCategory">
 								in <b>{post.categoryId}</b>
@@ -486,6 +486,11 @@ const Post = ({ post }) => {
 																			</MenuItem>
 																		))}
 																	</Select>
+																</FormControl>
+																<FormControl
+																	variant="standard"
+																	sx={{ m: 1, minWidth: 120 }}
+																>
 																	<InputLabel id="">Mood</InputLabel>
 																	<Select
 																		sx={{

@@ -235,7 +235,7 @@ export default function Topbar() {
 						}}
 					>
 						<Chip
-							label={user.user.username}
+							label={user.user.display_name}
 							variant="outlined"
 							sx={{
 								color: "white",

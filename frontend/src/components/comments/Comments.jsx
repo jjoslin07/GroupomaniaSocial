@@ -111,9 +111,9 @@ const Comments = ({ comment }) => {
 				>
 					<Avatar
 						className="postCommentImg"
-						src={PF + user.profilePicture}
+						src={PF + user.profile_picture}
 					></Avatar>
-					<span className="postCommentName"> {user.username}</span>
+					<span className="postCommentName"> {user.display_name}</span>
 					<span className="commentDate">{format(comment.createdAt)}</span>
 				</Box>
 

@@ -27,6 +27,11 @@ module.exports = {
 				defaultValue: Sequelize.UUIDV4,
 				allowNull: false,
 			},
+			is_read: {
+				type: Sequelize.BOOLEAN,
+				allowNull: false,
+				defaultValue: false,
+			},
 			likes: {
 				type: Sequelize.INTEGER,
 			},

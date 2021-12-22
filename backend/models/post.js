@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.UUID,
 				defaultValue: DataTypes.UUIDV4,
 			},
+			is_read: DataTypes.BOOLEAN,
 			likes: DataTypes.INTEGER,
 			loves: DataTypes.INTEGER,
 			funny: DataTypes.INTEGER,
