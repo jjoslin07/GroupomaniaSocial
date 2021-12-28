@@ -27,6 +27,9 @@
 .postDate {
 	font-size: 13px;
 }
+/* .postReadButton:hover {
+	background-color: rgba(128, 128, 128, 0.514);
+} */
 .postCategory,
 .postMood {
 	font-size: 13px;
