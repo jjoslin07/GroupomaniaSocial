@@ -16,7 +16,6 @@ import { AuthContext } from "../../context/AuthContext";
 import { Chip, Link } from "@mui/material";
 
 // import { useNavigate } from "react-router-dom";
-
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
 	borderRadius: theme.shape.borderRadius,

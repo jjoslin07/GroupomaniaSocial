@@ -191,22 +191,8 @@ const Post = ({ post }) => {
 		fetchComments();
 	}, [post]);
 
-	const [reactions, setReactions] = useState(null);
-
-	useEffect(() => {
-		const fetchReactions = async () => {
-			const res = post.id
-				? await axios.get("/posts/" + post.id + "/reactions")
-				: await axios.get("/posts/" + post.id);
-
-			setReactions(res.data.Likes);
-		};
-		fetchReactions();
-	}, [post]);
-
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-	const [likes, setLike] = useState(post.likes);
 	const [isLiked, setIsLiked] = useState(false);
 
 	const likeHandler = () => {
@@ -222,66 +208,28 @@ const Post = ({ post }) => {
 			} catch (error) {
 				console.log(error);
 			}
-			setLike(isLiked ? likes - 1 : likes + 1);
-			setIsLiked(!isLiked);
+			setIsLiked(isLiked);
 		} else {
 			try {
-				axios.delete("/posts/" + post.id + "/like", {
-					headers: {
-						Authorization: `Bearer ${currentUser.token}`,
-					},
-					userId: currentUser.user.id,
-				});
+				setIsLiked(!isLiked);
 			} catch (error) {
 				console.log(error);
 			}
-			setLike(isLiked ? likes - 1 : likes + 1);
-			setIsLiked(!isLiked);
 		}
+		window.location.reload();
 	};
+	const [reactions, setReactions] = useState(null);
 
-	// const [loves, setLove] = useState(post.loves);
-	// const [isLoved, setIsLoved] = useState(false);
+	useEffect(() => {
+		const fetchReactions = async () => {
+			const res = post.id
+				? await axios.get("/posts/" + post.id + "/reactions")
+				: await axios.get("/posts/" + post.id);
 
-	// const loveHandler = () => {
-	// 	if (!isLoved) {
-	// 		try {
-	// 			axios.post(
-	// 				"/posts/" + post.id + "/love",
-	// 				{
-	// 					userId: currentUser.user.id,
-	// 				},
-	// 				config
-	// 			);
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 		setLove(isLoved ? loves - 1 : loves + 1);
-	// 		setIsLoved(!isLoved);
-	// 	} else {
-	// 		try {
-	// 			axios.delete("/posts/" + post.id + "/love", {
-	// 				headers: {
-	// 					Authorization: `Bearer ${currentUser.token}`,
-	// 				},
-	// 				userId: currentUser.user.id,
-	// 			});
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 		setLove(isLoved ? loves - 1 : loves + 1);
-	// 		setIsLoved(!isLoved);
-	// 	}
-	// };
-
-	// const [funny, setFunny] = useState(post.funny);
-	// const [isFunny, setIsFunny] = useState(false);
-
-	// const funnyHandler = () => {
-	// 	setFunny(isFunny ? funny - 1 : funny + 1);
-	// 	setIsFunny(!isFunny);
-	// };
-
+			setReactions(res.data.Likes);
+		};
+		fetchReactions();
+	}, [post]);
 	const [user, setUser] = useState({});
 
 	useEffect(() => {
@@ -604,20 +552,6 @@ const Post = ({ post }) => {
 								alt=""
 							/>
 							<span className="postReactionCounter">{reactions}</span>
-							{/* <img
-								className="postIcon"
-								src={`${PF}love.png`}
-								onClick={loveHandler}
-								alt=""
-							/>
-							<span className="postReactionCounter">{loves}</span>
-							<img
-								className="postIcon"
-								src={`${PF}haha.png`}
-								onClick={funnyHandler}
-								alt=""
-							/>
-							<span className="postReactionCounter">{funny}</span> */}
 						</div>
 						<div className="postBottomRight">
 							<span className="postCommentText">

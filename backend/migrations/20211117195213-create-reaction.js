@@ -21,26 +21,6 @@ module.exports = {
 					allowNull: false,
 					unique: "unique_tag",
 				},
-				isLiked: {
-					type: Sequelize.BOOLEAN,
-					allowNull: false,
-					default: false,
-				},
-				isLoved: {
-					type: Sequelize.BOOLEAN,
-					allowNull: false,
-					default: false,
-				},
-				isFunny: {
-					type: Sequelize.BOOLEAN,
-					allowNull: false,
-					default: false,
-				},
-				hasReaction: {
-					type: Sequelize.BOOLEAN,
-					allowNull: false,
-					default: false,
-				},
 				createdAt: {
 					allowNull: false,
 					type: Sequelize.DATE,

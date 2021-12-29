@@ -23,18 +23,9 @@ router.get("/category/all", postsCtrl.category);
 // Get moods
 router.get("/mood/all", postsCtrl.mood);
 
-// Like a Post
+// Like and unlike post
 router.post("/:id/like", auth.checkAuth, reactions.like);
-// Unlike a Post
-router.delete("/:id/like", auth.checkAuth, reactions.unlike);
-// Love a post
-router.post("/:id/love", auth.checkAuth, reactions.love);
-// Unlove a post
-router.delete("/:id/love", auth.checkAuth, reactions.unlove);
-// Lol a Post
-router.post("/:id/funny", auth.checkAuth, reactions.funny);
-// Remove Lol
-router.delete("/:id/funny", auth.checkAuth, reactions.unfunny);
+
 // Get Reactions
 router.get("/:id/reactions", reactions.getReaction);
 

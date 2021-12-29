@@ -15,8 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 				userId: undefined,
 				id: undefined,
 				// postId: undefined,
-				PostId: undefined,
-				hasReaction: undefined,
+				// PostId: undefined,
 			};
 		}
 	}
@@ -35,10 +34,6 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.UUID,
 				defaultValue: DataTypes.UUIDV4,
 			},
-			isLiked: DataTypes.BOOLEAN,
-			isLoved: DataTypes.BOOLEAN,
-			isFunny: DataTypes.BOOLEAN,
-			hasReaction: DataTypes.BOOLEAN,
 		},
 
 		{
