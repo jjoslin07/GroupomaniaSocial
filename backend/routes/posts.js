@@ -1,9 +1,10 @@
 const express = require("express");
 const postsCtrl = require("../controllers/post-controller");
 const commentCtrl = require("../controllers/comment-controller");
-const reactions = require("../controllers/reactions");
+const reactions = require("../controllers/reactions-controller");
 const router = express.Router();
 const auth = require("../middleware/auth");
+const read = require("../controllers/read-controller");
 
 // Create a new Post
 router.post("/", auth.checkAuth, postsCtrl.save);
@@ -28,6 +29,11 @@ router.post("/:id/like", auth.checkAuth, reactions.like);
 
 // Get Reactions
 router.get("/:id/reactions", reactions.getReaction);
+
+// Mark post read and unread
+router.post("/:id/read", auth.checkAuth, read.read);
+// Get read status
+router.get("/:id/status", auth.checkAuth, read.status);
 
 // Make a comment
 router.post("/:id/comment", auth.checkAuth, commentCtrl.save);

@@ -16,7 +16,6 @@ import Comments from "../comments/Comments";
 
 import {
 	Avatar,
-	Badge,
 	Box,
 	Dialog,
 	DialogActions,
@@ -239,6 +238,49 @@ const Post = ({ post }) => {
 		};
 		fetchUser();
 	}, [post.userId]);
+	// const [buttonText, setButtonText] = useState("Unread");
+
+	// const changeText = (text) => setButtonText(text);
+
+	const [isRead, setIsRead] = useState(false);
+
+	const readHandler = () => {
+		if (!isRead) {
+			try {
+				axios.post(
+					"/posts/" + post.id + "/read",
+					{
+						userId: currentUser.user.id,
+					},
+					config,
+					setIsRead(isRead)
+					// changeText("Read")
+				);
+			} catch (error) {
+				console.log(error);
+			}
+			setIsRead(isRead);
+		} else {
+			try {
+				setIsRead(!isRead);
+				// changeText("Unread");
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		window.location.reload(false);
+	};
+
+	const [status, setStatus] = useState(null);
+	useEffect(() => {
+		const fetchStatus = async () => {
+			const res = post.id
+				? await axios.get("/posts/" + post.id + "/status", config)
+				: await axios.get("/posts/" + post.id);
+			setStatus(res.data.Status);
+		};
+		fetchStatus();
+	});
 
 	return (
 		<>
@@ -267,14 +309,17 @@ const Post = ({ post }) => {
 								{post.moodId ? post.moodId !== "--" && " feeling " : " "}
 								<b>{post.moodId === "--" ? (post.moodId = "") : post.moodId}</b>
 							</span>
-							<span>
+							{/* <span>
 								<Badge
 									color="primary"
 									overlap="circular"
 									badgeContent=" unread"
 									sx={{ marginLeft: 5 }}
 								></Badge>
-							</span>
+							</span> */}
+							<Button variant="text" onClick={readHandler}>
+								{status}
+							</Button>
 						</div>
 
 						{post.userId === currentUser.user.id && (
@@ -507,6 +552,7 @@ const Post = ({ post }) => {
 								onClick={likeHandler}
 								alt=""
 							/>
+
 							<span className="postReactionCounter">{reactions}</span>
 						</div>
 						<div className="postBottomRight">

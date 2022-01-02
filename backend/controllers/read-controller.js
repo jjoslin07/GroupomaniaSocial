@@ -1,30 +1,30 @@
 const models = require("../models");
 
-function like(req, res) {
-	const like = {
+function read(req, res) {
+	const read = {
 		postId: req.params.id,
 		userId: req.userData.userId,
 	};
 
-	models.Post.findByPk(like.postId)
+	models.Post.findByPk(read.postId)
 		.then((result) => {
 			if (result !== null) {
-				models.Reactions.findOne({
-					where: { postId: like.postId, userId: like.userId },
+				models.Read.findOne({
+					where: { postId: read.postId, userId: read.userId },
 				})
 					.then((result) => {
 						if (result !== null) {
-							models.Reactions.destroy({
-								where: { postId: like.postId, userId: like.userId },
+							models.Read.destroy({
+								where: { postId: read.postId, userId: read.userId },
 							})
 								.then((result) => {
 									if (result > 0) {
 										res.status(200).json({
-											message: "Like removed successfully",
+											message: "Post marked unread",
 										});
 									} else {
 										res.status(400).json({
-											message: "You already removed your LIKE",
+											message: "Post already marked unread",
 										});
 									}
 								})
@@ -35,15 +35,15 @@ function like(req, res) {
 									});
 								});
 						} else {
-							models.Reactions.create(like)
+							models.Read.create(read)
 								.then((result) => {
 									res.status(201).json({
-										message: "Like created successfully",
+										message: "Post marked read",
 									});
 								})
 								.catch((error) => {
 									res.status(400).json({
-										message: "You already reacted to this post",
+										message: "Post already marked read",
 									});
 								});
 						}
@@ -60,27 +60,36 @@ function like(req, res) {
 			}
 		})
 		.catch((error) => {
-			message: "Something went wrong";
+			res.status(500).json({
+				message: "Something went wrong",
+			});
 		});
 }
-function getReaction(req, res) {
-	// Each post
+
+function status(req, res) {
 	const postId = req.params.id;
-	// Find all reactions for each post
-	models.Reactions.findAll({ where: { postId: postId } })
+	const userId = req.userData.userId;
+	models.Read.findOne({ where: { postId: postId, userId: userId } })
 		.then((result) => {
-			res.status(200).json({
-				Likes: result.length,
-			});
+			if (result !== null) {
+				console.log(result);
+				res.status(200).json({
+					Status: "Read",
+				});
+			} else {
+				res.status(200).json({
+					Status: "Unread",
+				});
+			}
 		})
 		.catch((error) => {
 			res.status(404).json({
-				message: "No reactions found for this post",
+				error: error,
 			});
 		});
 }
 
 module.exports = {
-	like: like,
-	getReaction: getReaction,
+	read: read,
+	status: status,
 };

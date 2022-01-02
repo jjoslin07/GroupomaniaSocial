@@ -127,7 +127,9 @@ const Account = () => {
 						</span>
 					</div> */}
 					<div className="accountLeft">
-						<h3 className="accountLogo">Welcome {currentUser.user.username}</h3>
+						<h3 className="accountLogo">
+							Welcome {currentUser.user.display_name}
+						</h3>
 
 						<span className="accountDesc">
 							You can manage your account here.
