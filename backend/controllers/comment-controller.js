@@ -102,17 +102,9 @@ function showAll(req, res) {
 	// Look for any comments in db where post id matches
 	models.Comment.findAll({ where: { postId: postId } })
 		.then((result) => {
-			if (result.length > 0) {
-				// If result > 0 send response
-				res.status(200).json({
-					Comments: result,
-				});
-			} else {
-				// Send 404 error
-				res.status(404).json({
-					message: "No comments found!",
-				});
-			}
+			res.status(200).json({
+				Comments: result,
+			});
 		})
 		.catch((error) => {
 			res.status(500).json({

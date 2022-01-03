@@ -25,7 +25,7 @@
 .companyLogo {
 	width: 175px;
 	height: 50px;
-	object-fit: cover;
+	object-fit: contain;
 	cursor: pointer;
 }
 .topbarCenter {

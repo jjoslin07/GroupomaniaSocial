@@ -36,13 +36,7 @@ export default function Rightbar({ user, username }) {
 		return (
 			<>
 				<Box>
-					<div className="birthdayContainer">
-						<img className="birthdayImg" src="/assets/gift2.png" alt="" />
-						<span className="birthdayText">
-							<b>Vicki Smith</b> and <b>2 other people</b> have birthdays today.
-						</span>
-					</div>
-					<div className="rightbarImgContainer">
+					{/* <div className="rightbarImgContainer">
 						<span className="rightbarImgTitle">Latest Photos</span>
 						<ImageList
 							sx={{ width: 500, height: 450 }}
@@ -68,7 +62,7 @@ export default function Rightbar({ user, username }) {
 								</ImageListItem>
 							))}
 						</ImageList>
-					</div>
+					</div> */}
 				</Box>
 			</>
 		);

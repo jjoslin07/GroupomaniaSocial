@@ -74,11 +74,11 @@ function status(req, res) {
 			if (result !== null) {
 				console.log(result);
 				res.status(200).json({
-					Status: "Read",
+					Status: "✓",
 				});
 			} else {
 				res.status(200).json({
-					Status: "Unread",
+					Status: "✉️",
 				});
 			}
 		})

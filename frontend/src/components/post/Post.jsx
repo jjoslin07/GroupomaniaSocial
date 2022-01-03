@@ -17,6 +17,7 @@ import Comments from "../comments/Comments";
 import {
 	Avatar,
 	Box,
+	Container,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -238,9 +239,6 @@ const Post = ({ post }) => {
 		};
 		fetchUser();
 	}, [post.userId]);
-	// const [buttonText, setButtonText] = useState("Unread");
-
-	// const changeText = (text) => setButtonText(text);
 
 	const [isRead, setIsRead] = useState(false);
 
@@ -254,7 +252,6 @@ const Post = ({ post }) => {
 					},
 					config,
 					setIsRead(isRead)
-					// changeText("Read")
 				);
 			} catch (error) {
 				console.log(error);
@@ -263,7 +260,6 @@ const Post = ({ post }) => {
 		} else {
 			try {
 				setIsRead(!isRead);
-				// changeText("Unread");
 			} catch (error) {
 				console.log(error);
 			}
@@ -284,7 +280,7 @@ const Post = ({ post }) => {
 
 	return (
 		<>
-			<Box
+			<Container
 				className="post"
 				sx={{
 					boxShadow: 2,
@@ -309,15 +305,14 @@ const Post = ({ post }) => {
 								{post.moodId ? post.moodId !== "--" && " feeling " : " "}
 								<b>{post.moodId === "--" ? (post.moodId = "") : post.moodId}</b>
 							</span>
-							{/* <span>
-								<Badge
-									color="primary"
-									overlap="circular"
-									badgeContent=" unread"
-									sx={{ marginLeft: 5 }}
-								></Badge>
-							</span> */}
-							<Button variant="text" onClick={readHandler}>
+
+							<Button
+								sx={{
+									fontSize: 24,
+								}}
+								variant="text"
+								onClick={readHandler}
+							>
 								{status}
 							</Button>
 						</div>
@@ -611,7 +606,7 @@ const Post = ({ post }) => {
 						<Send />
 					</IconButton>
 				</Box>
-			</Box>
+			</Container>
 		</>
 	);
 };

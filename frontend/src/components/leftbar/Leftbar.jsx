@@ -1,17 +1,5 @@
 import "./leftbar.css";
-import {
-	RssFeed,
-	Bookmarks,
-	Event,
-	School,
-	WorkOutline,
-	PeopleAlt,
-	EmojiPeople,
-	EmojiEmotions,
-	EmojiObjects,
-	DirectionsCar,
-	MarkunreadMailboxOutlined,
-} from "@mui/icons-material";
+
 import Profiles from "../profiles/Profiles";
 import { useEffect, useState } from "react";
 
@@ -40,7 +28,7 @@ export default function Leftbar() {
 			}}
 		>
 			<div className="leftbarWrapper">
-				<ul className="leftbarList">
+				{/* <ul className="leftbarList">
 					<h4 className="leftbarTitle">Categories</h4>
 					<li className="leftbarListItem">
 						<MarkunreadMailboxOutlined className="leftbarIcon" />
@@ -87,7 +75,7 @@ export default function Leftbar() {
 						<span className="leftbarListItemText">Carpool</span>
 					</li>
 				</ul>
-				<hr className="leftbarHr" />
+				<hr className="leftbarHr" /> */}
 				<h4 className="leftbarTitle">Profiles</h4>
 				<ul className="leftbarFriendList">
 					{users.map((u) => (

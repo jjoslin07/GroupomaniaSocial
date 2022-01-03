@@ -14,6 +14,7 @@ import {
 import { Box } from "@mui/system";
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { format } from "timeago.js";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -109,10 +110,15 @@ const Comments = ({ comment }) => {
 						alignItems: "center",
 					}}
 				>
-					<Avatar
-						className="postCommentImg"
-						src={PF + user.profile_picture}
-					></Avatar>
+					<Link to={`/profile/${user.username}`}>
+						<Avatar
+							className="postCommentImg"
+							src={PF + user.profile_picture}
+							sx={{
+								cursor: "pointer",
+							}}
+						></Avatar>
+					</Link>
 					<span className="postCommentName"> {user.display_name}</span>
 					<span className="commentDate">{format(comment.createdAt)}</span>
 				</Box>

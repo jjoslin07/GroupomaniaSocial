@@ -9,6 +9,7 @@ import { TextareaAutosize } from "@mui/core";
 import {
 	Avatar,
 	Box,
+	Container,
 	FormControl,
 	InputLabel,
 	MenuItem,
@@ -34,9 +35,6 @@ export default function Publish() {
 		}
 	}
 
-	// useEffect(() => {
-	// 	fetchData2();
-	// }, []);
 	async function fetchData() {
 		try {
 			const categoryData = await axios.get(`/posts/category/all`);
@@ -94,7 +92,7 @@ export default function Publish() {
 		}
 	};
 	return (
-		<Box
+		<Container
 			className="publishContainer"
 			sx={{
 				boxShadow: 2,
@@ -140,7 +138,12 @@ export default function Publish() {
 						justifyContent: { xs: "center", md: "space-between" },
 					}}
 				>
-					<div className="publishOptions">
+					<Box
+						sx={{
+							flexDirection: { xs: "column", sm: "row" },
+						}}
+						className="publishOptions"
+					>
 						<label htmlFor="file" className="publishOption">
 							<AddAPhoto className="publishIcon" style={{ color: "green" }} />
 							<span className="publishOptionText">Photo</span>
@@ -156,7 +159,9 @@ export default function Publish() {
 						<label htmlFor="category" className="publishOption">
 							<div>
 								<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-									<InputLabel id="category">Category</InputLabel>
+									<InputLabel sx={{}} id="category">
+										Category
+									</InputLabel>
 									<Select
 										sx={{ margin: 1.5 }}
 										labelId="category"
@@ -197,24 +202,13 @@ export default function Publish() {
 								</FormControl>
 							</div>
 						</label>
-						{/* <div className="publishOption">
-							<Room className="publishIcon" style={{ color: "red" }} />
-							<span className="publishOptionText">Location</span>
-						</div> */}
-						{/* <div className="publishOption">
-							<EmojiEmotions
-								className="publishIcon"
-								style={{ color: "orange" }}
-							/>
-							<span className="publishOptionText">Mood</span>
-						</div> */}
-					</div>
+					</Box>
 					<button className="publishButton" type="submit">
 						{" "}
 						Publish
 					</button>
 				</Box>
 			</div>
-		</Box>
+		</Container>
 	);
 }
